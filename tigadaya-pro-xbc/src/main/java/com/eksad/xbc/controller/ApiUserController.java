@@ -2,12 +2,11 @@ package com.eksad.xbc.controller;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.annotations.common.util.impl.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.eksad.xbc.model.UserModel;
 import com.eksad.xbc.service.UserService;
 
-@Controller
 public class ApiUserController {
- 
-	private Log log = (Log) LogFactory.getLog(getClass());
+	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	private UserService service;
-	
+
 	@RequestMapping(value = "/api/user/", method = RequestMethod.GET)
 	public ResponseEntity<List<UserModel>> list() {
 		ResponseEntity<List<UserModel>> result = null;
@@ -105,5 +102,4 @@ public class ApiUserController {
 		}
 		return result;
 	}
-	
 }
