@@ -1,6 +1,7 @@
 package com.eksad.xbc.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,44 +11,49 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name="t_test_type")
+@Table(name="t_test")
 public class TestModel {
+
 	@Id
 	@Column(name="id", columnDefinition="serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_test_type_seq")
-	@TableGenerator(name = "t_test_type_seq", table = "tbl_squence",
-	pkColumnName = "seq_id", valueColumnName = "seq_value",
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_test_seq")
+	@TableGenerator(name = "t_test_seq", table = "tbl_squence", 
+	pkColumnName = "seq_id", valueColumnName = "seq_value", 
 	initialValue = 0, allocationSize=1)
 	private Integer id;
 	
 	@Column(name="name")
 	private String name;
 	
+	@Column(name="is_bootcamp_test")
+	private Boolean isBootcampTest;
+	
 	@Column(name="notes")
 	private String notes;
-	
-	@Column(name="type_of_answer")
-	private Integer typeOfAnswer;
 	
 	@Column(name="created_by")
 	private Integer createdBy;
 	
 	@Column(name="created_on")
-	private Timestamp createdOn;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
-	
+
 	@Column(name="modified_on")
-	private Timestamp modifiedOn;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
 	@Column(name="deleted_on")
-	private Timestamp deletedOn;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	private Date deletedOn;
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
@@ -68,20 +74,20 @@ public class TestModel {
 		this.name = name;
 	}
 
+	public Boolean getIsBootcampTest() {
+		return isBootcampTest;
+	}
+
+	public void setIsBootcampTest(Boolean isBootcampTest) {
+		this.isBootcampTest = isBootcampTest;
+	}
+
 	public String getNotes() {
 		return notes;
 	}
 
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-
-	public Integer getTypeOfAnswer() {
-		return typeOfAnswer;
-	}
-
-	public void setTypeOfAnswer(Integer typeOfAnswer) {
-		this.typeOfAnswer = typeOfAnswer;
 	}
 
 	public Integer getCreatedBy() {
@@ -92,12 +98,19 @@ public class TestModel {
 		this.createdBy = createdBy;
 	}
 
-	public Timestamp getCreatedOn() {
+	public Date getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Timestamp createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedOn(String createdOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date createdOnNew = null;
+		try {
+			createdOnNew = format.parse(createdOn);
+		} catch (Exception e) {
+			this.createdOn = null;
+		}
+		this.createdOn = createdOnNew;
 	}
 
 	public Integer getModifiedBy() {
@@ -108,12 +121,19 @@ public class TestModel {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public Timestamp getModifiedOn() {
+	public Date getModifiedOn() {
 		return modifiedOn;
 	}
 
-	public void setModifiedOn(Timestamp modifiedOn) {
-		this.modifiedOn = modifiedOn;
+	public void setModifiedOn(String modifiedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date modifiedOnNew = null;
+		try {
+			modifiedOnNew = format.parse(modifiedOn);
+		} catch (Exception e) {
+			this.modifiedOn = null;
+		}
+		this.modifiedOn = modifiedOnNew;
 	}
 
 	public Integer getDeletedBy() {
@@ -124,14 +144,20 @@ public class TestModel {
 		this.deletedBy = deletedBy;
 	}
 
-	public Timestamp getDeletedOn() {
+	public Date getDeletedOn() {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(Timestamp deletedOn) {
-		this.deletedOn = deletedOn;
+	public void setDeletedOn(String deletedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date deletedOnNew = null;
+		try {
+			deletedOnNew = format.parse(deletedOn);
+		} catch (Exception e) {
+			this.deletedOn = null;
+		}
+		this.deletedOn = deletedOnNew;
 	}
-
 	public Boolean getIsDelete() {
 		return isDelete;
 	}
@@ -139,5 +165,6 @@ public class TestModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-
+	
+	
 }

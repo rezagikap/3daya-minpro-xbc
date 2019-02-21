@@ -23,9 +23,4 @@ public class TestController {
 	public String delete() {
 		return "/test/delete";
 	}
-
-	@RequestMapping(value = "/test/detail")
-	public String detail() {
-		return "/test/detail";
-	}
 }

@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.eksad.xbc.model.TestModel;
 import com.eksad.xbc.service.TestService;
 
+@Controller
 public class ApiTestController {
 	private Log log = LogFactory.getLog(getClass());
 	@Autowired
 	private TestService service;
 	
-	@RequestMapping(value = "/api/menu/", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/test/", method = RequestMethod.GET)
 	public ResponseEntity<List<TestModel>> list(){
 		ResponseEntity<List<TestModel>> result = null;
 		try {
@@ -33,7 +35,7 @@ public class ApiTestController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/api/menu/search/{katakunci}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/test/search/{katakunci}", method = RequestMethod.GET)
 	public ResponseEntity<List<TestModel>> search(@PathVariable("katakunci") String cari){
 		ResponseEntity<List<TestModel>> result = null;
 		try {
@@ -46,7 +48,7 @@ public class ApiTestController {
 		return result;
 	}
 
-	@RequestMapping(value = "/api/menu/{itemId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/test/{itemId}", method = RequestMethod.GET)
 	public ResponseEntity<TestModel> getById(@PathVariable("itemId") int vid){
 		ResponseEntity<TestModel> result = null;
 		try {
@@ -59,7 +61,7 @@ public class ApiTestController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/api/menu/", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/test/", method = RequestMethod.POST)
 	public ResponseEntity<TestModel> postInsert(@RequestBody TestModel item){
 		ResponseEntity<TestModel> result = null;
 		try {
@@ -72,7 +74,7 @@ public class ApiTestController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/api/menu/", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/test/", method = RequestMethod.PUT)
 	public ResponseEntity<TestModel> putUpdate(@RequestBody TestModel item){
 		ResponseEntity<TestModel> result = null;
 		try {
@@ -85,7 +87,7 @@ public class ApiTestController {
 			return result;
 		}
 	
-	@RequestMapping(value = "/api/menu/{itemId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/test/{itemId}", method = RequestMethod.DELETE)
 	public ResponseEntity<TestModel> delApi(@PathVariable("itemId") Integer vid){
 		ResponseEntity<TestModel> result = null;
 		try {

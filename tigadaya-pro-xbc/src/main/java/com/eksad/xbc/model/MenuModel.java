@@ -32,7 +32,7 @@ public class MenuModel {
 	@Column(name="description")
 	private String description;
 	
-	@Column(name="imaga_url")
+	@Column(name="image_url")
 	private String imageUrl;
 	
 	@Column(name="menu_order")
@@ -52,21 +52,21 @@ public class MenuModel {
 	private Date createdOn;
 	
 	@Column(name="modified_by")
-	private String modifiedBy;
+	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
-	private String deletedBy;
+	private Integer deletedBy;
 	
-	@Column(name="delete_on")
+	@Column(name="deleted_on")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date deletedOn;
 	
-	@Column(name="id_delete")
-	private Boolean idDelete;
+	@Column(name="is_delete")
+	private Boolean isDelete;
 
 	public Integer getId() {
 		return id;
@@ -155,11 +155,11 @@ public class MenuModel {
 		this.createdOn = createdOnNew;
 	}
 
-	public String getModifiedBy() {
+	public Integer getModifiedBy() {
 		return modifiedBy;
 	}
 
-	public void setModifiedBy(String modifiedBy) {
+	public void setModifiedBy(Integer modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
 
@@ -178,11 +178,11 @@ public class MenuModel {
 		this.modifiedOn = modifiedOnNew;
 	}
 
-	public String getDeletedBy() {
+	public Integer getDeletedBy() {
 		return deletedBy;
 	}
 
-	public void setDeletedBy(String deletedBy) {
+	public void setDeletedBy(Integer deletedBy) {
 		this.deletedBy = deletedBy;
 	}
 
@@ -201,11 +201,11 @@ public class MenuModel {
 		this.deletedOn = deletedOnNew;
 	}
 
-	public Boolean getIdDelete() {
-		return idDelete;
+	public Boolean getIsDelete() {
+		return isDelete;
 	}
 
-	public void setIdDelete(Boolean idDelete) {
-		this.idDelete = idDelete;
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
 	}	
 }
