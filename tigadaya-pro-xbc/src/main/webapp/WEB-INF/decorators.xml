@@ -4,11 +4,11 @@
     <!-- Any urls that are excluded will never be decorated by Sitemesh -->
 	<excludes>
 		<pattern>/resources/*</pattern>
-		<pattern>/category/*</pattern>
-		<pattern>/product/*</pattern>
-		<pattern>/package/*</pattern>
-		<pattern>/supplier/*</pattern>
-		<pattern>/po/po-form</pattern>
+		<pattern>/user/*</pattern>
+		<pattern>/role/*</pattern>
+		<pattern>/menu/*</pattern>
+		<pattern>/test/*</pattern>
+		<pattern>/list/*</pattern>
 	</excludes>
 
 	<decorator name="main" page="main.jsp">
