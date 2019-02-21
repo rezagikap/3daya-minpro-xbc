@@ -51,7 +51,7 @@
 			dataType : 'html',
 			success : function(result) {
 				// mengganti judul modal
-				$("#modal-title").html("TEST TYPE");
+				$("#modal-title").html("TEST");
 				// mengisi content dengan variable result
 				$("#modal-data").html(result);
 				// menampilkan modal pop up
@@ -76,10 +76,10 @@
 							var dataRow = '<tr>'+ 
 							'<td>'+ item.name+ '</td>'+ 
 							'<td>'+ item.createdBy+ '</td>'+ 
-							'<td class="col-md-1">'+ 
-							'<button type="button" class="btn btn-edit btn-warning btn-sm" value="'+ item.id +'"><i class="fa fa-align-justify"></i></button> '+
-							'</td>' +
-							'</tr>';
+							'<td class="col-md-1">'+
+							'<button type="button" class="btn btn-delete btn-danger btn-xs" value="'+ item.id +'"><i class="fa fa-trash"></i></button> '+
+						'</td>'+
+						'</tr>';
 								$("#list-data").append(dataRow);
 						});
 						// menampilkan data ke console => F12
@@ -125,4 +125,45 @@
 		});
 	}
 	
+	// ketidak btn-delete di click
+	$('#list-data').on('click','.btn-delete', function(){
+		var vid = $(this).val();
+		$.ajax({
+			url:'${contextName}/test/delete',
+			type:'get',
+			dataType:'html',
+			success : function(result){
+				//mengganti judul modal
+				$("#modal-title").html("DELETE");
+				//mengisi content dengan variable result
+				$("#modal-data").html(result);
+				//menampilkan modal pop up
+				$("#modal-form").modal('show');
+				//panggil method
+				getData(vid);
+			}
+		});
+	});
+	
+	// method untuk delete data
+	function deleteData($form){
+		// memangil method getFormData dari file
+		var vid = $form.find("#id").val();
+		$.ajax({
+			// url ke api/category/
+			url:'${contextName}/api/test/'+vid,
+			// method http di controller
+			type:'delete',
+			// data type berupa JSON
+			dataType:'json',
+			// jika sukses
+			success : function(result){
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+				console.log(result);
+			}
+		});
+	}
 </script>
