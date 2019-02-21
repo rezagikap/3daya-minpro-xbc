@@ -22,7 +22,7 @@ public class RoleController {
 	public String delete() {
 		return "/role/delete";
 	}
-	@RequestMapping(value="/role/detail")
+	//@RequestMapping(value="/role/detail")
 	public String detail() {
 		return "/role/detail";
 	}

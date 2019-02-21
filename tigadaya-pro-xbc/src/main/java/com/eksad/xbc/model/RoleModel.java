@@ -1,5 +1,6 @@
 package com.eksad.xbc.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 
 @Entity
 @Table(name="t_role")
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class RoleModel {
 	
 	@Id
@@ -36,18 +41,21 @@ public class RoleModel {
 	private Integer createdBy;
 	
 	@Column(name="created_on")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
 	@Column(name="deleted_on")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date deletedOn;
 	
 	@Column(name="is_delete")
@@ -97,8 +105,15 @@ public class RoleModel {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedOn(String createdOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date createdOnNew = null;
+		try {
+			createdOnNew = format.parse(createdOn);
+		} catch (Exception e) {
+			this.createdOn = null;
+		}
+		this.createdOn = createdOnNew;
 	}
 
 	public Integer getModifiedBy() {
@@ -113,8 +128,16 @@ public class RoleModel {
 		return modifiedOn;
 	}
 
-	public void setModifiedOn(Date modifiedOn) {
-		this.modifiedOn = modifiedOn;
+
+	public void setModifiedOn(String modifiedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date modifiedOnNew = null;
+		try {
+			modifiedOnNew = format.parse(modifiedOn);
+		} catch (Exception e) {
+			this.modifiedOn = null;
+		}
+		this.modifiedOn = modifiedOnNew;
 	}
 
 	public Integer getDeletedBy() {
@@ -129,8 +152,15 @@ public class RoleModel {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(Date deletedOn) {
-		this.deletedOn = deletedOn;
+	public void setDeletedOn(String deletedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date deletedOnNew = null;
+		try {
+			deletedOnNew = format.parse(deletedOn);
+		} catch (Exception e) {
+			this.deletedOn = null;
+		}
+		this.deletedOn = deletedOnNew;
 	}
 
 	public Boolean getIsDelete() {
@@ -140,6 +170,7 @@ public class RoleModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
+
 	
 	
 }
