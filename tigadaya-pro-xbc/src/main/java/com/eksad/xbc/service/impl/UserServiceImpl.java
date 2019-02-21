@@ -13,10 +13,10 @@ import com.eksad.xbc.service.UserService;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserDao dao;
-
+	
 	@Override
 	public List<UserModel> getList() {
 		return this.dao.getList();
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void insert(UserModel model) {
-		this.dao.insert(model);		
+		this.dao.insert(model);
 	}
 
 	@Override
