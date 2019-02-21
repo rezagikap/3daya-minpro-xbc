@@ -14,9 +14,9 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>USERNAME</th>
-					<th>ROLE</th>
-					<th>EMAIL</th>
+					<th>Username</th>
+					<th>Role</th>
+					<th>E-mail</th>
 					<th>#</th>
 				</tr>
 			</thead>

@@ -12,8 +12,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>NAME</th>
-					<th>OPSI</th>
+					<th>Name</th>
+					<th>Opsi</th>
 				</tr>
 			</thead>
 			<tbody id="list-data">

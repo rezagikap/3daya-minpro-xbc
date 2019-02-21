@@ -4,7 +4,7 @@
 %>
 <div class="box box-info">
 	<div class="box-header with-border">
-		<h3 class="box-title">TEST</h3>
+		<h3 class="box-title">Test</h3>
 		<div class="box-tools">
 			<button type="button" class="btn btn-primary btn-sm" id="btn-add">
 				<i class="fa fa-plus"></i>
@@ -15,8 +15,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>NAME</th>
-					<th>CREATED BY</th>
+					<th>Name</th>
+					<th>Created By</th>
 					<th class="col-md-1">#</th>
 				</tr>
 			</thead>
