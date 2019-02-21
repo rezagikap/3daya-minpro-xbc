@@ -12,7 +12,7 @@ import javax.persistence.TableGenerator;
 
 
 @Entity
-@Table(name="role")
+@Table(name="t_role")
 
 public class RoleModel {
 	
