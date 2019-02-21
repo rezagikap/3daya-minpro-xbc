@@ -79,6 +79,7 @@
 							'<td>'+ item.name+ '</td>'+ 
 							'<td>'+ item.createdBy+ '</td>'+ 
 							'<td class="col-md-1">'+
+							'<button type="button" class="btn btn-edit btn-warning btn-xs" value="'+ item.id +'"><i class="fa fa-edit"></i></button> '+
 							'<button type="button" class="btn btn-delete btn-danger btn-xs" value="'+ item.id +'"><i class="fa fa-trash"></i></button> '+
 						'</td>'+
 						'</tr>';
@@ -168,4 +169,57 @@
 			}
 		});
 	}
+
+	// ketidak btn-edit di click
+	$('#list-data').on('click','.btn-edit', function(){
+		var vid = $(this).val();
+		var d = new Date($.now());
+		$.ajax({
+			url:'${contextName}/test/edit',
+			type:'get',
+			dataType:'html',
+			success : function(result){
+				//mengganti judul modal
+				$("#modal-title").html("EDIT");
+				//mengisi content dengan variable result
+				$("#modal-data").html(result);
+				//menampilkan modal pop up
+				$("#modal-form").modal('show');
+				
+				// panggil method getData
+				getData(vid);
+				$('#createdOn').val(
+						d.getDate() + "-" + d.getMonth() + "-"
+								+ d.getFullYear() + " " + d.getHours()
+								+ ":" + d.getMinutes() + ":"
+								+ d.getSeconds());
+			}
+		});
+	});
+	
+	// method untuk edit data
+	function editData($form){
+		// memangil method getFormData dari file
+		// resources/dist/js/map-form-objet.js
+		var dataForm = getFormData($form);
+		$.ajax({
+			// url ke api/test/
+			url:'${contextName}/api/test/',
+			type:'put',
+			// data type berupa JSON
+			dataType:'json',
+			// mengirim parameter data
+			data:JSON.stringify(dataForm),
+			// mime type 
+			contentType: 'application/json',
+			success : function(result){
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+			}
+		});
+		console.log(dataForm);
+	}
+	
 </script>
