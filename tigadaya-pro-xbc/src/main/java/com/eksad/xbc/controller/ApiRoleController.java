@@ -24,13 +24,6 @@ public class ApiRoleController {
 	@Autowired
 	private RoleService service;
 	
-	//@RequestMapping(value="/role/index")  
-	//public String index(Model model){
-		//List<RoleModel> list = this.service.getList();
-		//model.addAttribute("list",list);
-		//return "/role/index";
-	//}
-	
 	@RequestMapping(value="/api/role/", method=RequestMethod.GET) //
 	public ResponseEntity<List<RoleModel>> list(){
 		ResponseEntity<List<RoleModel>> result = null;

@@ -20,7 +20,7 @@ public class RoleDaoImpl implements RoleDao {
 	@Override
 	public List<RoleModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select jt from RoleModel jt order by jt.rolename";
+		String hql = "select jt from RoleModel jt order by jt.name";
 		Query query = session.createQuery(hql);
 		List<RoleModel> result = query.getResultList();
 		return result;
@@ -70,7 +70,7 @@ public class RoleDaoImpl implements RoleDao {
 	@Override
 	public List<RoleModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from RoleModel x where x.name like :keySearch order by x.code";
+		String hql = "select x from RoleModel x where x.name like :keySearch order by x.name";
 		Query query = session.createQuery(hql);
 		query.setParameter("keySearch", "%"+key+"%");
 		return query.getResultList();

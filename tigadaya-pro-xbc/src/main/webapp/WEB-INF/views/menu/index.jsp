@@ -19,6 +19,7 @@
 <div class="box box-info">
 	<div class="box-header">
 		<h3 class="box-title">List Menu</h3>
+
 		<div class="box-tools">
 			<button type="button" id="btn-add" class="btn btn-success btn-sm">
 				<i class="fa fa-plus"></i>
@@ -26,6 +27,18 @@
 		</div>
 	</div>
 	<div class="box-body">
+		<form action="#" method="get">
+			<div class="input-group">
+				<input type="text" name="searchData" class="form-control"
+					placeholder="Search Menu..."> <span class="input-group-btn">
+					<button type="submit" name="search" id="search-btn"
+						class="btn btn-flat">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</form>
+		<br>
 		<table class="table">
 			<thead>
 				<tr>
