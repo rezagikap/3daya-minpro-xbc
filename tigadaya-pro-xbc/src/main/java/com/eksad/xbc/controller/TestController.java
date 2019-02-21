@@ -5,27 +5,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
-	@RequestMapping(value = "/menu")
+	@RequestMapping(value = "/test")
 	public String index() {
-		return "/menu/index";
+		return "/test/index";
 	}
 
-	@RequestMapping(value="/menu/create")
+	@RequestMapping(value="/test/create")
 	public String create() {
-		return "/menu/create";
+		return "/test/create";
 	}
-	@RequestMapping(value = "/menu/edit")
+	@RequestMapping(value = "/test/edit")
 	public String edit() {
-		return "/menu/edit";
+		return "/test/edit";
 	}
 
-	@RequestMapping(value = "/menu/delete")
+	@RequestMapping(value = "/test/delete")
 	public String delete() {
-		return "/menu/delete";
+		return "/test/delete";
 	}
 
-	@RequestMapping(value = "/menu/detail")
+	@RequestMapping(value = "/test/detail")
 	public String detail() {
-		return "/menu/detail";
+		return "/test/detail";
 	}
 }
