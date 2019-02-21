@@ -25,9 +25,4 @@ public class MenuController {
 	public String delete(){
 		return "/menu/delete";
 	}
-	
-	@RequestMapping(value="/menu/detail")
-	public String detail(){
-		return "/menu/detail";
-	}
 }
