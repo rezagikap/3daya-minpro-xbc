@@ -1,7 +1,7 @@
 <% request.setAttribute("contextName", request.getServletContext().getContextPath()); %>
 <div class="box box-info">
 	<div class="box-header">
-		<h3 class="box-title">TRAINER</h3>
+		<h3 class="box-title">TECHNOLOGY</h3>
 		<div class="box-tools">
 			<button type="button" id="btn-add" class="btn btn-primary btn-sm">
 				<i class="fa fa-plus"></i>
@@ -19,6 +19,7 @@
 			<thead>
 				<tr>
 					<th>NAME</th>
+					<th>CREATED BY</th>
 					<th>#</th>
 				</tr>
 			</thead>
@@ -29,12 +30,25 @@
 </div>
 
 <div class="modal" id="modal-trainer">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="box box-success">
 			<div class="box-header with-border">
 				<h3 class="box-title" id="modal-title">Form Input</h3>
 			</div>
 			<div class="box-body" id="modal-data">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="modal-tech">
+	<div class="modal-dialog">
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title" id="modal-title">Form Input</h3>
+			</div>
+			<div class="box-body" id="modal-data1">
 				
 			</div>
 		</div>
@@ -47,11 +61,12 @@
 		loadData();
 	});
 	
-	//ketika button add di click
+	//ketika button add di click maka muncul pop up form add
+	//ajax di dalem jquery
 	$("#btn-add").click(function(){
 		var d = new Date($.now());
 		$.ajax({
-			url:'${contextName}/trainer/create',
+			url:'${contextName}/technology/create',
 			type:'get',
 			dataType:'html',
 			success : function(result){
@@ -66,14 +81,20 @@
 		});
 	});
 	
+	// menambahkan fungsi pop up trainer
+	function AddTrainer($form){
+		$("#modal-tech").modal('show');
+
+	}
+	
 	// method untuk add data
 	function addData($form){
 		// memangil method getFormData dari file
 		// resources/dist/js/map-form-objet.js
 		var dataForm = getFormData($form);
 		$.ajax({
-			// url ke api/trainer/
-			url:'${contextName}/api/trainer/',
+			// url ke api/technology/
+			url:'${contextName}/api/technology/',
 			type:'post',
 			// data type berupa JSON
 			dataType:'json',
@@ -90,12 +111,14 @@
 		});
 		console.log(dataForm);
 	}
+	
+	
 
 	//method loadData
 	function loadData(){
 		$.ajax({
 			// url ke api/category/
-			url:'${contextName}/api/trainer/',
+			url:'${contextName}/api/technology/',
 			type:'get',
 			// data type berupa JSON
 			dataType:'json',
@@ -106,6 +129,7 @@
 				$.each(result, function(index, item){
 					var dataRow ='<tr>'+
 						'<td>'+ item.name+'</td>'+
+						'<td>'+ item.createdBy+'</td>'+
 						'<td class="col-md-1">'+
 						'<div class="dropdown">'+
 						'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
@@ -129,15 +153,15 @@
 		// panggil API
 		$.ajax({
 			// url ke api/category/
-			url:'${contextName}/api/trainer/'+dataId,
+			url:'${contextName}/api/technology/'+dataId,
 			type:'get',
 			// data type berupa JSON
 			dataType:'json',
 			success : function(dataApi){
 				$('#modal-data').find('#id').val(dataApi.id);
 				$('#modal-data').find('#name').val(dataApi.name);
-				$('#modal-data').find('#notes').val(dataApi.notes);
 				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
+				$('#modal-data').find('#notes').val(dataApi.notes);
 				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
 				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
 				
@@ -149,7 +173,7 @@
 	function search(){
 		var item = $('#search').val();
 		$.ajax({
-			url: '${contextName}/api/trainer/search/' + item,
+			url: '${contextName}/api/technology/search/' + item,
 			type: 'get',
 			dataType: 'json',
 			success: function(result){
@@ -158,6 +182,7 @@
 				$.each(result, function(index, item){
 				var dataRow ='<tr>'+
 					'<td>'+ item.name+'</td>'+
+					'<td>'+ item.createdBy+'</td>'+
 					'<td class="col-md-1">'+
 						'<div class="dropdown">'+
 					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
@@ -175,11 +200,14 @@
 		});
 	}
 	
+	
+	
+	
 	//btn-edit di click
 	$('#list-data').on('click','#btn-edit', function(){
 		var vid = $(this).val();
 		$.ajax({
-			url:'${contextName}/trainer/edit',
+			url:'${contextName}/technology/edit',
 			type:'get',
 			dataType:'html',
 			success : function(result){
@@ -201,8 +229,8 @@
 		// resources/dist/js/map-dagang-objet.js
 		var dataForm = getFormData($form);
 		$.ajax({
-			// url ke api/trainer/
-			url:'${contextName}/api/trainer/',
+			// url ke api/technology/
+			url:'${contextName}/api/technology/',
 			type:'put',
 			// data type berupa JSON
 			dataType:'json',
@@ -224,7 +252,7 @@
 	$('#list-data').on('click','#btn-delete', function(){
 		var vid = $(this).val();
 		$.ajax({
-			url:'${contextName}/trainer/delete',
+			url:'${contextName}/technology/delete',
 			type:'get',
 			dataType:'html',
 			success : function(result){
@@ -245,8 +273,8 @@
 		// memangil method getFormData dari file
 		var vid = $form.find("#id").val();
 		$.ajax({
-			// url ke api/trainer/
-			url:'${contextName}/api/trainer/'+vid,
+			// url ke api/technology/
+			url:'${contextName}/api/technology/'+vid,
 			// method http di controller
 			type:'delete',
 			// data type berupa JSON

@@ -15,15 +15,15 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="t_trainer")
+@Table(name="t_technology")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class TrainerModel {
+public class TechnologyModel {
 	
 
 	@Id
 	@Column(name="id", columnDefinition="serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_trainer_seq")
-	@TableGenerator(name = "t_trainer_seq", table = "tbl_squence", 
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_technology_seq")
+	@TableGenerator(name = "t_technology_seq", table = "tbl_squence", 
 	pkColumnName = "seq_id", valueColumnName = "seq_value", 
 	initialValue = 0, allocationSize=1)
 	private Integer id;
