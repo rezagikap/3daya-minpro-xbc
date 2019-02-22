@@ -11,7 +11,11 @@
 		<pattern>/test/*</pattern>
 		<pattern>/list/*</pattern>
 		<pattern>/category/*</pattern>
+<<<<<<< HEAD
 		<pattern>/bootcamptesttype/*</pattern>
+=======
+		<pattern>/class/*</pattern>
+>>>>>>> 1419373949cfb4a8f13dc1ef5c89d174dd23c9f7
 	</excludes>
 
 	<decorator name="main" page="main.jsp">

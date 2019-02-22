@@ -46,7 +46,12 @@
 					<li><a href="${contextName}/biodata"><i class="fa fa-circle-o"></i>Biodata</a></li>
 					<li><a href="${contextName}/trainer"><i class="fa fa-circle-o"></i>Trainer</a></li>
 					<li><a href="${contextName}/technology"><i class="fa fa-circle-o"></i>Technology</a></li>
+<<<<<<< HEAD
 					<li><a href="${contextName}/bootcamptesttype"><i class="fa fa-circle-o"></i>Bootcamp Test Type</a></li>
+=======
+					<li><a href="${contextName}/bootcampType"><i class="fa fa-circle-o"></i>Bootcamp Type</a></li>
+					<li><a href="${contextName}/class"><i class="fa fa-circle-o"></i>Class</a></li>
+>>>>>>> 1419373949cfb4a8f13dc1ef5c89d174dd23c9f7
 					<li><a href="${contextName}/office"><i class="fa fa-circle-o"></i>Office</a></li>
 					<li><a href="${contextName}/category"><i class="fa fa-circle-o"></i>Category</a></li>
 				</ul>

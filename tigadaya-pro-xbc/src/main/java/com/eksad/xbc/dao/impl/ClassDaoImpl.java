@@ -9,60 +9,60 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.eksad.xbc.dao.CategoryDao;
-import com.eksad.xbc.model.CategoryModel;
+import com.eksad.xbc.dao.ClassDao;
+import com.eksad.xbc.model.ClassModel;
+import com.eksad.xbc.model.MenuModel;
 
 @Repository
-public class CategoryDaoImpl implements CategoryDao {
+public class ClassDaoImpl implements ClassDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
-	public List<CategoryModel> getList() {
+	public List<ClassModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select cm from CategoryModel cm order by id";
+		String hql = "select jt from ClassModel jt order by jt.title";
 		Query query = session.createQuery(hql);
-		List<CategoryModel> result = query.getResultList();
+		List<ClassModel> result = query.getResultList();
 		return result;
 	}
 
 	@Override
-	public List<CategoryModel> search(String key) {
+	public List<ClassModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from CategoryModel x where x.name like :keySearch";
+		String hql = "select x from ClassModel x where x.title like  :keySearch order by.x.title";
 		Query query = session.createQuery(hql);
-		query.setParameter("keysearch", "%"+key+"%");
+		query.setParameter("keySearch", "%" + key + "%");
 		return query.getResultList();
 	}
 
 	@Override
-	public CategoryModel getById(Integer id) {
+	public ClassModel getById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select cm from CategoryModel cm where cm.id=:id";
+		String hql = "select jt from ClassModel jt where jt.id=:id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
-		CategoryModel result = (CategoryModel)query.getSingleResult();
+		ClassModel result = (ClassModel) query.getSingleResult();
 		return result;
 	}
 
 	@Override
-	public void insert(CategoryModel model) {
+	public void insert(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(model);
 
 	}
 
 	@Override
-	public void update(CategoryModel model) {
+	public void update(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(model);
 	}
 
 	@Override
-	public void delete(CategoryModel model) {
+	public void delete(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(model);
 
 	}
-
 }
