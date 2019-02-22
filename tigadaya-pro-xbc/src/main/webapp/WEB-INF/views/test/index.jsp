@@ -11,6 +11,14 @@
 			</button>
 		</div>
 	</div>
+	
+	<div class="box-tools col-md-12">
+			<input type="text" name="search" id="search" placeholder="Search by name"/>
+			<button class="btn btn-primary btn-sm" onclick="search()">
+				<i class="fa fa-circle-o"></i>
+			</button>
+		</div>
+	
 	<div class="box-body">
 		<table class="table">
 			<thead>
@@ -75,14 +83,18 @@
 						$("#list-data").empty();
 						// looping data dengan jQuery
 						$.each(result,function(index, item) {
-							var dataRow = '<tr>'+ 
-							'<td>'+ item.name+ '</td>'+ 
-							'<td>'+ item.createdBy+ '</td>'+ 
+							var dataRow ='<tr>'+
+							'<td>'+ item.name+'</td>'+
 							'<td class="col-md-1">'+
-							'<button type="button" class="btn btn-edit btn-warning btn-xs" value="'+ item.id +'"><i class="fa fa-edit"></i></button> '+
-							'<button type="button" class="btn btn-delete btn-danger btn-xs" value="'+ item.id +'"><i class="fa fa-trash"></i></button> '+
-						'</td>'+
-						'</tr>';
+							'<div class="dropdown">'+
+							'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+						    '<ul class="dropdown-menu">'+
+						    	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
+						    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
+						    '</ul>'+
+						    '</div>'+
+							'</td>'+
+							'</tr>';
 								$("#list-data").append(dataRow);
 						});
 						// menampilkan data ke console => F12
@@ -90,7 +102,36 @@
 					}
 				});
 	}
-
+	
+	function search(){
+		var item = $('#search').val();
+		$.ajax({
+			url: '${contextName}/api/test/search/' + item,
+			type: 'get',
+			dataType: 'json',
+			success: function(result){
+				$("#list-data").empty();
+				// looping data dengan jQuery
+				$.each(result, function(index, item){
+				var dataRow ='<tr>'+
+					'<td>'+ item.name+'</td>'+
+					'<td class="col-md-1">'+
+						'<div class="dropdown">'+
+					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+				   	 '<ul class="dropdown-menu">'+
+				   	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
+			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
+				    '</ul>'+
+				    '</div>'+
+					'</td>'+
+					'</tr>';
+					$("#list-data").append(dataRow);
+					});
+				console.log(result);
+			}
+		});
+	}
+	
 	// method untuk add data
 	function addData($form) {
 		// memanggil method getFormdata dari file
@@ -129,7 +170,7 @@
 	}
 	
 	// ketidak btn-delete di click
-	$('#list-data').on('click','.btn-delete', function(){
+	$('#list-data').on('click','#btn-delete', function(){
 		var vid = $(this).val();
 		$.ajax({
 			url:'${contextName}/test/delete',
@@ -171,7 +212,7 @@
 	}
 
 	// ketidak btn-edit di click
-	$('#list-data').on('click','.btn-edit', function(){
+	$('#list-data').on('click','#btn-edit', function(){
 		var vid = $(this).val();
 		var d = new Date($.now());
 		$.ajax({
@@ -222,34 +263,6 @@
 		console.log(dataForm);
 	}
 	
-	// method untuk search
-	function search(){
-		$.ajax({
-			url: '${contextName}/api/test/search/' + item,
-			type: 'get',
-			dataType: 'json',
-			success: function(result){
-				$("#list-data").empty();
-				// looping data dengan jQuery
-				$.each(result, function(index, item){
-				var dataRow ='<tr>'+
-					'<td>'+ item.name+'</td>'+
-					'<td class="col-md-1">'+
-						'<div class="dropdown">'+
-					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
-				   	 '<ul class="dropdown-menu">'+
-				   	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
-			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
-				    '</ul>'+
-				    '</div>'+
-					'</td>'+
-					'</tr>';
-					$("#list-data").append(dataRow);
-					});
-				console.log(result);
-			}
-		});
-	}
 		
 
 	
