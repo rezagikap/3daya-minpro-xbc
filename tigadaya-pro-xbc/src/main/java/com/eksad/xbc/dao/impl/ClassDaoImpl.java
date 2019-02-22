@@ -9,66 +9,60 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.eksad.xbc.dao.TestDao;
-import com.eksad.xbc.model.TestModel;
+import com.eksad.xbc.dao.ClassDao;
+import com.eksad.xbc.model.ClassModel;
+import com.eksad.xbc.model.MenuModel;
 
 @Repository
-public class TestDaoImpl implements TestDao {
-	
+public class ClassDaoImpl implements ClassDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<TestModel> getList() {
+	public List<ClassModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		// HQL = Hibernate Query Language
-		// Hibernate = ORM (Object Relation Mapping)
-		String hql = "select t from TestModel t";
+		String hql = "select jt from ClassModel jt order by jt.title";
 		Query query = session.createQuery(hql);
-		List<TestModel> result = query.getResultList();
+		List<ClassModel> result = query.getResultList();
 		return result;
 	}
 
 	@Override
-	public List<TestModel> search(String key) {
+	public List<ClassModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select t from TestModel t where t.name like :keySearch";
+		String hql = "select x from ClassModel x where x.title like  :keySearch order by.x.title";
 		Query query = session.createQuery(hql);
-		query.setParameter("keySearch", "%"+key+"%");
+		query.setParameter("keySearch", "%" + key + "%");
 		return query.getResultList();
-		
 	}
 
 	@Override
-	public TestModel getById(Integer id) {
+	public ClassModel getById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select t from TestModel t where t.id=:id";
+		String hql = "select jt from ClassModel jt where jt.id=:id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
-		TestModel result = (TestModel) query.getSingleResult();
+		ClassModel result = (ClassModel) query.getSingleResult();
 		return result;
 	}
 
 	@Override
-	public void insert(TestModel model) {
+	public void insert(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(model);
-		
+
 	}
 
 	@Override
-	public void update(TestModel model) {
+	public void update(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(model);
-		
 	}
 
 	@Override
-	public void delete(TestModel model) {
+	public void delete(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(model);
-		
-	
-	}
 
+	}
 }

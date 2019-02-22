@@ -20,7 +20,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	public List<CategoryModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select cm from CategoryModel mo order by id";
+		String hql = "select cm from CategoryModel cm order by id";
 		Query query = session.createQuery(hql);
 		List<CategoryModel> result = query.getResultList();
 		return result;

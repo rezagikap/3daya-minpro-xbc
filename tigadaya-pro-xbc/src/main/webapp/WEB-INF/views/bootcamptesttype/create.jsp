@@ -1,27 +1,16 @@
 <% request.setAttribute("contextName", request.getServletContext().getContextPath()); %>
-<form id="form-edit" class="form-horizontal">
-<input type="hidden" name="id" id="id" />
-
+<form id="form-create" class="form-horizontal">
 	<div class="form-group">
 		<div class="col-md-10">
 			<input type="text" class="form-control" name="name" placeholder="Name"/>
 		</div>
 	</div>
 	
-	<div class="form-group">
-		<label class="control-label col-md-4">Is BootCamp Test?</label>
+	<div class="form-group ">
 		<div class="col-md-10">
-			<input type="radio" name="isBootcampTest" value="true"/>Yes
-			<input type="radio" name="isBootcampTest" value="false"/>No
+			<input type="text" class="form-control" name="notes" placeholder="Notes"/>
 		</div>
 	</div>
-	
-	<div class="form-group">
-		<div class="col-md-10">
-			<input type="text" class="form-control" name="notes" id="notes" placeholder="Notes"/>
-		</div>
-	</div>
-	
 	
 	<input type="hidden" class="form-control" name="notes" value="1" />
 	<input type="hidden" class="form-control" name="createdBy" value="1" />
@@ -35,8 +24,8 @@
 	
 	
 	<div class="modal-footer">
-		<button type="button" onClick="editData($('#form-edit'))" class="btn btn-primary"><i class="fa fa-save"></i></button>
-		<button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-reply"></i></button>
+		<button type="button" onClick="addData($('#form-create'))" class="btn btn-primary">SAVE</button>
+		<button type="button" class="btn btn-success" data-dismiss="modal">CANCEL</button>
 	</div>
 
 </form>
