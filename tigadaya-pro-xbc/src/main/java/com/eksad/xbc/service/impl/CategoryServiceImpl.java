@@ -6,45 +6,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eksad.xbc.dao.UserDao;
-import com.eksad.xbc.model.UserModel;
-import com.eksad.xbc.service.UserService;
+import com.eksad.xbc.dao.CategoryDao;
+import com.eksad.xbc.model.CategoryModel;
+import com.eksad.xbc.service.CategoryService;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
-
+public class CategoryServiceImpl implements CategoryService {
 	@Autowired
-	private UserDao dao;
-	
+	private CategoryDao dao;
+
 	@Override
-	public List<UserModel> getList() {
+	public List<CategoryModel> getList() {
 		return this.dao.getList();
 	}
 
 	@Override
-	public List<UserModel> search(String key) {
+	public List<CategoryModel> search(String key) {
 		return this.dao.search(key);
 	}
 
 	@Override
-	public UserModel getById(Integer id) {
+	public CategoryModel getById(Integer id) {
 		return this.dao.getById(id);
 	}
 
 	@Override
-	public void insert(UserModel model) {
+	public void insert(CategoryModel model) {
 		this.dao.insert(model);
+
 	}
 
 	@Override
-	public void update(UserModel model) {
+	public void update(CategoryModel model) {
 		this.dao.update(model);
+
 	}
 
 	@Override
-	public void delete(UserModel model) {
+	public void delete(CategoryModel model) {
 		this.dao.delete(model);
+
 	}
 
 }

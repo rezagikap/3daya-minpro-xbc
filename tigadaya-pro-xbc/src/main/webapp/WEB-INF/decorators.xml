@@ -9,6 +9,7 @@
 		<pattern>/menu/*</pattern>
 		<pattern>/test/*</pattern>
 		<pattern>/list/*</pattern>
+		<pattern>/category/*</pattern>
 	</excludes>
 
 	<decorator name="main" page="main.jsp">

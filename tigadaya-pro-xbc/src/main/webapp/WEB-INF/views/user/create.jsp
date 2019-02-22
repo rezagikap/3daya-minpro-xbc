@@ -3,7 +3,7 @@
 <div class="form-group">
 		<label class="control-label col-md-2">Role Id</label>
 		<div class="col-md-10">
-		<select name="po[roleId]" id="roleId"
+		<select name="role[roleId]" id="roleId"
 								class="form-control">
 								<option value="1">Choose Role</option>
 							</select>
@@ -36,7 +36,8 @@
 		<div class="col-md-10">
 			<input type="text" class="form-control" name="password" id="password" />
 		</div>
-	</div>
+	</div> 
+	
 	
 	<div class="modal-footer">
 		<button type="button" onClick="addData($('#form-create'))"
@@ -49,3 +50,5 @@
 	</div>
 </form>
 <!-- Form Selesai -->
+
+

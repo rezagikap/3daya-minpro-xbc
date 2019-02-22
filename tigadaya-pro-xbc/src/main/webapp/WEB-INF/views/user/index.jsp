@@ -54,6 +54,7 @@
     
 	//ketika button add di Click
 	$("#btn-add").click(function() {
+		var d = new Date($.now());
 		$.ajax({
 			url : '${contextName}/user/create',
 			type : 'get',
@@ -65,6 +66,12 @@
 				$("#modal-data").html(result);
 				// menampilkan modal pop up
 				$("#modal-form").modal('show');
+				$('#createdOn').val(
+						d.getDate() + "-" + d.getMonth() + "-"
+								+ d.getFullYear() + " " + d.getHours()
+								+ ":" + d.getMinutes() + ":"
+								+ d.getSeconds());
+				loadRole($("#modal-data"));
 			}
 		});
 	});
@@ -137,7 +144,7 @@
 	}
 	// ketidak btn-edit di click
 	$('#list-data').on('click','.btn-edit', function(){
-		var vid = $(this).val();
+		var d = new Date($.now());
 		$.ajax({
 			url:'${contextName}/user/edit',
 			type:'get',
@@ -151,6 +158,13 @@
 				$("#modal-form").modal('show');
 				// panggil method getData
 				getData(vid);
+				$('#modifiedOn').val(
+						d.getDate() + "-" + d.getMonth() + "-"
+								+ d.getFullYear() + " " + d.getHours()
+								+ ":" + d.getMinutes() + ":"
+								+ d.getSeconds());
+				loadRole($("#modal-data"));
+				
 			}
 		});
 	});
@@ -196,6 +210,7 @@
 				$("#modal-form").modal('show');
 				//panggil method
 				getData(vid);
+			
 			}
 		});
 	});
@@ -218,6 +233,29 @@
 				// panggil method load data, untuk melihat data terbaru
 				loadData();
 				console.log(result);
+			}
+		});
+	}
+	
+	function loadRole($form, $selected){
+		$.ajax({
+			// url ke api/product/
+			url:'${contextName}/api/role/list',
+			type:'get',
+			// data type berupa JSON
+			dataType:'json',
+			success : function(result){
+				// empty data first
+				$form.find("#roleId").empty();
+				$form.find("#roleId").append('<option value="">=Select Role=</option>');
+				// looping data
+				$.each(result, function(index, item){
+					if($selected == item.id){
+						$form.find("#roleId").append('<option value="'+ item.id +'" selected="selected">'+ item.code +' - '+ item.name +'</option>');
+					}else {
+						$form.find("#roleId").append('<option value="'+ item.id +'">'+ item.code +' - '+ item.name +'</option>');
+					}
+				});
 			}
 		});
 	}
