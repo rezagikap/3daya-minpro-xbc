@@ -5,6 +5,7 @@
 	<excludes>
 		<pattern>/resources/*</pattern>
 		<pattern>/trainer/*</pattern>
+		<pattern>/technology/*</pattern>
 		<pattern>/user/*</pattern>
 		<pattern>/role/*</pattern>
 		<pattern>/menu/*</pattern>

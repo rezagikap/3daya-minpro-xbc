@@ -1,40 +1,38 @@
 package com.eksad.xbc.model;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-import com.eksad.xbc.model.RoleModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="t_role")
-public class RoleModel {
-	@Id
-	@Column(name="id", columnDefinition = "serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_role_seq")
-	@TableGenerator(name = "t_role_seq", table = "tbl_squence", pkColumnName = "seq_id", valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
-	private Integer id;
+@Table(name="t_technology")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class TechnologyModel {
 	
-	@Column(name="code")
-	private String code;
+
+	@Id
+	@Column(name="id", columnDefinition="serial")
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_technology_seq")
+	@TableGenerator(name = "t_technology_seq", table = "tbl_squence", 
+	pkColumnName = "seq_id", valueColumnName = "seq_value", 
+	initialValue = 0, allocationSize=1)
+	private Integer id;
 	
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="description")
-	private String description;
+	@Column(name="notes")
+	private String notes;
 	
 	@Column(name="created_by")
 	private Integer createdBy;
@@ -57,7 +55,7 @@ public class RoleModel {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date deletedOn;
 	
-	@Column(name="is_deleted")
+	@Column(name="is_delete")
 	private Boolean isDelete;
 
 	public Integer getId() {
@@ -68,14 +66,6 @@ public class RoleModel {
 		this.id = id;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -84,12 +74,12 @@ public class RoleModel {
 		this.name = name;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getNotes() {
+		return notes;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 	public Integer getCreatedBy() {
@@ -148,4 +138,6 @@ public class RoleModel {
 		this.isDelete = isDelete;
 	}
 	
+	
+
 }
