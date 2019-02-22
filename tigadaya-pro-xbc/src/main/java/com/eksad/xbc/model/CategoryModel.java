@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class CategoryModel {
 	@Id
 	@Column(name = "id", columnDefinition = "serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "category_seq")
-	@TableGenerator(name = "category_seq", table = "tbl_squence", pkColumnName = "seq_id",
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_category_seq")
+	@TableGenerator(name = "t_category_seq", table = "tbl_squence", pkColumnName = "seq_id",
 	valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
 	private Integer id;
 	
@@ -93,7 +93,7 @@ public class CategoryModel {
 		return createdOn;
 	}
 	public void setCreatedOn(String createdOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		Date crea = null;
 		try {
 			crea = format.parse(createdOn);
@@ -112,7 +112,7 @@ public class CategoryModel {
 		return modifiedOn;
 	}
 	public void setModifiedOn(String modifiedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		Date modi = null;
 		try {
 			modi = format.parse(modifiedOn);
@@ -131,7 +131,7 @@ public class CategoryModel {
 		return deletedOn;
 	}
 	public void setDeletedOn(String deletedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		Date dele = null;
 		try {
 			dele = format.parse(deletedOn);

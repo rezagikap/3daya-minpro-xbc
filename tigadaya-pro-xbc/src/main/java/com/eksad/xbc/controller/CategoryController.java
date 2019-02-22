@@ -8,7 +8,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/category")
 	public String index() {
-		return "menu/index";
+		return "category/index";
 	}
 	
 	@RequestMapping(value = "/category/create")
@@ -18,7 +18,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/category/edit")
 	public String edit() {
-		return "menu/edit";
+		return "category/edit";
 	}
 	
 	@RequestMapping(value = "/category/delete")
