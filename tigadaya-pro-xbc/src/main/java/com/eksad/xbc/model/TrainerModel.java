@@ -1,6 +1,7 @@
 package com.eksad.xbc.model;
 
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,17 +34,23 @@ public class TrainerModel {
 	private Integer createdBy;
 	
 	@Column(name="created_on")
-	private Timestamp createdOn;
+	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
-	private Timestamp modifiedOn;
+	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
+	@Column(name="deleted_on")
+	private Date deletedOn;
+	
+	@Column(name="is_delete")
+	private Boolean isDelete;
+
 	public Integer getId() {
 		return id;
 	}
@@ -76,12 +83,19 @@ public class TrainerModel {
 		this.createdBy = createdBy;
 	}
 
-	public Timestamp getCreatedOn() {
+	public Date getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Timestamp createdOn) {
-		this.createdOn = createdOn;
+	public void createdOn(String createdOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date coDateNew = null;
+		try {
+			coDateNew = format.parse(createdOn); 
+			} catch (Exception e) {
+				this.createdOn= null;
+			}
+		this.createdOn=coDateNew;
 	}
 
 	public Integer getModifiedBy() {
@@ -92,12 +106,19 @@ public class TrainerModel {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public Timestamp getModifiedOn() {
+	public Date getModifiedOn() {
 		return modifiedOn;
 	}
 
-	public void setModifiedOn(Timestamp modifiedOn) {
-		this.modifiedOn = modifiedOn;
+	public void modifiedOn(String modifiedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date moDateNew = null;
+		try {
+			moDateNew = format.parse(modifiedOn); 
+			} catch (Exception e) {
+				this.modifiedOn= null;
+			}
+		this.modifiedOn=moDateNew;
 	}
 
 	public Integer getDeletedBy() {
@@ -108,12 +129,19 @@ public class TrainerModel {
 		this.deletedBy = deletedBy;
 	}
 
-	public Timestamp getDeletedOn() {
+	public Date getDeletedOn() {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(Timestamp deletedOn) {
-		this.deletedOn = deletedOn;
+	public void deletedOn(String deletedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date doDateNew = null;
+		try {
+			doDateNew = format.parse(deletedOn); 
+			} catch (Exception e) {
+				this.deletedOn= null;
+			}
+		this.deletedOn=doDateNew;
 	}
 
 	public Boolean getIsDelete() {
@@ -123,12 +151,7 @@ public class TrainerModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-
-	@Column(name="deleted_on")
-	private Timestamp deletedOn;
 	
-	@Column(name="is_delete")
-	private Boolean isDelete;
 	
 
 }

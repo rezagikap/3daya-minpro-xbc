@@ -22,7 +22,7 @@ public class TrainerController {
 	}
 	
 	@RequestMapping(value="/trainer/create")
-	public String create() {
+	public String create(){
 		return "/trainer/create";
 	}
 	
