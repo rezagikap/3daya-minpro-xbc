@@ -9,66 +9,61 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.eksad.xbc.dao.TestDao;
-import com.eksad.xbc.model.TestModel;
+import com.eksad.xbc.dao.BootcampTestTypeDao;
+import com.eksad.xbc.model.BootcampTestTypeModel;
 
 @Repository
-public class TestDaoImpl implements TestDao {
-	
+public class BootcampTestTypeDaoImpl implements BootcampTestTypeDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<TestModel> getList() {
+	public List<BootcampTestTypeModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		// HQL = Hibernate Query Language
-		// Hibernate = ORM (Object Relation Mapping)
-		String hql = "select t from TestModel t";
+		String hql = "select btt from BootcampTestTypeModel btt";
 		Query query = session.createQuery(hql);
-		List<TestModel> result = query.getResultList();
+		List<BootcampTestTypeModel> result = query.getResultList();
 		return result;
 	}
 
 	@Override
-	public List<TestModel> search(String key) {
+	public List<BootcampTestTypeModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select t from TestModel t where t.name like :keySearch";
+		String hql = "select btt from BootcampTestTypeModel btt where btt.name like :keySearch";
 		Query query = session.createQuery(hql);
 		query.setParameter("keySearch", "%"+key+"%");
 		return query.getResultList();
-		
 	}
 
 	@Override
-	public TestModel getById(Integer id) {
+	public BootcampTestTypeModel getById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select t from TestModel t where t.id=:id";
+		String hql = "select btt from BootcampTestTypeModel btt where btt.id=:btt";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
-		TestModel result = (TestModel) query.getSingleResult();
+		BootcampTestTypeModel result = (BootcampTestTypeModel) query.getSingleResult();
 		return result;
 	}
 
 	@Override
-	public void insert(TestModel model) {
+	public void insert(BootcampTestTypeModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(model);
 		
 	}
 
 	@Override
-	public void update(TestModel model) {
+	public void update(BootcampTestTypeModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(model);
 		
 	}
 
 	@Override
-	public void delete(TestModel model) {
+	public void delete(BootcampTestTypeModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(model);
 		
-	
 	}
 
 }
