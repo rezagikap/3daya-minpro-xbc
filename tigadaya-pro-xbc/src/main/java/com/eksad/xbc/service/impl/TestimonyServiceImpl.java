@@ -6,46 +6,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eksad.xbc.dao.RoleDao;
-import com.eksad.xbc.model.RoleModel;
-import com.eksad.xbc.service.RoleService;
+import com.eksad.xbc.dao.TestimonyDao;
+import com.eksad.xbc.model.TestimonyModel;
+import com.eksad.xbc.service.TestimonyService;
 
 
 @Service
 @Transactional
-public class RoleServiceImpl implements RoleService {
+public class TestimonyServiceImpl implements TestimonyService {
 	
 	@Autowired
-	private RoleDao dao;
+	private TestimonyDao dao;
 	
 	@Override
-	public List<RoleModel> getList() {
+	public List<TestimonyModel> getList() {
 		return this.dao.getList();
 	}
 
 	
 	@Override
-	public RoleModel getById(Integer id) {
+	public TestimonyModel getById(Integer id) {
 		return this.dao.getById(id);
 	}
 
 	@Override
-	public void insert(RoleModel model) {
+	public void insert(TestimonyModel model) {
 		this.dao.insert(model);
 	}
 
 	@Override
-	public void update(RoleModel model) {
+	public void update(TestimonyModel model) {
 		this.dao.update(model);
 	}
 
 	@Override
-	public void delete(RoleModel model) {
+	public void delete(TestimonyModel model) {
 		this.dao.delete(model);
 	}
 
 	@Override
-	public List<RoleModel> search(String key) {
+	public List<TestimonyModel> search(String key) {
 		return this.dao.search(key);
 	}
 

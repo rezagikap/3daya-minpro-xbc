@@ -21,8 +21,7 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Code</th>
-					<th>Name</th>
+					<th>Title</th>
 					<th>#</th>
 				</tr>
 			</thead>
@@ -56,12 +55,12 @@
 			function() {
 				var d = new Date($.now());
 				$.ajax({
-					url : '${contextName}/role/create',
+					url : '${contextName}/testimony/create',
 					type : 'get',
 					dataType : 'html',
 					success : function(result) {
 						//mengganti judul modal
-						$("#modal-title").html("Add New role");
+						$("#modal-title").html("Add New testimony");
 						//mengisi content dengan variable result
 						$("#modal-data").html(result);
 						//menampilkan modal pop up
@@ -79,8 +78,8 @@
 	function loadData() {
 		$
 				.ajax({
-					// url ke api/role/
-					url : '${contextName}/api/role/',
+					// url ke api/testimony/
+					url : '${contextName}/api/testimony/',
 					type : 'get',
 					// data type berupa JSON
 					dataType : 'json',
@@ -93,8 +92,8 @@
 										result,
 										function(index, item) {
 											var dataRow = '<tr>'
-													+ '<td>'+ item.code+ '</td>'
-													+ '<td>'+ item.name+ '</td>'
+													+ '<td>'+ item.title+ '</td>'
+													+ '<td>'+ item.content+ '</td>'
 													+ '<td class="col-md-1">'+ '<div class="dropdown">'+ '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+ '<ul class="dropdown-menu">'
 													+ '<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
 													+ '<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
@@ -116,8 +115,8 @@
 		// resources/dist/js/map-form-objet.js
 		var dataForm = getFormData($form);
 		$.ajax({
-			// url ke api/role/
-			url : '${contextName}/api/role/',
+			// url ke api/testimony/
+			url : '${contextName}/api/testimony/',
 			type : 'post',
 			// data type berupa JSON
 			dataType : 'json',
@@ -139,16 +138,15 @@
 	function getData(dataId) {
 		// panggil API
 		$.ajax({
-			// url ke api/role/
-			url : '${contextName}/api/role/' + dataId,
+			// url ke api/testimony/
+			url : '${contextName}/api/testimony/' + dataId,
 			type : 'get',
 			// data type berupa JSON
 			dataType : 'json',
 			success : function(dataApi) {
 				$('#modal-data').find('#id').val(dataApi.id);
-				$('#modal-data').find('#code').val(dataApi.code);
-				$('#modal-data').find('#name').val(dataApi.name);
-				$('#modal-data').find('#description').val(dataApi.description);
+				$('#modal-data').find('#title').val(dataApi.title);
+				$('#modal-data').find('#content').val(dataApi.content);
 				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
 				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
 				$('#modal-data').find('#modifiedBy').val(dataApi.modifiedBy);
@@ -167,7 +165,7 @@
 				var vid = $(this).val();
 				var d = new Date($.now());
 				$.ajax({
-					url : '${contextName}/role/delete',
+					url : '${contextName}/testimony/delete',
 					type : 'get',
 					dataType : 'html',
 					success : function(result) {
@@ -194,7 +192,7 @@
 		var vid = $form.find("#id").val();
 		$.ajax({
 			// url ke api/category/
-			url : '${contextName}/api/role/' + vid,
+			url : '${contextName}/api/testimony/' + vid,
 			// method http di controller
 			type : 'delete',
 			// data type berupa JSON
@@ -220,12 +218,12 @@
 				var vid = $(this).val();
 				var d = new Date($.now());
 				$.ajax({
-					url : '${contextName}/role/edit',
+					url : '${contextName}/testimony/edit',
 					type : 'get',
 					dataType : 'html',
 					success : function(result) {
 						//mengganti judul modal
-						$("#modal-title").html("Edit Data role");
+						$("#modal-title").html("Edit Data testimony");
 						//mengisi content dengan variable result
 						$("#modal-data").html(result);
 						//menampilkan modal pop up
@@ -248,7 +246,7 @@
 		var dataForm = getFormData($form);
 		$.ajax({
 			// url ke api/category/
-			url : '${contextName}/api/role/',
+			url : '${contextName}/api/testimony/',
 			// method http di controller
 			type : 'put',
 			// data type berupa JSON
@@ -270,7 +268,7 @@
 	function search(){
 		var item = $('#search').val();
 		$.ajax({
-			url: '${contextName}/api/role/search/' + item,
+			url: '${contextName}/api/testimony/search/' + item,
 			type: 'get',
 			dataType: 'json',
 			success: function(result){
@@ -278,8 +276,8 @@
 				// looping data dengan jQuery
 				$.each(result, function(index, item){
 				var dataRow ='<tr>'+
-					'<td>'+ item.code+'</td>'+
-					'<td>'+ item.name+'</td>'+
+					'<td>'+ item.title+'</td>'+
+					'<td>'+ item.content+'</td>'+
 					'<td class="col-md-1">'+
 					'<div class="dropdown">'+
 					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+

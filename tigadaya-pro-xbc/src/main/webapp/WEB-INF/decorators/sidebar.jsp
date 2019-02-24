@@ -49,6 +49,8 @@
 					<li><a href="${contextName}/bootcampType"><i class="fa fa-circle-o"></i>Bootcamp Type</a></li>
 					<li><a href="${contextName}/office"><i class="fa fa-circle-o"></i>Office</a></li>
 					<li><a href="${contextName}/category"><i class="fa fa-circle-o"></i>Category</a></li>
+					<li><a href="${contextName}/idleNews"><i class="fa fa-circle-o"></i>Idle News</a></li>
+					<li><a href="${contextName}/testimony"><i class="fa fa-circle-o"></i>Testimony</a></li>
 				</ul>
 			</li>		
 		</ul>

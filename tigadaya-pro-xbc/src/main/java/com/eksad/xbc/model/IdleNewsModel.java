@@ -2,6 +2,7 @@ package com.eksad.xbc.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,26 +16,29 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
-
 @Entity
-@Table(name="t_role")
+@Table(name="t_idle_news")
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-public class RoleModel {
+public class IdleNewsModel {
 	
 	@Id
 	@Column(name="id", columnDefinition = "serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "role_seq")
-	@TableGenerator(name = "role_seq", table = "tbl_squence", pkColumnName = "seq_id", valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "idle_news_seq")
+	@TableGenerator(name = "idle_news_seq", table = "tbl_squence",
+	pkColumnName = "seq_id", valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
 	private Integer id;
 	
-	@Column(name="code")
-	private String code;
+	@Column(name="category_id")
+	private Integer categoryId;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="title")
+	private String title;
 	
-	@Column(name="description")
-	private String description;
+	@Column(name="content")
+	private String content;
+	
+	@Column(name="is_publish")
+	private Boolean isPublish;
 	
 	@Column(name="created_by")
 	private Integer createdBy;
@@ -44,7 +48,7 @@ public class RoleModel {
 	private Date createdOn;
 	
 	@Column(name="modified_by")
-	private Integer modifiedBy;
+	private Integer modifiedby;
 	
 	@Column(name="modified_on")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -68,28 +72,36 @@ public class RoleModel {
 		this.id = id;
 	}
 
-	public String getCode() {
-		return code;
+	public Integer getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getContent() {
+		return content;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Boolean getIsPublish() {
+		return isPublish;
+	}
+
+	public void setIsPublish(Boolean isPublish) {
+		this.isPublish = isPublish;
 	}
 
 	public Integer getCreatedBy() {
@@ -115,18 +127,17 @@ public class RoleModel {
 		this.createdOn = createdOnNew;
 	}
 
-	public Integer getModifiedBy() {
-		return modifiedBy;
+	public Integer getModifiedby() {
+		return modifiedby;
 	}
 
-	public void setModifiedBy(Integer modifiedBy) {
-		this.modifiedBy = modifiedBy;
+	public void setModifiedby(Integer modifiedby) {
+		this.modifiedby = modifiedby;
 	}
 
 	public Date getModifiedOn() {
 		return modifiedOn;
 	}
-
 
 	public void setModifiedOn(String modifiedOn) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -155,7 +166,7 @@ public class RoleModel {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date deletedOnNew = null;
 		try {
-			deletedOnNew = format.parse(deletedOn);
+			deletedOnNew = format.parse(deletedOn); 
 		} catch (Exception e) {
 			this.deletedOn = null;
 		}
@@ -169,7 +180,7 @@ public class RoleModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-
+	
 	
 	
 }
