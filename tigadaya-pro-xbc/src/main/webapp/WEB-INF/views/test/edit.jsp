@@ -3,19 +3,26 @@
 <input type="hidden" name="id" id="id" />
 
 	<div class="form-group">
-		<label class="control-label col-md-2"> NAME</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="name" id="name"/>
+			<input type="text" class="form-control" name="name" placeholder="Name"/>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="control-label col-md-2"> CREATED BY</label>
+		<label class="control-label col-md-4">Is BootCamp Test?</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="createdBy" id="createdBy"/>
+			<input type="radio" name="isBootcampTest" value="true"/>Yes
+			<input type="radio" name="isBootcampTest" value="false"/>No
 		</div>
 	</div>
-	<input type="hidden" class="form-control" name="isBootcampTest" value="true" />
+	
+	<div class="form-group">
+		<div class="col-md-10">
+			<input type="text" class="form-control" name="notes" id="notes" placeholder="Notes"/>
+		</div>
+	</div>
+	
+	
 	<input type="hidden" class="form-control" name="notes" value="1" />
 	<input type="hidden" class="form-control" name="createdBy" value="1" />
 	<input type="hidden" class="form-control" name="createdOn"id="createdOn" />
