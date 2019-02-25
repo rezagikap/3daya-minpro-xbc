@@ -5,13 +5,17 @@
 	<excludes>
 		<pattern>/resources/*</pattern>
 		<pattern>/trainer/*</pattern>
+		<pattern>/technology/*</pattern>
 		<pattern>/user/*</pattern>
 		<pattern>/role/*</pattern>
 		<pattern>/menu/*</pattern>
 		<pattern>/test/*</pattern>
 		<pattern>/list/*</pattern>
 		<pattern>/category/*</pattern>
+		<pattern>/bootcamptesttype/*</pattern>
 		<pattern>/class/*</pattern>
+		<pattern>/class/*</pattern>
+
 	</excludes>
 
 	<decorator name="main" page="main.jsp">
