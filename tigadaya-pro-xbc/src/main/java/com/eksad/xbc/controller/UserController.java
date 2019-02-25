@@ -27,4 +27,9 @@ public class UserController {
 		return "/user/delete";
 	}
 	
+	@RequestMapping(value="/user/reset")
+	public String reset(){
+		return "/user/reset";
+	}
+	
 }
