@@ -6,44 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eksad.xbc.dao.ClassDao;
-import com.eksad.xbc.model.ClassModel;
-import com.eksad.xbc.service.ClassService;
+import com.eksad.xbc.dao.OfficeDao;
+import com.eksad.xbc.model.OfficeModel;
+import com.eksad.xbc.service.OfficeService;
 
 @Service
 @Transactional
-public class ClassServiceImpl implements ClassService {
+public class OfficeServiceImpl implements OfficeService {
 
 	@Autowired
-	private ClassDao dao;
+	private OfficeDao dao;
 	
 	@Override
-	public List<ClassModel> getList() {
+	public List<OfficeModel> getList() {
 		return this.dao.getList();
 	}
 
 	@Override
-	public List<ClassModel> search(String key) {
+	public List<OfficeModel> search(String key) {
 		return this.dao.search(key);
 	}
 
 	@Override
-	public ClassModel getById(Integer id) {
+	public OfficeModel getById(Integer id) {
 		return this.dao.getById(id);
 	}
 
 	@Override
-	public void insert(ClassModel model) {
+	public void insert(OfficeModel model) {
 		this.dao.insert(model);
 	}
 
 	@Override
-	public void update(ClassModel model) {
+	public void update(OfficeModel model) {
 		this.dao.update(model);
 	}
 
 	@Override
-	public void delete(ClassModel model) {
+	public void delete(OfficeModel model) {
 		this.dao.delete(model);
 	}
 	

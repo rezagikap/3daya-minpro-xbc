@@ -36,24 +36,24 @@ public class ApiCategoryController {
 		return result;
 	}
 	
-	@RequestMapping(value = "api/category/search/{katakunci}", method = RequestMethod.GET)
-	public ResponseEntity<List<CategoryModel>> search(@PathVariable("katakunci") String cari){
+	@RequestMapping(value = "api/category/search/{keyword}", method = RequestMethod.GET)
+	public ResponseEntity<List<CategoryModel>> search(@PathVariable("keyword") String cari){
 		ResponseEntity<List<CategoryModel>> result = null;
 		try {
 			List<CategoryModel> list = this.service.search(cari);
 			result = new ResponseEntity<List<CategoryModel>>(list, HttpStatus.OK);
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
+		} catch (Exception err) {
+			log.debug(err.getMessage(), err);
 			result = new ResponseEntity<List<CategoryModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return result;
 	}
 	
-	@RequestMapping(value = "api/category/{categoryId}", method = RequestMethod.GET)
-	public ResponseEntity<CategoryModel> getById(@PathVariable("categoryId") int VId){
+	@RequestMapping(value = "api/category/{itemId}", method = RequestMethod.GET)
+	public ResponseEntity<CategoryModel> getById(@PathVariable("itemId") int vId){
 		ResponseEntity<CategoryModel> result = null;
 		try {
-			CategoryModel category = this.service.getById(VId);
+			CategoryModel category = this.service.getById(vId);
 			result = new ResponseEntity<CategoryModel>(category, HttpStatus.OK);
 		} catch (Exception e) {
 			log.debug(e.getMessage(), e);
@@ -88,8 +88,8 @@ public class ApiCategoryController {
 		return result;
 	}
 	
-	@RequestMapping(value = "api/category/{categoryId}", method = RequestMethod.DELETE)
-	public ResponseEntity<CategoryModel> delApi(@PathVariable("categoryId") Integer vId){
+	@RequestMapping(value = "api/category/{itemId}", method = RequestMethod.DELETE)
+	public ResponseEntity<CategoryModel> delApi(@PathVariable("itemId") Integer vId){
 		ResponseEntity<CategoryModel> result = null;
 		try {
 			CategoryModel item = this.service.getById(vId);

@@ -1,20 +1,28 @@
+
 <!-- form mulai -->
 <form id="form-create" class="form-horizontal">
-	<div class="form-group">
+
+	<!-- <div class="form-group">
+		<label class="control-label col-md-2">Code</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="code" placeholder="Code" />
-		</div>
-	</div>
-         
+			<input type="text" class="form-control" name="code" />
+		</div>  
+	</div> -->
+	
+	
+	<Input type="hidden" class="form-control" name="code" id="code" value="C001"/>
+
 	<div class="form-group">
+		<label class="control-label col-md-2">Name</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="name" placeholder="Name" />
+			<input type="text" class="form-control" name="name" />
 		</div>
 	</div>
 
 	<div class="form-group">
+		<label class="control-label col-md-2">Description</label>
 		<div class="col-md-10">
-			<textarea  class="form-control" name="description" placeholder="Description" />
+			<textarea  class="form-control" name="description" />
 		</div>
 	</div>
 	
