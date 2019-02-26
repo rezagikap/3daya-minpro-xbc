@@ -13,13 +13,8 @@
 		<pattern>/list/*</pattern>
 		<pattern>/category/*</pattern>
 		<pattern>/bootcamptesttype/*</pattern>
-<<<<<<< HEAD
-
 		<pattern>/class/*</pattern>
 
-=======
-		<pattern>/class/*</pattern>
->>>>>>> 6a0c2282e483c12a7dce3348a6d55d35098c6c6d
 	</excludes>
 
 	<decorator name="main" page="main.jsp">

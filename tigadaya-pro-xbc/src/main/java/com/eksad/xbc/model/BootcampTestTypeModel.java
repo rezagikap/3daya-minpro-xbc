@@ -153,13 +153,6 @@ public class BootcampTestTypeModel {
 
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
 
 }

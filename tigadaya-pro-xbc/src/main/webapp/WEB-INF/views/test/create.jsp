@@ -1,8 +1,9 @@
 <% request.setAttribute("contextName", request.getServletContext().getContextPath()); %>
 <form id="form-create" class="form-horizontal">
 	<div class="form-group">
-		<div class="col-md-10">
-			<input type="text" class="form-control" name="name" placeholder="Name"/>
+			<div class="col-md-10">
+			<input type="text" class="form-control" name="name" placeholder="Name" required/>
+			<label><span>(required, oi)</span></label>
 		</div>
 	</div>
 	
@@ -31,9 +32,8 @@
 	<input type="hidden" class="form-control" name="isDelete" value="false" />
 	
 	<div class="modal-footer">
-		<button type="button" onClick="addData($('#form-create'))" class="btn btn-primary">CANCEL</button>
-		<button type="button" class="btn btn-success" data-dismiss="modal">SAVE</button>
+		<button type="button" onClick="addData($('#form-create'))" class="btn btn-primary">SAVE</button>
+		<button type="button" class="btn btn-success" data-dismiss="modal">CANCEL</button>
 	</div>
-	
-	
+
 </form>
