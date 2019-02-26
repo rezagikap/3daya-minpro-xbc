@@ -29,9 +29,9 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	public List<CategoryModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from CategoryModel x where x.name like :keySearch";
+		String hql = "select cm from CategoryModel cm where cm.name like :keySearch or cm.code like :keySearch" ;
 		Query query = session.createQuery(hql);
-		query.setParameter("keysearch", "%"+key+"%");
+		query.setParameter("keySearch", "%"+key+"%");
 		return query.getResultList();
 	}
 

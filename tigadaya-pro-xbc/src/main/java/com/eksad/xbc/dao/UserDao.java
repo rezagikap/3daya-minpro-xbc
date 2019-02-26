@@ -10,6 +10,7 @@ public interface UserDao {
 	public UserModel getById(Integer id);
 	public void insert(UserModel model);
 	public void update(UserModel model);
-	public void delete(UserModel model);	
+	public void delete(UserModel model);
 	public void reset(UserModel model);
+
 }

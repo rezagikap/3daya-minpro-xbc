@@ -33,7 +33,7 @@ package com.eksad.xbc.model;
 		private Integer createdBy;
 		
 		@Column(name="created_on")
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 		private Date createdOn;
 
 		public Integer getId() {

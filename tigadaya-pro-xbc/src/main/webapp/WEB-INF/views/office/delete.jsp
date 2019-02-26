@@ -6,9 +6,9 @@
 	</center>
 	
 	<input type="hidden" name="id" id="id" />
-	<input type="hidden" name="batchId" id="batchId" />
-    <input type="hidden" name="biodataId" id="biodataId" />
-     <input type="hidden" name="name" id="name" />
+	<input type="hidden" name="name" id="name" />
+	<input type="hidden" name="phone" id="phone" />
+	<input type="hidden" name="email" id="email" />
 	
 	
 	<div class="modal-footer">

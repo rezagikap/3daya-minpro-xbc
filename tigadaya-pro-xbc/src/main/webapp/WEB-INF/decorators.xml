@@ -14,7 +14,7 @@
 		<pattern>/category/*</pattern>
 		<pattern>/bootcamptesttype/*</pattern>
 		<pattern>/class/*</pattern>
-		<pattern>/class/*</pattern>
+		<pattern>/office/*</pattern>
 
 	</excludes>
 

@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="form-group">
-		<label class="control-label col-md-2">User Name</label>
+		<label class="control-label col-md-2">Username</label>
 		<div class="col-md-10">
 			<input type="text" class="form-control" name="username" />
 		</div>
@@ -43,6 +43,12 @@
 	<input type="hidden" class="form-control" name="isDelete" value="false"/>
 	
 	<input type="hidden" class="form-control" name="mobileFlag" value="false"/>
+	
+	<input type="hidden" class="form-control" name="modifiedBy" id="modifiedBy"/>
+	
+	<input type="hidden" class="form-control" name="modifiedOn" id="modifiedOn"/>
+	
+	<input type="hidden" class="form-control" name="deletedBy" id="deletedBy"/>
 	
 	<div class="modal-footer">
 		<button type="button" onClick="addData($('#form-create'))"

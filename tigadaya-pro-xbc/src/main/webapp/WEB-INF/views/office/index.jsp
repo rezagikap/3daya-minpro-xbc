@@ -8,7 +8,7 @@
 	
 	<div class="box-header col-md-12">
 			<input type="text" name="search" id="search"
-				placeholder="Search by username/email" />
+				placeholder="Search by officename/email" />
 			<button class="margin col-md-0.5 btn btn-warning btn-xm"
 				onClick="search()">
 				<i class="fa fa-circle-o"></i>
@@ -25,9 +25,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>NAME</th>
-					<th>ROLE</th>
-					<th>EMAIL</th>
+					<th>Name</th>
+					<th>Contact</th>
 					<th class="col-md-1">#</th>
 				</tr>
 			</thead>
@@ -41,7 +40,7 @@
 	<div class="modal-dialog">
 		<div class="box box-success">
 			<div class="box-header">
-				<h3 class="box-title" id="modal-title">ADD DATA</h3>
+				<h3 class="box-title" id="modal-title">ADD OFFICE</h3>
 			</div>
 			<div class="box-body" id="modal-data"></div>
 		</div>
@@ -59,7 +58,7 @@
 			function() {
 				var d = new Date($.now());
 				$.ajax({
-					url : '${contextName}/user/create',
+					url : '${contextName}/office/create',
 					type : 'get',
 					dataType : 'html',
 					success : function(result) {
@@ -74,7 +73,6 @@
 										+ d.getFullYear() + " " + d.getHours()
 										+ ":" + d.getMinutes() + ":"
 										+ d.getSeconds());
-						loadRole($("#modal-data"));
 					}
 				});
 			});
@@ -83,7 +81,7 @@
 		$
 				.ajax({
 					// url ke api/role/
-					url : '${contextName}/api/user/',
+					url : '${contextName}/api/office/',
 					type : 'get',
 					// data type berupa JSON
 					dataType : 'json',
@@ -96,21 +94,13 @@
 										result,
 										function(index, item) {
 											var dataRow = '<tr>'
-													+ '<td>'
-													+ item.username
-													+ '</td>'
-													+ '<td>'
-													+ item.roleId
-													+ '</td>'
-													+ '<td>'
-													+ item.email
-													+ '</td>'
+													+ '<td>'+ item.name + '</td>'
+													+ '<td>'+ item.phone +' / '+ item.email + '</td>'
 													+ '<td class="col-md-1">'
 													+ '<div class="dropdown">'
 													+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
 													+ '<ul class="dropdown-menu">'
 													+ '<li id="btn-edit" value="'+ item.id +'"><a>Edit</a></li> '
-													+ '<li id="btn-reset" value="'+ item.id +'"><a>Reset Password</a></li> '
 													+ '<li id="btn-delete" value="'+ item.id +'"><a>Delete</a></li> '
 													+ '</ul>' + '</div>'
 													+ '</td>' + '</tr>';
@@ -127,8 +117,8 @@
 		// resources/dist/js/map-form-object.js
 		var dataForm = getFormData($form);
 		$.ajax({
-			// url ke api/user/
-			url : '${contextName}/api/user/',
+			// url ke api/office/
+			url : '${contextName}/api/office/',
 			type : 'post',
 			dataType : 'json',
 			data : JSON.stringify(dataForm),
@@ -142,17 +132,16 @@
 	}
 	function getData(dataId) {
 		$.ajax({
-			url : '${contextName}/api/user/' + dataId,
+			url : '${contextName}/api/office/' + dataId,
 			type : 'get',
 			dataType : 'json',
 			success : function(dataApi) {
 				$('#modal-data').find('#id').val(dataApi.id);
-				$('#modal-data').find('#username').val(dataApi.username);
-				$('#modal-data').find('#password').val(dataApi.password);
+				$('#modal-data').find('#name').val(dataApi.officename);
+				$('#modal-data').find('#phone').val(dataApi.password);
 				$('#modal-data').find('#email').val(dataApi.email);
-				$('#modal-data').find('#roleId').val(dataApi.roleId);
-				$('#modal-data').find('#mobileFlag').val(dataApi.mobileFlag);
-				$('#modal-data').find('#mobileToken').val(dataApi.mobileToken);
+				$('#modal-data').find('#address').val(dataApi.roleId);
+				$('#modal-data').find('#notes').val(dataApi.mobileFlag);
 				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
 				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
 				$('#modal-data').find('#modifiedBy').val(dataApi.modifiedBy);
@@ -164,14 +153,14 @@
 			}
 		});
 	}
-	// ketidak btn-edit di click
+	// ketika btn-edit di click
 	$('#list-data').on(
 			'click',
 			'#btn-edit',
 			function() {
 				var vid = $(this).val();
 				$.ajax({
-					url : '${contextName}/user/edit',
+					url : '${contextName}/office/edit',
 					type : 'get',
 					dataType : 'html',
 					success : function(result) {
@@ -194,8 +183,8 @@
 		// resources/dist/js/map-form-objet.js
 		var dataForm = getFormData($form);
 		$.ajax({
-			// url ke api/user/
-			url : '${contextName}/api/user/',
+			// url ke api/office/
+			url : '${contextName}/api/office/',
 			type : 'put',
 			// data type berupa JSON
 			dataType : 'json',
@@ -216,7 +205,7 @@
 	$('#list-data').on('click', '#btn-delete', function() {
 		var vid = $(this).val();
 		$.ajax({
-			url : '${contextName}/user/delete',
+			url : '${contextName}/office/delete',
 			type : 'get',
 			dataType : 'html',
 			success : function(result) {
@@ -237,7 +226,7 @@
 		var vid = $form.find("#id").val();
 		$.ajax({
 			// url ke api/trainer/
-			url : '${contextName}/api/user/' + vid,
+			url : '${contextName}/api/office/' + vid,
 			// method http di controller
 			type : 'delete',
 			// data type berupa JSON
@@ -252,73 +241,11 @@
 			}
 		});
 	}
-	//ketika Reset Password di klik
-	$('#list-data').on('click', '#btn-reset', function(){
-		var vid=$(this).val();
-		$.ajax({
-			url: '${contextName}/user/reset',
-			type: 'get',
-			dataType: 'html',
-			success: function(result){
-				$('#modal-title').html("RESET PASSWORD");
-				$('#modal-data').html(result);
-				$('#modal-form').modal('show');
-				getData(vid);
-			}
-			
-		});
-	});
-	
-	//method untuk Reset Password
-	function resetData($form){
-		var dataForm=getFormData($form);
-		$.ajax({
-			url: '${contextName}/api/user/reset/',
-			type: 'put',
-			dataType: 'json',
-			data: JSON.stringify(dataForm),
-			contentType: 'application/json',
-			success: function(result){
-				$("#modal-form").modal('hide');
-				loadData();
-			}
-		});
-		console.log(dataForm);
-	}
-	
-	function loadRole($form, $selected) {
-		$.ajax({
-			// url ke api/product/
-			url : '${contextName}/api/role/',
-			type : 'get',
-			// data type berupa JSON
-			dataType : 'json',
-			success : function(result) {
-				// empty data first
-				$form.find("#roleId").empty();
-				$form.find("#roleId").append(
-						'<option value="">=Select Role=</option>');
-				// looping data
-				$.each(result, function(index, item) {
-					if ($selected == item.id) {
-						$form.find("#roleId").append(
-								'<option value="'+ item.id +'" selected="selected">'
-										+ item.code + ' - ' + item.name
-										+ '</option>');
-					} else {
-						$form.find("#roleId").append(
-								'<option value="'+ item.id +'">' + item.code
-										+ ' - ' + item.name + '</option>');
-					}
-				});
-			}
-		});
-	}
 	
 	function search(){
 		var item = $('#search').val();
 		$.ajax({
-			url: '${contextName}/api/user/search/' + item,
+			url: '${contextName}/api/office/search/' + item,
 			type: 'get',
 			dataType: 'json',
 			success: function(result){
@@ -327,7 +254,7 @@
 				$.each(result, function(index, item){
 					var dataRow = '<tr>'
 						+ '<td>'
-						+ item.username
+						+ item.name
 						+ '</td>'
 						+ '<td>'
 						+ item.email
@@ -337,7 +264,6 @@
 						+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
 						+ '<ul class="dropdown-menu">'
 						+ '<li id="btn-edit" value="'+ item.id +'"><a>Edit</a></li> '
-						+ '<li id="btn-reset" value="'+ item.id +'"><a>Reset Password</a></li> '
 						+ '<li id="btn-delete" value="'+ item.id +'"><a>Delete</a></li> '
 						+ '</ul>' + '</div>'
 						+ '</td>' + '</tr>';

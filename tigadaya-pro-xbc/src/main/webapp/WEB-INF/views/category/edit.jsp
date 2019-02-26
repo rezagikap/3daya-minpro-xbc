@@ -22,7 +22,7 @@
 	<div class="form-group">
 		<label class="control-label col-md-2">Description</label>
 		<div class="col-md-10">
-			<textarea  class="form-control" name="description" id="description"/> 
+			<textarea  class="form-control" name="description" id="description"/>
 		</div>
 	</div>
 	

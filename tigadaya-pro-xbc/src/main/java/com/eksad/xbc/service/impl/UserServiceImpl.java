@@ -51,5 +51,4 @@ public class UserServiceImpl implements UserService {
 	public void reset(UserModel model) {
 		this.dao.reset(model);
 	}
-
 }
