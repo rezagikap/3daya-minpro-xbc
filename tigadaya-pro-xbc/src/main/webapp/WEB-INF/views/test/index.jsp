@@ -1,17 +1,13 @@
-
-<%
-	request.setAttribute("contextName", request.getServletContext().getContextPath());
-%>
+<%request.setAttribute("contextName", request.getServletContext().getContextPath());%>
 <div class="box box-info">
 	<div class="box-header with-border">
-		<h3 class="box-title">TEST</h3>
+		<h3 class="box-title">Test</h3>
 		<div class="box-tools">
 			<button type="button" class="btn btn-primary btn-sm" id="btn-add">
 				<i class="fa fa-plus"></i>
 			</button>
 		</div>
 	</div>
-	
 	<div class="box-tools col-md-12">
 			<input type="text" name="search" id="search" placeholder="Search by name"/>
 			<button class="btn btn-primary btn-sm" onclick="search()">
@@ -23,8 +19,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>NAME</th>
-					<th>CREATED BY</th>
+					<th>Name</th>
+					<th>Created By</th>
 					<th class="col-md-1">#</th>
 				</tr>
 			</thead>
@@ -46,6 +42,8 @@
 </div>
 
 <script>
+
+
 	// method yang pertama dipanggil saat page diload
 	$(function() {
 		// memanggil method load data
@@ -83,8 +81,9 @@
 						$("#list-data").empty();
 						// looping data dengan jQuery
 						$.each(result,function(index, item) {
-							var dataRow ='<tr>'+
-							'<td>'+ item.name+'</td>'+
+							var dataRow = '<tr>'+ 
+							'<td>'+ item.name+ '</td>'+ 
+							'<td>'+ item.createdBy+ '</td>'+ 
 							'<td class="col-md-1">'+
 							'<div class="dropdown">'+
 							'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
@@ -93,8 +92,8 @@
 						    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
 						    '</ul>'+
 						    '</div>'+
-							'</td>'+
-							'</tr>';
+						'</td>'+
+						'</tr>';
 								$("#list-data").append(dataRow);
 						});
 						// menampilkan data ke console => F12
@@ -102,36 +101,7 @@
 					}
 				});
 	}
-	
-	function search(){
-		var item = $('#search').val();
-		$.ajax({
-			url: '${contextName}/api/test/search/' + item,
-			type: 'get',
-			dataType: 'json',
-			success: function(result){
-				$("#list-data").empty();
-				// looping data dengan jQuery
-				$.each(result, function(index, item){
-				var dataRow ='<tr>'+
-					'<td>'+ item.name+'</td>'+
-					'<td class="col-md-1">'+
-						'<div class="dropdown">'+
-					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
-				   	 '<ul class="dropdown-menu">'+
-				   	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
-			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
-				    '</ul>'+
-				    '</div>'+
-					'</td>'+
-					'</tr>';
-					$("#list-data").append(dataRow);
-					});
-				console.log(result);
-			}
-		});
-	}
-	
+
 	// method untuk add data
 	function addData($form) {
 		// memanggil method getFormdata dari file
@@ -162,14 +132,50 @@
 			success : function(dataApi) {
 				$('#modal-data').find('#id').val(dataApi.id);
 				$('#modal-data').find('#name').val(dataApi.name);
+				$('#modal-data').find('#isBootcampTest').val(dataApi.isBootcampTest);
+				$('#modal-data').find('#notes').val(dataApi.notes);
 				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
-
+				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
+				$('#modal-data').find('#modifiedOn').val(dataApi.modifiedOn);
+				$('#modal-data').find('#deletedBy').val(dataApi.deletedBy);
+				$('#modal-data').find('#deletedOn').val(dataApi.deletedOn);
+				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
 				console.log(dataApi);
 			}
 		});
 	}
 	
-	// ketidak btn-delete di click
+	function search(){
+		var item = $('#search').val();
+		$.ajax({
+			url: '${contextName}/api/test/search/' + item,
+			type: 'get',
+			dataType: 'json',
+			success: function(result){
+				$("#list-data").empty();
+				// looping data dengan jQuery
+				$.each(result, function(index, item){
+				var dataRow ='<tr>'+
+					'<td>'+ item.name+'</td>'+
+					'<td>'+ item.createdBy+ '</td>'+ 
+					'<td class="col-md-1">'+
+						'<div class="dropdown">'+
+					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+				   	 '<ul class="dropdown-menu">'+
+				   	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
+			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
+				    '</ul>'+
+				    '</div>'+
+					'</td>'+
+					'</tr>';
+					$("#list-data").append(dataRow);
+					});
+				console.log(result);
+			}
+		});
+	}
+	
+	// ketika btn-delete di click
 	$('#list-data').on('click','#btn-delete', function(){
 		var vid = $(this).val();
 		$.ajax({
@@ -194,7 +200,7 @@
 		// memangil method getFormData dari file
 		var vid = $form.find("#id").val();
 		$.ajax({
-			// url ke api/category/
+			// url ke api/test/
 			url:'${contextName}/api/test/'+vid,
 			// method http di controller
 			type:'delete',
@@ -211,7 +217,7 @@
 		});
 	}
 
-	// ketidak btn-edit di click
+	// ketika btn-edit di click
 	$('#list-data').on('click','#btn-edit', function(){
 		var vid = $(this).val();
 		var d = new Date($.now());
@@ -262,8 +268,5 @@
 		});
 		console.log(dataForm);
 	}
-	
-		
-
 	
 </script>

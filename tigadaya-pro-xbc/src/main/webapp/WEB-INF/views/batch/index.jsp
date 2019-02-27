@@ -65,7 +65,7 @@
 					var dataRow ='<tr>'+
 					'<td>'+ item.technologyId +'</td>'+
 					'<td>'+ item.name+'</td>'+
-					'<td>'+ item.trainer.name+'</td>'+
+					'<td>'+ item.trainerId+'</td>'+
 					'<td class = "col-md-1">'+
 					'<div class = "dropdown">'+
 						'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
@@ -218,7 +218,7 @@
 		});
 	}
 	
-	//letika btn-edit di klik
+	//ketika btn-edit di klik
 	$('#list-data').on('click', '#btn-edit', function() {
 		var vid = $(this).val();
 		$.ajax({
@@ -226,11 +226,44 @@
 			type : 'get',
 			dataType : 'html',
 			success : function(result) {
-				$("#modal-title").html("EDIT");
+				//mengganti judul modal
+				$("#modal-title").html("EDIT DATA");
+				//menggisi content dengan variable result
 				$("#modal-data").html(result);
+				//menampilkan modal pop up
 				$("#modal-form").modal('show');
+				//panggil Trainer
+				loadTrainer($("#modal-data"));
+				loadBootcampType($("#modal-data"));
 				getData(vid);
 			}
 		});
 	});
+	
+	//method untuk edit data 
+	function editData($form){
+		//memanggil method getFormData dari file 
+		//resources/dist/js/map-form-object.js
+		var dataForm = getFormData($form);
+		$.ajax({
+			//url ke api/batch/
+			url : '${contextName}/api/batch/',
+			type: 'put',
+			//data type berupa JSON
+			dataType:'json',
+			//mengirim parameter data 
+			data : JSON.stringify(dataForm),
+			// mime type 
+			contentType : 'application/json',
+			success : function(result) {
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+			}
+		});
+		console.log(dataForm);
+	}
+			
+		
 </script>

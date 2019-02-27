@@ -4,7 +4,7 @@
 
 	<div class="form-group">
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="name" placeholder="Name"/>
+			<input type="text" class="form-control" name="name" id="name" placeholder="Name"/>
 		</div>
 	</div>
 	
@@ -22,8 +22,6 @@
 		</div>
 	</div>
 	
-	
-	<input type="hidden" class="form-control" name="notes" value="1" />
 	<input type="hidden" class="form-control" name="createdBy" value="1" />
 	<input type="hidden" class="form-control" name="createdOn"id="createdOn" />
 	<input type="hidden" class="form-control" name="modifiedBy" value="1" />
