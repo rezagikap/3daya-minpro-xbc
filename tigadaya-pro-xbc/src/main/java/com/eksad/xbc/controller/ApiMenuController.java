@@ -88,6 +88,19 @@ public class ApiMenuController {
 		return result;
 	}
 	
+	@RequestMapping(value="/api/menu/delete/", method=RequestMethod.PUT)
+	public ResponseEntity<MenuModel> putDelete(@RequestBody MenuModel item){
+		ResponseEntity<MenuModel> result = null;
+		try {
+			this.service.update(item);
+			result = new ResponseEntity<MenuModel>(item, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			log.debug(e.getMessage(),e);
+			result = new ResponseEntity<MenuModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;
+	}
+	
 	@RequestMapping(value="/api/menu/{itemId}", method=RequestMethod.DELETE)
 	public ResponseEntity<MenuModel> delApi(@PathVariable("itemId") Integer vid){
 		ResponseEntity<MenuModel> result = null;

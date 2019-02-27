@@ -2,23 +2,27 @@ package com.eksad.xbc.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 
 @Entity
 @Table(name="t_role")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class RoleModel {
 	
 	@Id
@@ -60,6 +64,10 @@ public class RoleModel {
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="roles")
+	private List<MenuAccessModel> listMenuAccess;
 
 	public Integer getId() {
 		return id;
@@ -171,6 +179,11 @@ public class RoleModel {
 		this.isDelete = isDelete;
 	}
 
-	
-	
+	public List<MenuAccessModel> getListMenuAccess() {
+		return listMenuAccess;
+	}
+
+	public void setListMenuAccess(List<MenuAccessModel> listMenuAccess) {
+		this.listMenuAccess = listMenuAccess;
+	}
 }

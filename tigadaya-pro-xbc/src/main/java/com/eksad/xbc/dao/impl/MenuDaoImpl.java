@@ -2,10 +2,10 @@ package com.eksad.xbc.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.Query;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.hibernate.query.criteria.internal.expression.function.SubstringFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -45,6 +45,26 @@ public class MenuDaoImpl implements MenuDao {
 		MenuModel result = (MenuModel)query.getSingleResult();
 		return result;
 	}
+	
+	@Override
+	public String getNewCode() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql="select cd from MenuModel cd where cd.code=(select max(code) from MenuModel)";
+		Query query = session.createQuery(hql);
+		String kodeBaru = "";
+		if(query.getResultList().size()>0) {
+			MenuModel jt = (MenuModel) query.getSingleResult();
+			kodeBaru=jt.getCode();
+			int mCode = Integer.parseInt(kodeBaru.substring(1,5));
+			mCode++;
+			kodeBaru="M" + String.format("%04d", mCode);
+		} else {
+			kodeBaru="M0001";
+		}
+		
+		return kodeBaru;
+		
+	}
 
 	@Override
 	public void insert(MenuModel model) {
@@ -63,4 +83,6 @@ public class MenuDaoImpl implements MenuDao {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(model);
 	}
+
+	
 }

@@ -8,8 +8,11 @@
 		<pattern>/user/*</pattern>
 		<pattern>/role/*</pattern>
 		<pattern>/menu/*</pattern>
+		<pattern>/menu-access/*</pattern>
 		<pattern>/test/*</pattern>
 		<pattern>/list/*</pattern>
+		<pattern>/biodata/*</pattern>
+		<pattern>/category/*</pattern>
 	</excludes>
 
 	<decorator name="main" page="main.jsp">
