@@ -1,11 +1,7 @@
 package com.eksad.xbc.model;
 
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.Date;
-=======
-import java.sql.Date;
->>>>>>> 5e70104095746f37266624ff45d346286554aa22
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,12 +22,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="t_role")
-<<<<<<< HEAD
 //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-=======
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=RoleModel.class)
 
->>>>>>> 5e70104095746f37266624ff45d346286554aa22
 public class RoleModel {
 	@Id
 	@Column(name="id", columnDefinition = "serial")
@@ -73,13 +65,11 @@ public class RoleModel {
 	private Boolean isDelete;
 	
 	@JsonIgnore
-<<<<<<< HEAD
 	@OneToMany(mappedBy="roles")
 	private List<MenuAccessModel> listMenuAccess;
-=======
+	
 	@OneToMany(mappedBy="role", fetch=FetchType.EAGER, orphanRemoval=true)
 	private List<UserModel> listUser;
->>>>>>> 5e70104095746f37266624ff45d346286554aa22
 
 	public Integer getId() {
 		return id;
@@ -169,7 +159,6 @@ public class RoleModel {
 		this.isDelete = isDelete;
 	}
 
-<<<<<<< HEAD
 	public List<MenuAccessModel> getListMenuAccess() {
 		return listMenuAccess;
 	}
@@ -177,8 +166,7 @@ public class RoleModel {
 	public void setListMenuAccess(List<MenuAccessModel> listMenuAccess) {
 		this.listMenuAccess = listMenuAccess;
 	}
-}
-=======
+	
 	public List<UserModel> getListUser() {
 		return listUser;
 	}
@@ -189,4 +177,3 @@ public class RoleModel {
 	
 	
 }
->>>>>>> 5e70104095746f37266624ff45d346286554aa22
