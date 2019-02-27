@@ -6,22 +6,29 @@
 		<h3 class="box-title">USER</h3>
 	</div>
 	
-	<div class="box-header col-md-12">
-			<input type="text" name="search" id="search"
-				placeholder="Search by officename/email" />
-			<button class="margin col-md-0.5 btn btn-warning btn-xm"
-				onClick="search()">
-				<i class="fa fa-circle-o"></i>
-			</button>
-			<div class="box-tools col-md-1">
-				<button type="button" id="btn-add"
-					class="margin col-md-0.5 btn btn-warning btn-m">
-					<i class="fa fa-plus"></i>
-				</button>
+	
+			
+	<div class="box-body">
+	<div class="row">
+		<div class="col-md-11">
+			<div class="input-group col-md-5">
+				<input type="text" name="search" id="search" class="form-control"
+					placeholder="Search by username/email" /> <span class="input-group-btn">
+					<button class="btn btn-warning btn-xm "
+						onClick="search()">
+						<i class="fa fa-circle-o"></i>
+					</button>
+				</span>
 			</div>
 		</div>
-		
-	<div class="box-body">
+		<div class="box-tools">
+			<button type="button" id="btn-add"
+				class="btn btn-warning btn-xm">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+	</div>	
+
 		<table class="table">
 			<thead>
 				<tr>

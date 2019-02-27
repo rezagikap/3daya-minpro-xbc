@@ -6,14 +6,14 @@
 	<div class="form-group">
 		<label class="control-label col-md-3">Password</label>
 		<div class="col-md-7">
-			<input type="text" class="form-control" name="password" id="password" placeholder="password"/>
+			<input type="password" class="form-control" name="password" id="password" placeholder="password"/>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label class="control-label col-md-3">Retype Password</label>
 		<div class="col-md-7">
-			<input type="text" class="form-control" name="password" id="password" placeholder="re-type password"/>
+			<input type="password" class="form-control" name="password" id="password" placeholder="re-type password"/>
 		</div>
 	</div>
 	
@@ -43,8 +43,8 @@
 	<input type="hidden" class="form-control" name="deletedOn" id="deletedOn"/>
 	
 <div class="modal-footer">
-		<button type="button" class="btn btn-warning pull-left" onClick="resetData($('#form-reset'))">Reset</button>
-		<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>		
+		<button type="button" class="btn btn-success pull-left" onClick="resetData($('#form-reset'))">RESET</button>
+		<button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>		
 </div>
 </form>
 <!-- Form Selesai -->

@@ -25,14 +25,14 @@
 	<div class="form-group">
 		<label class="control-label col-md-2">Password</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="password" />
+			<input type="password" class="form-control" name="password" />
 		</div>
 	</div>
 
 	<div class="form-group">
-		<label class="control-label col-md-2">New Password</label>
+		<label class="control-label col-md-2">Re-type Password</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="password" />
+			<input type="password" class="form-control" name="password" />
 		</div>
 	</div>
 	
@@ -50,9 +50,10 @@
 	
 	<input type="hidden" class="form-control" name="deletedBy" id="deletedBy"/>
 	
+	
 	<div class="modal-footer">
 		<button type="button" onClick="addData($('#form-create'))"
-			class="btn btn-primary pull-left">Simpan</button>
-		<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+			class="btn btn-success pull-left">SIMPAN</button>
+		<button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
 	</div>
 </form>

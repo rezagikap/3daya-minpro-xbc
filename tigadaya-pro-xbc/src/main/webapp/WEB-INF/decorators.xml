@@ -15,6 +15,7 @@
 		<pattern>/bootcamptesttype/*</pattern>
 		<pattern>/class/*</pattern>
 		<pattern>/office/*</pattern>
+		<pattern>/batch/*</pattern>
 
 	</excludes>
 

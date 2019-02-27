@@ -16,7 +16,7 @@
 	<div class="form-group">
 		<label class="control-label col-md-3">Email</label>
 		<div class="col-md-7">
-			<input type="text" class="form-control" name="email" id="email" readonly="readonly" />
+			<input type="text" class="form-control" name="email" id="email" />
 		</div>
 	</div>
 
@@ -31,9 +31,9 @@
 		<label class="control-label col-md-3">Mobile Flag</label>
 		<div class="col-md-7">
 			<label class="radio-inline"> 
-			<input type="radio" name="mobileFlag" id="mobileFlag" value="">True</label>
+			<input type="radio" name="mobileFlag" id="mobileFlag" value="false">True</label>
 			<label class="radio-inline">
-			<input type="radio" name="mobileFlag" id="mobileFlag" value="">False</label>
+			<input type="radio" name="mobileFlag" id="mobileFlag" value="true">False</label>
 		</div>
 	</div>
 
@@ -62,8 +62,8 @@
 	<input type="hidden" class="form-control" name="deletedOn" id="deletedOn"/>
 	
 <div class="modal-footer">
-		<button type="button" class="btn btn-warning pull-left" onClick="editData($('#form-edit'))">Update</button>
-		<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>		
+		<button type="button" class="btn btn-success pull-left" onClick="editData($('#form-edit'))">UPDATE</button>
+		<button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>		
 </div>
 </form>
 <!-- Form Selesai -->
