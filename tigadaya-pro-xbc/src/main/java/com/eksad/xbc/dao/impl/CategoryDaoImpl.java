@@ -16,7 +16,7 @@ import com.eksad.xbc.model.CategoryModel;
 public class CategoryDaoImpl implements CategoryDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public List<CategoryModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
@@ -29,9 +29,9 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	public List<CategoryModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from CategoryModel x where x.name like :keySearch";
+		String hql = "select cm from CategoryModel cm where cm.name like :keySearch or cm.code like :keySearch";
 		Query query = session.createQuery(hql);
-		query.setParameter("keysearch", "%"+key+"%");
+		query.setParameter("keySearch", "%" + key + "%");
 		return query.getResultList();
 	}
 
@@ -41,8 +41,27 @@ public class CategoryDaoImpl implements CategoryDao {
 		String hql = "select cm from CategoryModel cm where cm.id=:id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
-		CategoryModel result = (CategoryModel)query.getSingleResult();
+		CategoryModel result = (CategoryModel) query.getSingleResult();
 		return result;
+	}
+
+	@Override
+	public String getNewCode() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "select xx from CategoryModel xx where xx.code=(select max(code) from CategoryModel)";
+		Query query = session.createQuery(hql);
+		CategoryModel xx = (CategoryModel) query.getSingleResult();
+		String kodeBaru = xx.getCode();
+		if (xx != null) {
+			int xCode = Integer.parseInt(kodeBaru.substring(1, 4));// value di mulai 1 dan panjang nya 3
+			xCode++;
+			kodeBaru = "C" + String.format("%03d", xCode);
+		} else {
+			kodeBaru = "C001";
+			
+		}
+
+		return kodeBaru;
 	}
 
 	@Override

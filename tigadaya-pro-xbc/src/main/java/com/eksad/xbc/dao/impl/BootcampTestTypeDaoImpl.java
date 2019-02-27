@@ -20,7 +20,7 @@ public class BootcampTestTypeDaoImpl implements BootcampTestTypeDao {
 	@Override
 	public List<BootcampTestTypeModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select btt from BootcampTestTypeModel btt";
+		String hql = "select btt from BootcampTestTypeModel btt order by id";
 		Query query = session.createQuery(hql);
 		List<BootcampTestTypeModel> result = query.getResultList();
 		return result;

@@ -16,94 +16,76 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.eksad.xbc.model.BootcampTestTypeModel;
 import com.eksad.xbc.service.BootcampTestTypeService;
 
+
+
 @Controller
 public class ApiBootcampTestTypeController {
-	private Log log = LogFactory.getLog(getClass());
-	@Autowired
-	private BootcampTestTypeService service;
-	
-	@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.GET)
-	public ResponseEntity<List<BootcampTestTypeModel>> list(){
-		ResponseEntity<List<BootcampTestTypeModel>> result = null;
-		try {
-			List<BootcampTestTypeModel> list = this.service.getList();
-			result = new ResponseEntity<List<BootcampTestTypeModel>>(list, HttpStatus.OK);
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
-			result = new ResponseEntity<List<BootcampTestTypeModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		private Log log = LogFactory.getLog(getClass());
+		@Autowired
+		private BootcampTestTypeService service;
 		
-		return result;
-		
-	}
-	
-	@RequestMapping(value = "/api/bootcamptesttype/search/{katakunci}", method = RequestMethod.GET)
-	public ResponseEntity<List<BootcampTestTypeModel>> search(@PathVariable("katakunci") String cari){
-		ResponseEntity<List<BootcampTestTypeModel>> result = null;
-		try {
-			List<BootcampTestTypeModel> list = this.service.search(cari);
-			result = new ResponseEntity<List<BootcampTestTypeModel>>(list, HttpStatus.OK);			
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
-			result = new ResponseEntity<List<BootcampTestTypeModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return result;
-	}
-	
-	@RequestMapping(value = "/api/bootcamptesttype/{itemId}", method = RequestMethod.GET)
-	public ResponseEntity<BootcampTestTypeModel> getById(@PathVariable("itemId") int vid){
-		ResponseEntity<BootcampTestTypeModel> result = null;
-		try {
-			BootcampTestTypeModel cat = this.service.getById(vid);
-			result = new ResponseEntity<BootcampTestTypeModel>(cat, HttpStatus.OK);
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
-			result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return result;
-	}
-	
-	@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.POST)
-	public ResponseEntity<BootcampTestTypeModel> postInsert (@RequestBody BootcampTestTypeModel item ){
-		ResponseEntity<BootcampTestTypeModel> result = null;
-		try {
-			this.service.insert(item);
-			result = new ResponseEntity<BootcampTestTypeModel>(item, HttpStatus.CREATED);
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
-			result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return result;
-	}
-	
-	@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.PUT)
-	public ResponseEntity<BootcampTestTypeModel> putUpdate(@RequestBody BootcampTestTypeModel item){
-		ResponseEntity<BootcampTestTypeModel> result = null;
-		try {
-			this.service.update(item);
-			result = new ResponseEntity<BootcampTestTypeModel>(item,HttpStatus.ACCEPTED);
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
-			result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.GET)
+		public ResponseEntity<List<BootcampTestTypeModel>> list(){
+			ResponseEntity<List<BootcampTestTypeModel>> result = null;
+			try {
+				List<BootcampTestTypeModel> list = this.service.getList();
+				result = new ResponseEntity<List<BootcampTestTypeModel>>(list, HttpStatus.OK);
+			}  catch (Exception e) {
+				log.debug(e.getMessage(), e);
+				result = new ResponseEntity<List<BootcampTestTypeModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 			return result;
 		}
-	
-	@RequestMapping(value = "/api/bootcamptesttype/{itemId}", method = RequestMethod.DELETE)
-	public ResponseEntity<BootcampTestTypeModel> delApi(@PathVariable("itemId") Integer vid){
-		ResponseEntity<BootcampTestTypeModel> result = null;
-		try {
-			BootcampTestTypeModel item = this.service.getById(vid);
-			if (item != null) {
-				this.service.delete(item);
-				result = new ResponseEntity<BootcampTestTypeModel>(item, HttpStatus.ACCEPTED);
-			} else {
-				result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.NO_CONTENT);
+		
+		@RequestMapping(value = "/api/bootcamptesttype/search/{katakunci}", method = RequestMethod.GET)
+		public ResponseEntity<List<BootcampTestTypeModel>> search (@PathVariable("katakunci") String cari){
+			ResponseEntity<List<BootcampTestTypeModel>> result = null;
+			try {
+				List<BootcampTestTypeModel> list = this.service.search(cari);
+				result = new ResponseEntity<List<BootcampTestTypeModel>>(list, HttpStatus.OK);
+			} catch (Exception e) {
+				log.debug(e.getMessage(), e);
+				result = new ResponseEntity<List<BootcampTestTypeModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
+			return result;
+		}
+		
+		@RequestMapping(value = "/api/bootcamptesttype/{itemId}", method = RequestMethod.GET)
+		public ResponseEntity<BootcampTestTypeModel> getById(@PathVariable("itemId") int vid){
+			ResponseEntity<BootcampTestTypeModel> result = null;
+			try {
+				BootcampTestTypeModel cat = this.service.getById(vid);
+				result = new ResponseEntity<BootcampTestTypeModel>(cat, HttpStatus.OK);
 			} catch (Exception e) {
 				log.debug(e.getMessage(), e);
 				result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			return result;
 		}
+		
+		@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.POST)
+		public ResponseEntity<BootcampTestTypeModel> postInsert(@RequestBody BootcampTestTypeModel item){
+			ResponseEntity<BootcampTestTypeModel> result = null;
+			try {
+				this.service.insert(item);
+				result = new ResponseEntity<BootcampTestTypeModel>(item, HttpStatus.CREATED);
+			} catch (Exception e) {
+				log.debug(e.getMessage(), e);
+				result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			return result;
+		}
+		
+	@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.PUT)
+	public ResponseEntity<BootcampTestTypeModel> putUpdate(@RequestBody BootcampTestTypeModel item) {
+		ResponseEntity<BootcampTestTypeModel> result = null;
+		try {
+			this.service.update(item);
+			result = new ResponseEntity<BootcampTestTypeModel>(item, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			log.debug(e.getMessage(), e);
+			result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;
 	}
+}
