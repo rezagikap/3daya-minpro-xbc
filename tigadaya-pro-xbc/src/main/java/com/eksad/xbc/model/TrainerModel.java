@@ -1,7 +1,6 @@
 package com.eksad.xbc.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="t_trainer")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class TrainerModel {
 	
 
@@ -34,18 +38,21 @@ public class TrainerModel {
 	private Integer createdBy;
 	
 	@Column(name="created_on")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
 	@Column(name="deleted_on")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date deletedOn;
 	
 	@Column(name="is_delete")
@@ -87,15 +94,8 @@ public class TrainerModel {
 		return createdOn;
 	}
 
-	public void createdOn(String createdOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date coDateNew = null;
-		try {
-			coDateNew = format.parse(createdOn); 
-			} catch (Exception e) {
-				this.createdOn= null;
-			}
-		this.createdOn=coDateNew;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public Integer getModifiedBy() {
@@ -110,15 +110,8 @@ public class TrainerModel {
 		return modifiedOn;
 	}
 
-	public void modifiedOn(String modifiedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date moDateNew = null;
-		try {
-			moDateNew = format.parse(modifiedOn); 
-			} catch (Exception e) {
-				this.modifiedOn= null;
-			}
-		this.modifiedOn=moDateNew;
+	public void setModifiedOn(Date modifiedOn) {
+		this.modifiedOn = modifiedOn;
 	}
 
 	public Integer getDeletedBy() {
@@ -133,15 +126,8 @@ public class TrainerModel {
 		return deletedOn;
 	}
 
-	public void deletedOn(String deletedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date doDateNew = null;
-		try {
-			doDateNew = format.parse(deletedOn); 
-			} catch (Exception e) {
-				this.deletedOn= null;
-			}
-		this.deletedOn=doDateNew;
+	public void setDeletedOn(Date deletedOn) {
+		this.deletedOn = deletedOn;
 	}
 
 	public Boolean getIsDelete() {

@@ -11,4 +11,6 @@ public interface UserService {
 	public void insert(UserModel model);
 	public void update(UserModel model);
 	public void delete(UserModel model);
+	public void reset(UserModel model);	
+
 }

@@ -1,11 +1,16 @@
 package com.eksad.xbc.model;
 
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.Date;
+=======
+import java.sql.Date;
+>>>>>>> 5e70104095746f37266624ff45d346286554aa22
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,23 +18,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-
 @Entity
 @Table(name="t_role")
+<<<<<<< HEAD
 //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+=======
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=RoleModel.class)
+
+>>>>>>> 5e70104095746f37266624ff45d346286554aa22
 public class RoleModel {
-	
 	@Id
 	@Column(name="id", columnDefinition = "serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "role_seq")
-	@TableGenerator(name = "role_seq", table = "tbl_squence", pkColumnName = "seq_id", valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
-	
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_role_seq")
+	@TableGenerator(name = "t_role_seq", table = "tbl_squence", pkColumnName = "seq_id", valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
 	private Integer id;
 	
 	@Column(name="code")
@@ -45,29 +52,34 @@ public class RoleModel {
 	private Integer createdBy;
 	
 	@Column(name="created_on")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
 	@Column(name="deleted_on")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date deletedOn;
 	
-	@Column(name="is_delete")
+	@Column(name="is_deleted")
 	private Boolean isDelete;
 	
 	@JsonIgnore
+<<<<<<< HEAD
 	@OneToMany(mappedBy="roles")
 	private List<MenuAccessModel> listMenuAccess;
+=======
+	@OneToMany(mappedBy="role", fetch=FetchType.EAGER, orphanRemoval=true)
+	private List<UserModel> listUser;
+>>>>>>> 5e70104095746f37266624ff45d346286554aa22
 
 	public Integer getId() {
 		return id;
@@ -113,15 +125,8 @@ public class RoleModel {
 		return createdOn;
 	}
 
-	public void setCreatedOn(String createdOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date createdOnNew = null;
-		try {
-			createdOnNew = format.parse(createdOn);
-		} catch (Exception e) {
-			this.createdOn = null;
-		}
-		this.createdOn = createdOnNew;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
 	public Integer getModifiedBy() {
@@ -136,16 +141,8 @@ public class RoleModel {
 		return modifiedOn;
 	}
 
-
-	public void setModifiedOn(String modifiedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date modifiedOnNew = null;
-		try {
-			modifiedOnNew = format.parse(modifiedOn);
-		} catch (Exception e) {
-			this.modifiedOn = null;
-		}
-		this.modifiedOn = modifiedOnNew;
+	public void setModifiedOn(Date modifiedOn) {
+		this.modifiedOn = modifiedOn;
 	}
 
 	public Integer getDeletedBy() {
@@ -160,15 +157,8 @@ public class RoleModel {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(String deletedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date deletedOnNew = null;
-		try {
-			deletedOnNew = format.parse(deletedOn);
-		} catch (Exception e) {
-			this.deletedOn = null;
-		}
-		this.deletedOn = deletedOnNew;
+	public void setDeletedOn(Date deletedOn) {
+		this.deletedOn = deletedOn;
 	}
 
 	public Boolean getIsDelete() {
@@ -179,6 +169,7 @@ public class RoleModel {
 		this.isDelete = isDelete;
 	}
 
+<<<<<<< HEAD
 	public List<MenuAccessModel> getListMenuAccess() {
 		return listMenuAccess;
 	}
@@ -187,3 +178,15 @@ public class RoleModel {
 		this.listMenuAccess = listMenuAccess;
 	}
 }
+=======
+	public List<UserModel> getListUser() {
+		return listUser;
+	}
+
+	public void setListUser(List<UserModel> listUser) {
+		this.listUser = listUser;
+	}
+	
+	
+}
+>>>>>>> 5e70104095746f37266624ff45d346286554aa22

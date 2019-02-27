@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<UserModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select jt from UserModel jt order by jt.username";
+		String hql = "select jt from UserModel jt order by jt.id";
 		Query query = session.createQuery(hql);
 		List<UserModel> result = query.getResultList();
 		return result;
@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<UserModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from UserModel x where x.username or x.email like :keySearch order by x.username";
+		String hql = "select x from UserModel x where x.username like :keySearch or x.email like :keySearch";
 		Query query = session.createQuery(hql);
 		query.setParameter("keySearch", "%"+key+"%");		
 		return query.getResultList();
@@ -62,5 +62,11 @@ public class UserDaoImpl implements UserDao {
 	public void delete(UserModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(model);
+	}
+	
+	@Override
+	public void reset(UserModel model) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(model);
 	}
 }

@@ -1,5 +1,4 @@
 package com.eksad.xbc.controller;
-
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -86,6 +85,33 @@ public class ApiUserController {
 		}
 		return result;
 	}
+
+	@RequestMapping(value = "/api/user/reset/", method = RequestMethod.PUT)
+	public ResponseEntity<UserModel> putReset(@RequestBody UserModel item) {
+		ResponseEntity<UserModel> result = null;
+		try {
+			this.service.update(item);
+			result = new ResponseEntity<UserModel>(item, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			log.debug(e.getMessage(), e);
+			result = new ResponseEntity<UserModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/api/user/delete/", method = RequestMethod.PUT)
+	public ResponseEntity<UserModel> putDelete(@RequestBody UserModel item) {
+		ResponseEntity<UserModel> result = null;
+		try {
+			this.service.update(item);
+			result = new ResponseEntity<UserModel>(item, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			log.debug(e.getMessage(), e);
+			result = new ResponseEntity<UserModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;
+	}
+
 
 	@RequestMapping(value = "/api/user/{itemId}", method = RequestMethod.DELETE)
 	public ResponseEntity<UserModel> delApi(@PathVariable("itemId") Integer vid) {

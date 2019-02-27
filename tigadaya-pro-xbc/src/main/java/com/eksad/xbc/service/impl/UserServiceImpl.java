@@ -46,5 +46,9 @@ public class UserServiceImpl implements UserService {
 	public void delete(UserModel model) {
 		this.dao.delete(model);
 	}
-
+	
+	@Override
+	public void reset(UserModel model) {
+		this.dao.reset(model);
+	}
 }

@@ -5,14 +5,24 @@
 	<excludes>
 		<pattern>/resources/*</pattern>
 		<pattern>/trainer/*</pattern>
+		<pattern>/technology/*</pattern>
 		<pattern>/user/*</pattern>
 		<pattern>/role/*</pattern>
 		<pattern>/menu/*</pattern>
 		<pattern>/menu-access/*</pattern>
 		<pattern>/test/*</pattern>
 		<pattern>/list/*</pattern>
+<<<<<<< HEAD
 		<pattern>/biodata/*</pattern>
 		<pattern>/category/*</pattern>
+=======
+		<pattern>/category/*</pattern>
+		<pattern>/bootcamptesttype/*</pattern>
+		<pattern>/class/*</pattern>
+		<pattern>/office/*</pattern>
+		<pattern>/batch/*</pattern>
+
+>>>>>>> 5e70104095746f37266624ff45d346286554aa22
 	</excludes>
 
 	<decorator name="main" page="main.jsp">

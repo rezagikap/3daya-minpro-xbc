@@ -8,9 +8,12 @@
 			</button>
 		</div>
 	</div>
-	<form>
-		<input class="margin col-md-2" type="text" placeholder="Search by Name" required>	
-	</form>
+	<div class="box-tools col-md-12">
+			<input type="text" name="search" id="search" placeholder="Search by name"/>
+			<button class="btn btn-primary btn-sm" onclick="search()">
+				<i class="fa fa-circle-o"></i>
+			</button>
+		</div>
 	<div class="box-body">
 		<table class="table">
 			<thead>
@@ -104,8 +107,13 @@
 					var dataRow ='<tr>'+
 						'<td>'+ item.name+'</td>'+
 						'<td class="col-md-1">'+
-						'<button type="button" class="btn btn-edit btn-warning btn-sm" value="'+ item.id +'"><i class="fa fa-edit"></i></button> '+
-						'<button type="button" class="btn btn-delete btn-danger btn-sm" value="'+ item.id +'"><i class="fa fa-trash"></i></button> '+
+						'<div class="dropdown">'+
+						'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+					    '<ul class="dropdown-menu">'+
+					    	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
+					    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
+					    '</ul>'+
+					    '</div>'+
 						'</td>'+
 						'</tr>';
 					$("#list-data").append(dataRow);
@@ -129,14 +137,46 @@
 				$('#modal-data').find('#id').val(dataApi.id);
 				$('#modal-data').find('#name').val(dataApi.name);
 				$('#modal-data').find('#notes').val(dataApi.notes);
+				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
+				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
+				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
 				
 				console.log(dataApi);
 			}
 		});
 	}
 	
+	function search(){
+		var item = $('#search').val();
+		$.ajax({
+			url: '${contextName}/api/trainer/search/' + item,
+			type: 'get',
+			dataType: 'json',
+			success: function(result){
+				$("#list-data").empty();
+				// looping data dengan jQuery
+				$.each(result, function(index, item){
+				var dataRow ='<tr>'+
+					'<td>'+ item.name+'</td>'+
+					'<td class="col-md-1">'+
+						'<div class="dropdown">'+
+					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+				   	 '<ul class="dropdown-menu">'+
+				   	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
+			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
+				    '</ul>'+
+				    '</div>'+
+					'</td>'+
+					'</tr>';
+					$("#list-data").append(dataRow);
+					});
+				console.log(result);
+			}
+		});
+	}
+	
 	//btn-edit di click
-	$('#list-data').on('click','.btn-edit', function(){
+	$('#list-data').on('click','#btn-edit', function(){
 		var vid = $(this).val();
 		$.ajax({
 			url:'${contextName}/trainer/edit',
@@ -181,7 +221,7 @@
 	}
 	
 	//btn-delete di click
-	$('#list-data').on('click','.btn-delete', function(){
+	$('#list-data').on('click','#btn-delete', function(){
 		var vid = $(this).val();
 		$.ajax({
 			url:'${contextName}/trainer/delete',

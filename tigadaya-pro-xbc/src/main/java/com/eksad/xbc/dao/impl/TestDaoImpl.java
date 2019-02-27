@@ -68,7 +68,7 @@ public class TestDaoImpl implements TestDao {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(model);
 		
-		
+	
 	}
 
 }

@@ -5,6 +5,7 @@
 	<div class="box-header">
 		<h3 class="box-title">CATEGORY</h3>
 </div>
+<<<<<<< HEAD
 		<div class="row">
 			
 			<div class="col-md-11">
@@ -27,6 +28,31 @@
 		</div>
 
 		<div class="box-body">
+=======
+
+<div class="box-body">
+	<div class="row">
+		<div class="col-md-11">
+			<div class="input-group col-md-5">
+				<input type="text" name="search" id="search" class="form-control"
+					placeholder="Search by username/email" /> <span class="input-group-btn">
+					<button class="btn btn-warning btn-xm "
+						onClick="search()">
+						<i class="fa fa-circle-o"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="box-tools">
+			<button type="button" id="btn-add"
+				class="btn btn-warning btn-xm">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+	</div>
+
+		
+>>>>>>> 5e70104095746f37266624ff45d346286554aa22
 			<table class="table">
 				<thead>
 					<tr>
