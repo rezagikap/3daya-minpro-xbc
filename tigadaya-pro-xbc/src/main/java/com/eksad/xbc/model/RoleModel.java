@@ -1,13 +1,7 @@
 package com.eksad.xbc.model;
 
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.Date;
-=======
-import java.sql.Date;
-import java.util.List;
-
->>>>>>> 68f78c39961fc43b8ad2d4524b685d88de4e2cbc
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -26,16 +19,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name="t_role")
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
-=======
-import com.eksad.xbc.model.RoleModel;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-@Entity
-@Table(name="t_role")
->>>>>>> 68f78c39961fc43b8ad2d4524b685d88de4e2cbc
 public class RoleModel {
 	
 	@Id
@@ -57,33 +40,21 @@ public class RoleModel {
 	private Integer createdBy;
 	
 	@Column(name="created_on")
-<<<<<<< HEAD
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-=======
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
->>>>>>> 68f78c39961fc43b8ad2d4524b685d88de4e2cbc
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
-<<<<<<< HEAD
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-=======
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
->>>>>>> 68f78c39961fc43b8ad2d4524b685d88de4e2cbc
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
 	@Column(name="deleted_on")
-<<<<<<< HEAD
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-=======
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
->>>>>>> 68f78c39961fc43b8ad2d4524b685d88de4e2cbc
 	private Date deletedOn;
 	
 	@Column(name="is_delete")
@@ -133,8 +104,15 @@ public class RoleModel {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedOn(String createdOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date createdOnNew = null;
+		try {
+			createdOnNew = format.parse(createdOn);
+		} catch (Exception e) {
+			this.createdOn = null;
+		}
+		this.createdOn = createdOnNew;
 	}
 
 	public Integer getModifiedBy() {
@@ -149,8 +127,16 @@ public class RoleModel {
 		return modifiedOn;
 	}
 
-	public void setModifiedOn(Date modifiedOn) {
-		this.modifiedOn = modifiedOn;
+
+	public void setModifiedOn(String modifiedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date modifiedOnNew = null;
+		try {
+			modifiedOnNew = format.parse(modifiedOn);
+		} catch (Exception e) {
+			this.modifiedOn = null;
+		}
+		this.modifiedOn = modifiedOnNew;
 	}
 
 	public Integer getDeletedBy() {
@@ -165,8 +151,15 @@ public class RoleModel {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(Date deletedOn) {
-		this.deletedOn = deletedOn;
+	public void setDeletedOn(String deletedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date deletedOnNew = null;
+		try {
+			deletedOnNew = format.parse(deletedOn);
+		} catch (Exception e) {
+			this.deletedOn = null;
+		}
+		this.deletedOn = deletedOnNew;
 	}
 
 	public Boolean getIsDelete() {
@@ -176,10 +169,7 @@ public class RoleModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-<<<<<<< HEAD
 
 	
-=======
->>>>>>> 68f78c39961fc43b8ad2d4524b685d88de4e2cbc
 	
 }

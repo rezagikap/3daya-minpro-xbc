@@ -15,7 +15,7 @@
 	<input type="hidden" name="modifiedOn" id="modifiedOn" />
 	<input type="hidden" name="deletedBy" id="deletedBy" />
 	<input type="hidden" name="deletedOn" id="deletedOn" />
-	<input type="hidden" name="isDelete" id="isDelete" />
+	<input type="hidden" name="isDelete" id="isDelete" value="true"/>
 	
 	
 	<div class="modal-footer">

@@ -29,7 +29,7 @@ public class TestimonyDaoImpl implements TestimonyDao {
 	@Override
 	public List<TestimonyModel> search(String key) {
 		Session session =sessionFactory.getCurrentSession();
-		String hql = "select t from TestimonyModel t where t.name like :keySearch";
+		String hql = "select t from TestimonyModel t where t.title like :keySearch";
 		Query query = session.createQuery(hql);
 		query.setParameter("keySearch", "%"+key+"%");
 		return query.getResultList();

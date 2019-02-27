@@ -1,23 +1,38 @@
 <%request.setAttribute("contextName", request.getServletContext().getContextPath());%>
 
 <div class="box box-info">
+	
 	<div class="box-header">
-		<h3 class="box-title">ROLE</h3>
-		<div class="box-tools">
-			<button type="button" id="btn-add" class="btn btn-success btn-sm">
-				<i class="fa fa-plus"></i>
-			</button>
-		</div>
-	</div>
-	<div class= "box-body"></div>
-	<div class="box-tools col-md-12">
-		<input type="text" name="search" id="search" placeholder="Search by name"/>
-		<button class="btn btn-primary btn-sm" onclick="search()">
-			<i class="fa fa-circle-o"></i></button>
+		<h3 class="box-title">
+			<b>TESTIMONY</b>
+		</h3>
 	</div>
 	
-
 	<div class="box-body">
+		
+		<div class="row">
+			
+			<div class="col-md-11">
+				<div class="input-group col-md-4">
+					<input type="text" name="search" id="search" class="form-control" placeholder="Search by title">
+					<span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn btn-warning" onClick="search()">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
+			</div>
+			
+			<div class="box-tools">
+				<button type="button" id="btn-add" class="btn btn-warning btn-xm">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+		
+		</div>
+		
+		<br>
+		<div class="box-body">
 		<table class="table">
 			<thead>
 				<tr>
@@ -44,6 +59,7 @@
 
 
 <script>
+
 	// method yang pertama kali dipanggil saat page di load
 	$(function() {
 		// memanggil method loadData;
@@ -65,50 +81,16 @@
 						$("#modal-data").html(result);
 						//menampilkan modal pop up
 						$("#modal-form").modal('show');
-						$('#createdOn').val(
-								d.getDate() + "-" + d.getMonth() + "-"
-										+ d.getFullYear() + " " + d.getHours()
-										+ ":" + d.getMinutes() + ":"
-										+ d.getSeconds());
+						$('#createdOn').val(d.getDate() + "-"
+								+ d.getMonth() + "-"
+								+ d.getFullYear() + " " 
+								+ d.getHours()	+ ":" 
+								+ d.getMinutes() + ":"
+								+ d.getSeconds());
 					}
 				});
 			});
-
-	//method loadData
-	function loadData() {
-		$
-				.ajax({
-					// url ke api/testimony/
-					url : '${contextName}/api/testimony/',
-					type : 'get',
-					// data type berupa JSON
-					dataType : 'json',
-					success : function(result) {
-						//kosong data di table
-						$("#list-data").empty();
-						// looping data dengan jQuery
-						$
-								.each(
-										result,
-										function(index, item) {
-											var dataRow = '<tr>'
-													+ '<td>'+ item.title+ '</td>'
-													+ '<td>'+ item.content+ '</td>'
-													+ '<td class="col-md-1">'+ '<div class="dropdown">'+ '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+ '<ul class="dropdown-menu">'
-													+ '<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
-													+ '<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
-													+ '</ul>'
-													+ '</div>'
-													+ '</td>' 
-													+ '</tr>';
-											$("#list-data").append(dataRow);
-										});
-						// menampilkan data ke console => F12
-						console.log(result);
-					}
-				});
-	}
-
+	
 	// method untuk add data
 	function addData($form) {
 		// memangil method getFormData dari file
@@ -133,7 +115,8 @@
 		});
 		console.log(dataForm);
 	}
-
+	
+	
 	// function get data 
 	function getData(dataId) {
 		// panggil API
@@ -160,6 +143,42 @@
 		});
 	}
 
+	//method loadData
+	function loadData() {
+		$.ajax({
+					// url ke api/testimony/
+					url : '${contextName}/api/testimony/',
+					type : 'get',
+					// data type berupa JSON
+					dataType : 'json',
+					success : function(result) {
+						//kosong data di table
+						$("#list-data").empty();
+						// looping data dengan jQuery
+						$.each(result,function(index, item) {
+							if(item.isDelete==false){
+								var dataRow = '<tr>'
+									+ '<td>'+ item.title+ '</td>'
+									+ '<td class="col-md-1">'+ '<div class="dropdown">'+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+ '<ul class="dropdown-menu">'
+									+ '<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
+									+ '<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+ '</ul>'
+									+ '</div>'
+									+ '</td>' 
+									+ '</tr>';
+									$("#list-data").append(dataRow);
+									}
+											
+										});
+						// menampilkan data ke console => F12
+						console.log(result);
+					}
+				});
+	}
+
+	
+
+	
+
 	// ketika btn-delete di click
 	$('#list-data').on('click','#btn-delete', function() {
 				var vid = $(this).val();
@@ -178,10 +197,12 @@
 						//panggil method
 						getData(vid);
 						$('#deletedOn').val(
-								d.getDate() + "-" + d.getMonth() + "-"
-										+ d.getFullYear() + " " + d.getHours()
-										+ ":" + d.getMinutes() + ":"
-										+ d.getSeconds());
+								d.getDate() + "-" 
+								+ d.getMonth() + "-"
+								+ d.getFullYear() + " " 
+								+ d.getHours()+ ":" 
+								+ d.getMinutes() + ":"
+								+ d.getSeconds());
 					}
 				});
 			});
@@ -190,13 +211,33 @@
 	function deleteData($form) {
 		// memangil method getFormData dari file
 		var vid = $form.find("#id").val();
+		var ttl=$form.find('#title').val();
+		var ctn=$form.find('#content').val();
+		var creBy=$form.find('#createdBy').val();
+		var creOn=$form.find('#createdOn').val();
+		var modBy=$form.find('#modifiedBy').val();
+		var modOn=$form.find('#modifiedOn').val();
+		var delBy=$form.find('#deletedBy').val();
+		var delOn=$form.find('#deletedOn').val();
+		//var isDelete=$form.find('#isDelete').val();
 		$.ajax({
 			// url ke api/category/
-			url : '${contextName}/api/testimony/' + vid,
+			url : '${contextName}/api/testimony/delete',
 			// method http di controller
-			type : 'delete',
+			type : 'put',
 			// data type berupa JSON
 			dataType : 'json',
+			data:'{"id":'+ vid 
+			+ ',"title":"'+ ttl 
+			+ '","content":"'+ ctn 
+			+ '","createdBy":"'+ creBy 
+			+ '","createdOn":"'+ creOn 
+			+ '","modifiedBy":"'+ modBy 
+			+ '","modifiedOn":"'+ modOn 
+			+ '","deletedBy":"'+ delBy
+			+ '","deletedOn":"'+ delOn
+			+ '","isDelete": true}',
+		contentType: 'application/json',
 			// jika sukses
 			success : function(result) {
 				//menutup modal
@@ -211,10 +252,7 @@
 	// ketidak btn-edit di click
 	//menjalankan on click pada footer di edit
 
-	$('#list-data').on(
-			'click',
-			'#btn-edit',
-			function() {
+	$('#list-data').on('click','#btn-edit',function() {
 				var vid = $(this).val();
 				var d = new Date($.now());
 				$.ajax({
@@ -230,10 +268,11 @@
 						$("#modal-form").modal('show');
 						// panggil method getData
 						getData(vid);
-						$('#createdOn').val(
-								d.getDate() + "-" + d.getMonth() + "-"
-										+ d.getFullYear() + " " + d.getHours()
-										+ ":" + d.getMinutes() + ":"
+						$('#createdOn').val(d.getDate() + "-"
+										+ d.getMonth() + "-"
+										+ d.getFullYear() + " "
+										+ d.getHours()+ ":" 
+										+ d.getMinutes() + ":"
 										+ d.getSeconds());
 					}
 				});
@@ -275,21 +314,21 @@
 				$("#list-data").empty();
 				// looping data dengan jQuery
 				$.each(result, function(index, item){
-				var dataRow ='<tr>'+
-					'<td>'+ item.title+'</td>'+
-					'<td>'+ item.content+'</td>'+
-					'<td class="col-md-1">'+
-					'<div class="dropdown">'+
-					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
-				   	'<ul class="dropdown-menu">'+'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
-			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+'</ul>'+
-				    '</div>'+
-					'</td>'+
-					'</tr>';
+				var dataRow ='<tr>'
+					+'<td>'+ item.title+'</td>'
+					+'<td class="col-md-1">'
+					+'<div class="dropdown">'
+					+'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
+					+'<ul class="dropdown-menu">'+'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
+					+'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+'</ul>'+ '</div>'
+					+'</td>'
+					+'</tr>';
 					$("#list-data").append(dataRow);
 					});
 				console.log(result);
 			}
 		});
 	}
+	
+		
 </script>

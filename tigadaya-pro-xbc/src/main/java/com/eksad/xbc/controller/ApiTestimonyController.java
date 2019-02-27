@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.eksad.xbc.model.RoleModel;
 import com.eksad.xbc.model.TestimonyModel;
 import com.eksad.xbc.service.TestimonyService;
 
@@ -32,6 +33,19 @@ public class ApiTestimonyController {
 			log.debug(e.getMessage(),e);
 			result = new ResponseEntity<List<TestimonyModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}		
+		return result;
+	}
+
+	@RequestMapping(value="/api/testimony/search/{katakunci}",method=RequestMethod.GET)
+	public ResponseEntity<List<TestimonyModel>> search(@PathVariable("katakunci") String cari){
+		ResponseEntity<List<TestimonyModel>> result = null;
+		try {
+			List<TestimonyModel> list = this.service.search(cari);
+			result = new ResponseEntity<List<TestimonyModel>>(list,HttpStatus.OK);
+		} catch (Exception err) {
+			log.debug(err.getMessage(),err);
+			result = new ResponseEntity<List<TestimonyModel>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		return result;
 	}
 	
@@ -87,6 +101,18 @@ public class ApiTestimonyController {
 			}
 		} catch (Exception e) {
 			log.debug(e.getMessage(), e);
+			result = new ResponseEntity<TestimonyModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;
+	}
+	@RequestMapping(value="/api/testimony/delete/", method=RequestMethod.PUT)
+	public ResponseEntity<TestimonyModel> deleteUpdate(@RequestBody TestimonyModel item){
+		ResponseEntity<TestimonyModel> result = null;
+		try {
+			this.service.update(item);
+			result = new ResponseEntity<TestimonyModel>(item, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			log.debug(e.getMessage(),e);
 			result = new ResponseEntity<TestimonyModel>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return result;

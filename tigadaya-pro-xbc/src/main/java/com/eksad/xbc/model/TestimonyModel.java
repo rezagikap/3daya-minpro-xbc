@@ -47,8 +47,10 @@ public class TestimonyModel {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date modifiedOn;
 	
+	@Column(name="deleted_by")
+	private Integer deletedBy;
 	
-	@Column(name="deleted_on")private Integer deletedBy;
+	@Column(name="deleted_on")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date deletedOn;
 	
@@ -141,7 +143,7 @@ public class TestimonyModel {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date deletedOnNew = null;
 		try {
-			deletedOnNew = format.parse(deletedOn); 
+			deletedOnNew = format.parse(deletedOn);
 		} catch (Exception e) {
 			this.deletedOn = null;
 		}
@@ -155,6 +157,7 @@ public class TestimonyModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
+
 	
 	
 }

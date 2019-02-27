@@ -24,7 +24,7 @@ public class ApiRoleController {
 	@Autowired
 	private RoleService service;
 	
-	@RequestMapping(value="/api/role/", method=RequestMethod.GET) //
+	@RequestMapping(value="/api/role/", method=RequestMethod.GET) // request body berfungsi menangkap data di kirim ke data base yang di kirimkan viek 
 	public ResponseEntity<List<RoleModel>> list(){
 		ResponseEntity<List<RoleModel>> result = null;
 		try {
@@ -106,5 +106,19 @@ public class ApiRoleController {
 		}
 		return result;
 	}
+	
+	@RequestMapping(value="/api/role/delete/", method=RequestMethod.PUT)
+	public ResponseEntity<RoleModel> deleteUpdate(@RequestBody RoleModel item){
+		ResponseEntity<RoleModel> result = null;
+		try {
+			this.service.update(item);
+			result = new ResponseEntity<RoleModel>(item, HttpStatus.ACCEPTED);
+		} catch (Exception e) {
+			log.debug(e.getMessage(),e);
+			result = new ResponseEntity<RoleModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return result;
+	}
+	
 }
 

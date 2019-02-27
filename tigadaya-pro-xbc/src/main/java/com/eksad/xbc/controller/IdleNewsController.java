@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IdleNewsController {
 	
 	
-	@RequestMapping(value="/idlenews")
+	@RequestMapping(value="/idle-news")
 	public String index() {
 		return "/idle-news/index";
 	}
-	@RequestMapping(value="/idlenews/create")
+	@RequestMapping(value="/idle-news/create")
 	public String create() {
 		return "/idle-news/create";
 	}
-	@RequestMapping(value="/idlenews/edit")
+	@RequestMapping(value="/idle-news/edit")
 	public String edit() {
-		return "/idlenews/edit";
+		return "/idle-news/edit";
 		
 	}
-	@RequestMapping(value="/idlenews/detail")
+	@RequestMapping(value="/idle-news/detail")
 	public String detail() {
 		return "idle-news/detail";
 	}
-	@RequestMapping(value="/idlenews/delete")
+	@RequestMapping(value="/idle-news/delete")
 	public String delete() {
-		return "/idlenews/delete";
+		return "/idle-news/delete";
 	}
 	
 }
