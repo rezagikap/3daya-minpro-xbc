@@ -1,3 +1,4 @@
+
 <%
 	request.setAttribute("contextName", request.getServletContext().getContextPath());
 %>
@@ -5,23 +6,28 @@
 	<div class="box-header">
 		<h3 class="box-title">USER</h3>
 	</div>
-	
-	<div class="box-header col-md-12">
-			<input type="text" name="search" id="search"
-				placeholder="Search by username/email" />
-			<button class="margin col-md-0.5 btn btn-warning btn-xm"
-				onClick="search()">
-				<i class="fa fa-circle-o"></i>
-			</button>
-			<div class="box-tools col-md-1">
-				<button type="button" id="btn-add"
-					class="margin col-md-0.5 btn btn-warning btn-m">
-					<i class="fa fa-plus"></i>
-				</button>
-			</div>
-		</div>
 		
 	<div class="box-body">
+	<div class="row">
+		<div class="col-md-11">
+			<div class="input-group col-md-5">
+				<input type="text" name="search" id="search" class="form-control"
+					placeholder="Search by username/email" /> <span class="input-group-btn">
+					<button class="btn btn-warning btn-xm "
+						onClick="search()">
+						<i class="fa fa-circle-o"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="box-tools">
+			<button type="button" id="btn-add"
+				class="btn btn-warning btn-xm">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+	</div>
+	<br>
 		<table class="table">
 			<thead>
 				<tr>
@@ -95,12 +101,13 @@
 								.each(
 										result,
 										function(index, item) {
-											var dataRow = '<tr>'
+											if(item.isDelete==false){
+												var dataRow = '<tr>'
 													+ '<td>'
 													+ item.username
 													+ '</td>'
 													+ '<td>'
-													+ item.roleId
+													+ item.role.name
 													+ '</td>'
 													+ '<td>'
 													+ item.email
@@ -114,7 +121,8 @@
 													+ '<li id="btn-delete" value="'+ item.id +'"><a>Delete</a></li> '
 													+ '</ul>' + '</div>'
 													+ '</td>' + '</tr>';
-											$("#list-data").append(dataRow);
+											$("#list-data").append(dataRow);	
+											}
 										});
 						// menampilkan data ke console => F12
 						console.log(result);
@@ -170,6 +178,7 @@
 			'#btn-edit',
 			function() {
 				var vid = $(this).val();
+				var d = new Date($.now());
 				$.ajax({
 					url : '${contextName}/user/edit',
 					type : 'get',
@@ -181,10 +190,16 @@
 						$("#modal-data").html(result);
 						//menampilkan modal pop up
 						$("#modal-form").modal('show');
+						$('#modifiedOn').val(
+								d.getDate() + "-" + d.getMonth() + "-"
+										+ d.getFullYear() + " " + d.getHours()
+										+ ":" + d.getMinutes() + ":"
+										+ d.getSeconds());
 						//panggil Role
 						loadRole($("#modal-data"));
 						// panggil method getData
 						getData(vid);
+						
 					}
 				});
 			});
@@ -232,26 +247,7 @@
 		});
 	});
 	// method untuk delete data
-	function deleteData($form) {
-		// memangil method getFormData dari file
-		var vid = $form.find("#id").val();
-		$.ajax({
-			// url ke api/trainer/
-			url : '${contextName}/api/user/' + vid,
-			// method http di controller
-			type : 'delete',
-			// data type berupa JSON
-			dataType : 'json',
-			// jika sukses
-			success : function(result) {
-				//menutup modal
-				$("#modal-form").modal('hide');
-				// panggil method load data, untuk melihat data terbaru
-				loadData();
-				console.log(result);
-			}
-		});
-	}
+	
 	//ketika Reset Password di klik
 	$('#list-data').on('click', '#btn-reset', function(){
 		var vid=$(this).val();
@@ -268,6 +264,42 @@
 			
 		});
 	});
+	
+		function deleteData($form) {
+			// memangil method getFormData dari file
+			var vid = $form.find("#id").val();
+			var username=$form.find('#username').val();
+			var password=$form.find('#password').val();
+			var email=$form.find('#email').val();
+			var role_id=$form.find('#roleId').val();
+			var mobile_flag=$form.find('#mobileFlag').val();
+			var mobile_token=$form.find('#mobileToken').val();
+			var create_by=$form.find('#createdBy').val();
+			var create_on=$form.find('#createdOn').val();
+			var modified_by=$form.find('#modifiedBy').val();
+			var modified_on=$form.find('#modifiedOn').val();
+			var deleted_by=$form.find('#deletedBy').val();
+			var deleted_on=$form.find('#deletedOn').val();
+			//var is_delete=$form.find('#isDelete').val();
+			$.ajax({
+				// url ke api/user/
+				url : '${contextName}/api/user/delete/',
+				// method http di controller
+				type : 'put',
+				dataType : 'json',
+				// data type berupa JSON
+				data: '{"id":' + vid + ',"username":"' + username + '","password":"' + password + '","email":"' + email + '","roleId":"' + role_id + '","mobileFlag":"' + mobile_flag + '","mobileToken":"' + mobile_token + '","createdBy":"' + create_by + '","createdOn":"' + create_on + '","modifiedBy":"' + modified_by + '","modifiedOn":"' + modified_on + '","deletedBy":"' + deleted_by + '","deletedOn":"' + deleted_on + '","isDelete": true }',
+				contentType:'application/json',
+				// jika sukses
+				success : function(result) {
+					//menutup modal
+					$("#modal-form").modal('hide');
+					// panggil method load data, untuk melihat data terbaru
+					loadData();
+					console.log(dataForm);
+				}
+			});	
+		}
 	
 	//method untuk Reset Password
 	function resetData($form){

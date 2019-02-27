@@ -12,8 +12,8 @@
 	
 	
 	<div class="modal-footer">
-		<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">No</button>
-		<button type="button" class="btn btn-success" onClick="deleteData($('#form-delete'))">Yes</button>
+		<button type="button" class="btn btn-danger" style="position: relative; right: 275px; padding: 10px 24px"; data-dismiss="modal">No</button>
+		<button type="button" class="btn btn-success" style="position: relative; right: 120px; padding: 10px 23px"; onClick="deleteData($('#form-delete'))">Yes</button>
 	</div>
 </form>
 <!-- Form Selesai -->

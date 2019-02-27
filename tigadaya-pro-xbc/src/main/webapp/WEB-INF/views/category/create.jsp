@@ -1,16 +1,15 @@
-
 <!-- form mulai -->
 <form id="form-create" class="form-horizontal">
 
-	<!-- <div class="form-group">
+	<!--  <div class="form-group">
 		<label class="control-label col-md-2">Code</label>
 		<div class="col-md-10">
-			<input type="text" class="form-control" name="code" />
+			<input type="text" class="form-control" name="code" value="${KodeBaru }"  />
 		</div>  
-	</div> -->
+	</div>  -->
 	
 	
-	<Input type="hidden" class="form-control" name="code" id="code" value="C001"/>
+	 <input type="hidden" class="form-control" name="code" id="code" value="${KodeBaru }"/> 
 
 	<div class="form-group">
 		<label class="control-label col-md-2">Name</label>
@@ -25,6 +24,7 @@
 			<textarea  class="form-control" name="description" />
 		</div>
 	</div>
+	
 	
 	<input type="hidden" class="form-control" name="createdBy" value="1"/>
 	
