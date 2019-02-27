@@ -1,6 +1,7 @@
 package com.eksad.xbc.model;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +14,12 @@ import javax.persistence.TableGenerator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="t_technology")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class TechnologyModel {
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class TechnologyModel{
 	
 
 	@Id
@@ -36,27 +38,28 @@ public class TechnologyModel {
 	
 	@Column(name="created_by")
 	private Integer createdBy;
-	
-	@Column(name="created_on")
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@Column(name="created_on")
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
-	@Column(name="modified_on")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@Column(name="modified_on")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
-	@Column(name="deleted_on")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@Column(name="deleted_on")
 	private Date deletedOn;
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
+	
 
 	public Integer getId() {
 		return id;
@@ -81,7 +84,7 @@ public class TechnologyModel {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-
+	
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
@@ -89,15 +92,22 @@ public class TechnologyModel {
 	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
-
+	
 	public Date getCreatedOn() {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedOn(String createdOn) {
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+		Date createdOnNew = null;
+		try {
+			createdOnNew = format.parse(createdOn);
+		} catch (Exception e) {
+			this.createdOn = null;
+		}
+		this.createdOn = createdOnNew;
 	}
-
+	
 	public Integer getModifiedBy() {
 		return modifiedBy;
 	}
@@ -106,12 +116,20 @@ public class TechnologyModel {
 		this.modifiedBy = modifiedBy;
 	}
 
+	
 	public Date getModifiedOn() {
 		return modifiedOn;
 	}
 
-	public void setModifiedOn(Date modifiedOn) {
-		this.modifiedOn = modifiedOn;
+	public void setModifiedOn(String modifiedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+		Date modifiedOnNew = null;
+		try {
+			modifiedOnNew = format.parse(modifiedOn);
+		} catch (Exception e) {
+			this.modifiedOn = null;
+		}
+		this.modifiedOn = modifiedOnNew;
 	}
 
 	public Integer getDeletedBy() {
@@ -122,12 +140,20 @@ public class TechnologyModel {
 		this.deletedBy = deletedBy;
 	}
 
+	
 	public Date getDeletedOn() {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(Date deletedOn) {
-		this.deletedOn = deletedOn;
+	public void setDeletedOn(String deletedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+		Date deletedOnNew = null;
+		try {
+			deletedOnNew = format.parse(deletedOn);
+		} catch (Exception e) {
+			this.deletedOn = null;
+		}
+		this.deletedOn = deletedOnNew;
 	}
 
 	public Boolean getIsDelete() {
@@ -137,7 +163,4 @@ public class TechnologyModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-	
-	
-
 }
