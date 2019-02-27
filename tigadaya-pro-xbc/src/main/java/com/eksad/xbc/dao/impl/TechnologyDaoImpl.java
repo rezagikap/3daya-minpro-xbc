@@ -23,7 +23,7 @@ public class TechnologyDaoImpl implements TechnologyDao {
 		Session session = sessionFactory.getCurrentSession();
 		// HQl => Hibernate Query language
 		// Hibernate => ORM ( Object Relation Mapping )
-		String hql = "select tr from TechnologyModel tr";
+		String hql = "select tc from TechnologyModel tc";
 		Query query = session.createQuery(hql);
 		List<TechnologyModel> result = query.getResultList();
 		return result;
@@ -31,7 +31,7 @@ public class TechnologyDaoImpl implements TechnologyDao {
 
 	public List<TechnologyModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select tr from TechnologyModel tr where tr.name like :keySearch";
+		String hql = "select tc from TechnologyModel tc where tc.name like :keySearch";
 		Query query = session.createQuery(hql);
 		query.setParameter("keySearch", "%"+key+"%");
 		return query.getResultList();
@@ -40,7 +40,7 @@ public class TechnologyDaoImpl implements TechnologyDao {
 	@Override
 	public TechnologyModel getById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select tr from TechnologyModel tr where tr.id=:id";
+		String hql = "select tc from TechnologyModel tc where tc.id=:id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 		TechnologyModel result = (TechnologyModel) query.getSingleResult();

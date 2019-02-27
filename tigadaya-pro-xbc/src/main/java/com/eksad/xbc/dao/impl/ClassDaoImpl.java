@@ -11,17 +11,17 @@ import org.springframework.stereotype.Repository;
 
 import com.eksad.xbc.dao.ClassDao;
 import com.eksad.xbc.model.ClassModel;
-import com.eksad.xbc.model.MenuModel;
 
 @Repository
 public class ClassDaoImpl implements ClassDao {
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	
+	
 	@Override
 	public List<ClassModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select jt from ClassModel jt order by jt.title";
+		String hql = "select jt from ClassModel jt order by jt.id";
 		Query query = session.createQuery(hql);
 		List<ClassModel> result = query.getResultList();
 		return result;
@@ -30,9 +30,9 @@ public class ClassDaoImpl implements ClassDao {
 	@Override
 	public List<ClassModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from ClassModel x where x.title like  :keySearch order by.x.title";
+		String hql = "select x from ClassModel x where x.classname like :keySearch or x.email like :keySearch";
 		Query query = session.createQuery(hql);
-		query.setParameter("keySearch", "%" + key + "%");
+		query.setParameter("keySearch", "%"+key+"%");		
 		return query.getResultList();
 	}
 
@@ -42,7 +42,7 @@ public class ClassDaoImpl implements ClassDao {
 		String hql = "select jt from ClassModel jt where jt.id=:id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
-		ClassModel result = (ClassModel) query.getSingleResult();
+		ClassModel result = (ClassModel)query.getSingleResult();
 		return result;
 	}
 
@@ -50,7 +50,6 @@ public class ClassDaoImpl implements ClassDao {
 	public void insert(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(model);
-
 	}
 
 	@Override
@@ -63,6 +62,6 @@ public class ClassDaoImpl implements ClassDao {
 	public void delete(ClassModel model) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(model);
-
 	}
+		
 }

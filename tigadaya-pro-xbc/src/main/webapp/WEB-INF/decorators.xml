@@ -16,6 +16,12 @@
 		<pattern>/testimony/*</pattern>
 		<pattern>/bootcamptesttype/*</pattern>
 		<pattern>/class/*</pattern>
+<<<<<<< HEAD
+=======
+		<pattern>/office/*</pattern>
+		<pattern>/batch/*</pattern>
+
+>>>>>>> af62e2d04ca653982cf4551e6a1c19231d443b13
 	</excludes>
 
 	<decorator name="main" page="main.jsp">

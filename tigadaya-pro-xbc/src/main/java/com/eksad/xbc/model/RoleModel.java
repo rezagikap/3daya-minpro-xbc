@@ -4,12 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
+<<<<<<< HEAD
+=======
+import com.fasterxml.jackson.annotation.JsonBackReference;
+>>>>>>> af62e2d04ca653982cf4551e6a1c19231d443b13
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -18,7 +23,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="t_role")
+<<<<<<< HEAD
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+=======
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=RoleModel.class)
+
+>>>>>>> af62e2d04ca653982cf4551e6a1c19231d443b13
 public class RoleModel {
 	
 	@Id
@@ -59,6 +69,10 @@ public class RoleModel {
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="role", fetch=FetchType.EAGER, orphanRemoval=true)
+	private List<UserModel> listUser;
 
 	public Integer getId() {
 		return id;
@@ -170,6 +184,16 @@ public class RoleModel {
 		this.isDelete = isDelete;
 	}
 
+<<<<<<< HEAD
+=======
+	public List<UserModel> getListUser() {
+		return listUser;
+	}
+
+	public void setListUser(List<UserModel> listUser) {
+		this.listUser = listUser;
+	}
+>>>>>>> af62e2d04ca653982cf4551e6a1c19231d443b13
 	
 	
 }

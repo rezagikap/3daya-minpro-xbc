@@ -30,6 +30,8 @@
 <script src="${contextName}/resources/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script src="${contextName}/resources/dist/js/map-form-object.js"></script>
+<script src="${contextName}/resources/jquery/jquery.validate.min.js"></script>
+
 <decorator:head />
 </head>
 

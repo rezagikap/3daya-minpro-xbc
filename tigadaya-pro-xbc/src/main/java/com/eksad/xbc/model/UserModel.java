@@ -2,7 +2,6 @@ package com.eksad.xbc.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +22,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="t_user")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=RoleModel.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=UserModel.class)
+
 public class UserModel {
 
 	@Id
@@ -33,11 +33,6 @@ public class UserModel {
 	pkColumnName = "seq_id", valueColumnName = "seq_value", 
 	initialValue = 0, allocationSize=1)	
 	private Integer id;
-	
-	@ManyToOne
-	@JoinColumn(name="role_id", updatable=false, insertable=false)
-	@JsonManagedReference
-	private RoleModel role;
 	
 	@Column(name="username")
 	private String username;
@@ -61,26 +56,31 @@ public class UserModel {
 	private Integer createdBy;
 	
 	@Column(name="created_on")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd ")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
 	@Column(name="deleted_on")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date deletedOn;
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
 
+	@ManyToOne
+	@JoinColumn(name="role_id", updatable=false, insertable=false)
+	//@JsonManagedReference
+	private RoleModel role;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -151,7 +151,7 @@ public class UserModel {
 
 
 	public void setCreatedOn(String createdOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		Date createdOnNew = null;
 		try {
 			createdOnNew = format.parse(createdOn);
@@ -174,7 +174,7 @@ public class UserModel {
 	}
 
 	public void setModifiedOn(String modifiedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		Date modifiedOnNew = null;
 		try {
 			modifiedOnNew = format.parse(modifiedOn);
@@ -197,7 +197,7 @@ public class UserModel {
 	}
 
 	public void setDeletedOn(String deletedOn) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 		Date deletedOnNew = null;
 		try {
 			deletedOnNew = format.parse(deletedOn);
@@ -222,4 +222,6 @@ public class UserModel {
 	public void setRole(RoleModel role) {
 		this.role = role;
 	}	
+	
+	
 }

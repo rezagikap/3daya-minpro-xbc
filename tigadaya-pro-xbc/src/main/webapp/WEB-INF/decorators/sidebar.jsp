@@ -51,8 +51,12 @@
 					<li><a href="${contextName}/class"><i class="fa fa-circle-o"></i>Class</a></li>
 					<li><a href="${contextName}/office"><i class="fa fa-circle-o"></i>Office</a></li>
 					<li><a href="${contextName}/category"><i class="fa fa-circle-o"></i>Category</a></li>
+<<<<<<< HEAD
 					<li><a href="${contextName}/idle-news"><i class="fa fa-circle-o"></i>Idle News</a></li>
 					<li><a href="${contextName}/testimony"><i class="fa fa-circle-o"></i>Testimony</a></li>
+=======
+					<li><a href="${contextName}/batch"><i class="fa fa-circle-o"></i>Batch</a></li>
+>>>>>>> af62e2d04ca653982cf4551e6a1c19231d443b13
 				</ul>
 			</li>		
 		</ul>

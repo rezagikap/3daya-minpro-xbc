@@ -24,8 +24,8 @@
 	<input type="hidden" class="form-control" name="isDelete" value="false"/>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-basic" style="position: relative; right:160px;" data-dismiss="modal">CANCEL</button>
-		<button type="button" onClick="editData($('#form-edit'))" class="btn btn-basic" style="position: relative; right:35px" >SAVE</button>
+		<button type="button" class="btn btn-warning" style="position: relative; right:160px;" data-dismiss="modal">CANCEL</button>
+		<button type="button" onClick="editData($('#form-edit'))" class="btn btn-warning" style="position: relative; right:35px" >SAVE</button>
 	</div>
 </form>
 <!-- Form Selesai -->

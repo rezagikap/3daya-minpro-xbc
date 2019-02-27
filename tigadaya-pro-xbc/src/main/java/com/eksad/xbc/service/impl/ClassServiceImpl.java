@@ -2,10 +2,9 @@ package com.eksad.xbc.service.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eksad.xbc.dao.ClassDao;
 import com.eksad.xbc.model.ClassModel;
@@ -17,7 +16,7 @@ public class ClassServiceImpl implements ClassService {
 
 	@Autowired
 	private ClassDao dao;
-
+	
 	@Override
 	public List<ClassModel> getList() {
 		return this.dao.getList();
@@ -36,19 +35,16 @@ public class ClassServiceImpl implements ClassService {
 	@Override
 	public void insert(ClassModel model) {
 		this.dao.insert(model);
-		
 	}
 
 	@Override
 	public void update(ClassModel model) {
 		this.dao.update(model);
-		
 	}
 
 	@Override
 	public void delete(ClassModel model) {
 		this.dao.delete(model);
-		
 	}
-
+	
 }
