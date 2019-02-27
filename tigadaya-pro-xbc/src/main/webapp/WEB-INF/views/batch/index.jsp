@@ -3,16 +3,27 @@
 	<div class = "box-header">
 		<h3 class = "box-title">BATCH</h3>
 	</div>
-	<div class = "box-body col-md-12">
-		<input type="text" name = "search" id = "search" placeholder="Search by Technology/Name" required>
-		<button type ="button" class="btn btn-warning btn-sm" onclick="search()">
-			<i class = "fa fa-circle-o"></i>
-		</button>
-		<button type = "button" id = "btn-add" class = "btn btn-succcess btn-warning btn-sm pull-right">
-			<i class = "fa fa-plus"></i>
-		</button>
-	</div>
 	<div class = "box-body">
+	<div class="row">
+		<div class="col-md-11">
+			<div class="input-group col-md-5">
+				<input type="text" name="search" id="search" class="form-control"
+					placeholder="Search by username/email" /> <span class="input-group-btn">
+					<button class="btn btn-warning btn-xm "
+						onClick="search()">
+						<i class="fa fa-circle-o"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="box-tools">
+			<button type="button" id="btn-add"
+				class="btn btn-warning btn-xm">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+	</div>
+	
 		<table class="table">
 			<thead>
 				<tr>
@@ -103,8 +114,8 @@
 						'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
 						'<ul class = "dropdown-menu">'+
 							'<li id = "btn-edit" value = "'+item.id+'"><a>Edit</a></li>'+
-							'<li id = "btn-partcipant" value = ""><a>Add Participant</a></li>'+
-							'<li id = "btn-test" value = ""><a>Setup Test</a></li>'+
+							'<li id = "btn-partcipant" value = "'+item.id+'"><a>Add Participant</a></li>'+
+							'<li id = "btn-test" value = "'+item.id+'"><a>Setup Test</a></li>'+
 						'</ul>' +
 					'</div>' +
 					'</td>' +
@@ -227,11 +238,11 @@
 			dataType : 'html',
 			success : function(result) {
 				//mengganti judul modal
-				$("#modal-title").html("EDIT DATA");
+				$("#modal-title-large").html("EDIT DATA");
 				//menggisi content dengan variable result
-				$("#modal-data").html(result);
+				$("#modal-data-large").html(result);
 				//menampilkan modal pop up
-				$("#modal-form").modal('show');
+				$("#modal-form-large").modal('show');
 				//panggil Trainer
 				loadTrainer($("#modal-data"));
 				loadBootcampType($("#modal-data"));
@@ -263,6 +274,39 @@
 			}
 		});
 		console.log(dataForm);
+	}
+	
+	function search(){
+		var item = $('#search').val();
+		$.ajax({
+			url: '${contextName}/api/batch/search/' + item,
+			type: 'get',
+			dataType: 'json',
+			success: function(result){
+				$("#list-data").empty();
+				// looping data dengan jQuery
+				$.each(result, function(index, item){
+					var dataRow = '<tr>'
+						+ '<td>'
+						+ item.technologyId
+						+ '</td>'
+						+ '<td>'
+						+ item.name
+						+ '</td>'
+						+ '<td class="col-md-1">'
+						'<div class = "dropdown">'+
+						'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+						'<ul class = "dropdown-menu">'+
+							'<li id = "btn-edit" value = "'+item.id+'"><a>Edit</a></li>'+
+							'<li id = "btn-partcipant" value = "'+item.id+'"><a>Add Participant</a></li>'+
+							'<li id = "btn-test" value = "'+item.id+'"><a>Setup Test</a></li>'+
+						'</ul>' +'</div>' 
+						+ '</td>' + '</tr>';
+					$("#list-data").append(dataRow);
+				});
+				console.log(result);
+			}
+		});
 	}
 			
 		
