@@ -1,45 +1,13 @@
 package com.eksad.xbc.model;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@Entity
-@Table(name="t_trainer")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class TrainerModel{
-	
-
-	
-
-	@Id
-	@Column(name="id", columnDefinition="serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_trainer_seq")
-	@TableGenerator(name = "t_trainer_seq", table = "tbl_squence", 
-	pkColumnName = "seq_id", valueColumnName = "seq_value", 
-	initialValue = 0, allocationSize=1)
-	private Integer id;
-	
-	@Column(name="name")
-	private String name;
-	
-	@Column(name="notes")
-	private String notes;
+public class BaseModel {
 	
 	@Column(name="created_by")
 	private Integer createdBy;
@@ -64,30 +32,7 @@ public class TrainerModel{
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
-	
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
 	
 	public Integer getCreatedBy() {
 		return createdBy;
@@ -167,9 +112,4 @@ public class TrainerModel{
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-	
-	
-	
-	
-
 }
