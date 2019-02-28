@@ -157,10 +157,7 @@
 		});
 	}
 	// ketika btn-edit di click
-	$('#list-data').on(
-			'click',
-			'#btn-edit',
-			function() {
+	$('#list-data').on('click','#btn-edit',function() {
 				var vid = $(this).val();
 				$.ajax({
 					url : '${contextName}/office/edit',

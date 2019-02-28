@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+	<!-- http pattern="/api/**" auto-config="true" use-expressions="true">
+		<intercept-url pattern="/**" access="hasAnyRole('ADMIN')" />
+		<http-basic entry-point-ref="authenticationEntryPoint" />
+		<access-denied-handler error-page="/403.html" />
+		<csrf disabled="true" />
+	</http-->
+	
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/" access="permitAll()" />
+		<intercept-url pattern="/403.html" access="permitAll()" />
+		<intercept-url pattern="/index.jsp" access="permitAll()" />
+		<intercept-url pattern="/resources/**" access="permitAll()" />
+		<intercept-url pattern="/login.html" access="permitAll()" />
+		<intercept-url pattern="/main.html" access="permitAll()" />
+		<intercept-url pattern="/" access="isAuthenticated()" />
+		<!--  <intercept-url pattern="/**" access="hasAnyRole('R001', 'R002', 'R003')" /> -->
+		<intercept-url pattern="/**" access="permitAll()" />
+		
+		<!-- access denied page  -->
+		<access-denied-handler error-page="/403.html" />
+
+		<form-login login-page="/login.html" 
+		    default-target-url="/"  
+			username-parameter="username"
+			password-parameter="password"
+			login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/login.html?error"/>
+
+		<logout logout-url="/logout" logout-success-url="/login.html" />
+
+		<!-- enable csrf protection -->
+		<csrf disabled="true"/>
+	</http>
+
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="SELECT username, password, is_delete FROM t_user WHERE username=?"
+				authorities-by-username-query="SELECT u1.username, u2.name FROM t_user u1, t_role u2 WHERE u1.role_id=u2.id and u1.username=?" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<b:bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+		<b:property name="realmName" value="admin realm" />
+	</b:bean>
+</b:beans>
