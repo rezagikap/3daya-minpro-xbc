@@ -85,8 +85,7 @@
 			});
 	//method loadData
 	function loadData() {
-		$
-				.ajax({
+		$.ajax({
 					// url ke api/role/
 					url : '${contextName}/api/office/',
 					type : 'get',
@@ -96,21 +95,18 @@
 						//kosong data di table
 						$("#list-data").empty();
 						// looping data dengan jQuery
-						$
-								.each(
-										result,
-										function(index, item) {
-											var dataRow = '<tr>'
-													+ '<td>'+ item.name + '</td>'
-													+ '<td>'+ item.phone +' / '+ item.email + '</td>'
-													+ '<td class="col-md-1">'
-													+ '<div class="dropdown">'
-													+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
-													+ '<ul class="dropdown-menu">'
-													+ '<li id="btn-edit" value="'+ item.id +'"><a>Edit</a></li> '
-													+ '<li id="btn-delete" value="'+ item.id +'"><a>Delete</a></li> '
-													+ '</ul>' + '</div>'
-													+ '</td>' + '</tr>';
+						$.each(result,function(index, item) {
+								var dataRow = '<tr>'
+										+ '<td>'+ item.name + '</td>'
+										+ '<td>'+ item.phone +' / '+ item.email + '</td>'
+										+ '<td class="col-md-1">'
+										+ '<div class="dropdown">'
+										+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
+										+ '<ul class="dropdown-menu">'
+										+ '<li id="btn-edit" value="'+ item.id +'"><a>Edit</a></li> '
+										+ '<li id="btn-delete" value="'+ item.id +'"><a>Delete</a></li> '
+										+ '</ul>' + '</div>'
+										+ '</td>' + '</tr>';
 											$("#list-data").append(dataRow);
 										});
 						// menampilkan data ke console => F12

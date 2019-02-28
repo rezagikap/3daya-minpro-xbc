@@ -15,7 +15,8 @@ import com.eksad.xbc.service.BootcampTestTypeService;
 public class BootcampTestTypeServiceImpl implements BootcampTestTypeService {
 	@Autowired
 	private BootcampTestTypeDao dao;
-		
+	
+	
 	@Override
 	public List<BootcampTestTypeModel> getList() {
 		return this.dao.getList();
@@ -48,5 +49,4 @@ public class BootcampTestTypeServiceImpl implements BootcampTestTypeService {
 		this.dao.delete(model);
 		
 	}
-
 }
