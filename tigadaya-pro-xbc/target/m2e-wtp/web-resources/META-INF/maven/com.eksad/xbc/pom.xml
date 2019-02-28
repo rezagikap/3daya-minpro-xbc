@@ -265,7 +265,7 @@
 
 
 		<!-- Log4j start -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
 			<version>${org.log4j-version}</version>
@@ -279,9 +279,8 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-web</artifactId>
 			<version>${org.log4j-version}</version>
-		</dependency>
+		</dependency> -->
 <!-- Log4j end -->
-		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

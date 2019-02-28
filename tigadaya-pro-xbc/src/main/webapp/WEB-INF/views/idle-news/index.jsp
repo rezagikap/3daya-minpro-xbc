@@ -260,7 +260,9 @@
 										+ d.getMinutes() + ":"
 										+ d.getSeconds());
 						loadCategory($("#modal-data"));
-
+						// panggil method getData
+						getData(vid);
+						
 					}
 				});
 			});
@@ -325,7 +327,7 @@
 	//ketika button drop down choose category di click
 	function loadCategory($form, $selected){
 		$.ajax({ 
-			url : '${contextName}/api/idle-news/list',
+			url : '${contextName}/api/category/',
 			type : 'get',
 			dataType : 'html',
 			success : function(result) {

@@ -2,23 +2,29 @@ package com.eksad.xbc.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @Entity
 @Table(name="t_idle_news")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class IdleNewsModel {
 	
 	@Id
@@ -64,6 +70,11 @@ public class IdleNewsModel {
 	@Column(name="is_delete")
 	private Boolean isDelete;
 
+	
+	@ManyToOne
+	@JoinColumn(name="category", updatable=false, insertable=false)
+	private List<CategoryModel> listCategory;
+		
 	public Integer getId() {
 		return id;
 	}
@@ -180,6 +191,16 @@ public class IdleNewsModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
+
+	public List<CategoryModel> getListCategory() {
+		return listCategory;
+	}
+
+	public void setListCategory(List<CategoryModel> listCategory) {
+		this.listCategory = listCategory;
+	}
+
+	
 	
 	
 	
