@@ -187,7 +187,7 @@
 	
 	function loadMenu($form, $selected){
 		$.ajax({
-			// url ke api/product/
+			// url ke api/menu/
 			url:'${contextName}/api/menu/',
 			type:'get',
 			// data type berupa JSON
@@ -337,10 +337,77 @@
 				//menampilkan modal pop up
 				$("#modal-form").modal('show');
 				//panggil method
-				getDataLarge(vid);
+				getData(vid);
 				$('#deletedOn').val(d.getDate() + "-" + (d.getMonth()+1) + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
 			}
 		});
 	});
+	
+	//delete
+	function deleteData($form) {
+		// memangil method getFormData dari file
+		var vid = $form.find("#id").val();
+		var cd=$form.find('#code').val();
+		var ttl=$form.find('#title').val();
+		var desc=$form.find('#description').val();
+		var irl=$form.find('#imageUrl').val();
+		var mord=$form.find('#menuOrder').val();
+		var mp=$form.find('#menuParent').val();
+		var mu=$form.find('#menuUrl').val();
+		var creBy=$form.find('#createdBy').val();
+		var creOn=$form.find('#createdOn').val();
+		var modBy=$form.find('#modifiedBy').val();
+		var modOn=$form.find('#modifiedOn').val();
+		var delBy=$form.find('#deletedBy').val();
+		var delOn=$form.find('#deletedOn').val();
+		//var isDelete=$form.find('#isDelete').val();
+		$.ajax({
+			// url ke api/user/
+			url : '${contextName}/api/menu/delete/',
+			// method http di controller
+			type : 'put',
+			// data type berupa JSON
+			dataType : 'json',
+			//
+			data:'{"id":'
+				+ vid 
+				+ ',"code":"' 
+				+ cd 
+				+ '","title":"' 
+				+ ttl 
+				+ '","description":"' 
+				+ desc 
+				+ '","imageUrl":"' 
+				+ irl 
+				+ '","menuOrder":"' 
+				+ mord 
+				+ '","menuParent":"' 
+				+ mp 
+				+ '","menuUrl":"' 
+				+ mu 
+				+ '","createdBy":"' 
+				+ creBy 
+				+ '","createdOn":"' 
+				+ creOn 
+				+ '","modifiedBy":"' 
+				+ modBy 
+				+ '","modifiedOn":"' 
+				+ modOn 
+				+ '","deletedBy":"' 
+				+ delBy
+				+ '","deletedOn":"' 
+				+ delOn
+				+ '","isDelete": true}',
+			contentType: 'application/json',
+			// jika sukses
+			success : function(result) {
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+				console.log(dataForm);
+			}
+		});	
+	}
 </script>
 

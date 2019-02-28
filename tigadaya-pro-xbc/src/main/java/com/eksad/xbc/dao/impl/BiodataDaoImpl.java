@@ -31,7 +31,7 @@ public class BiodataDaoImpl implements BiodataDao {
 	@Override
 	public List<BiodataModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from BiodataModel x where x.name like :keySearch order by x.name";
+		String hql = "select x from BiodataModel x where x.name like :keySearch or x.majors like :keySearch";
 		Query query = session.createQuery(hql);
 		query.setParameter("keySearch", "%"+key+"%");		
 		return query.getResultList();

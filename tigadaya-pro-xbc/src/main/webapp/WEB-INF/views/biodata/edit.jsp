@@ -50,19 +50,21 @@
 		<div class="col-md-6">
 			
 			<div class="form-group">
-				<div class="col-md-12">
+				<!--  <div class="col-md-12">-->
 					<label class="control-label">Gender</label>
 					<div class="col-md-12">
-						<input type="radio" name="gender" id="gender" value="m"/>Male
-						<input type="radio" name="gender" id="gender" value="f"/>Female
+						<label class="radio-inline">
+						<input type="radio" name="gender" id="gender" value="male"/>Male</label>
+						<label class="radio-inline">
+						<input type="radio" name="gender" id="gender" value="female"/>Female</label>
 					</div>
-				</div>
+				<!--  </div> -->
 			</div>
 			
 			<div class="form-group">
 				<div class="col-md-12">
 					<label class="control-label">Bootcamp Test Type</label>
-					<select name="bootcampTypeTest" class="form-control" id="bootcampTestType">
+					<select name="bootcampTestType" class="form-control" id="bootcampTestType">
 						<option value="">-Choose Bootcamp Test Type-</option>
 					</select>
 				</div>
@@ -138,7 +140,7 @@
 	<input type="hidden" class="form-control" name="modifiedOn"id="modifiedOn" />
 	<input type="hidden" class="form-control" name="deletedBy" value="1" />
 	<input type="hidden" class="form-control" name="deletedOn"id="deletedOn" />
-	<input type="hidden" class="form-control" name="isDelete" value="true" />
+	<input type="hidden" class="form-control" name="isDelete" value="false" />
 	
 	<div class="modal-footer">
 		<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>

@@ -59,7 +59,7 @@
 	<input type="hidden" class="form-control" name="modifiedOn" id="modifiedOn" />
 	<input type="hidden" class="form-control" name="deletedBy" id="deletedBy" />
 	<input type="hidden" class="form-control" name="deletedOn" id="deletedOn" />
-	<input type="hidden" class="form-control" name="isDelete" id="isDelete" value="true" />
+	<input type="hidden" class="form-control" name="isDelete" id="isDelete" value="false" />
 	
 	<!-- untuk footer berupa tombol save dan cancel -->
 	<div class="modal-footer">

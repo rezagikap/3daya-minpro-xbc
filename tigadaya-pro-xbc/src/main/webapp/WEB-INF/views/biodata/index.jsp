@@ -86,27 +86,28 @@
 				$("#list-data").empty();
 				
 					$.each(result, function(index, item) {
-
-							var dataRow = '<tr>'
-							+ '<td class="col-md-3">'
-							+ item.name
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.majors
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.gpa
-							+ '</td>'
-							+ '<td class="col-md-1">'
-							+ '<div class="dropdown">'
-							+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
-							+ '<ul class="dropdown-menu">'
-							+	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
-							+	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
-							+ '</ul>'
-							+ '</div>'
-							+ '</td>' + '</tr>';
-							$("#list-data").append(dataRow); //munculkan tabel di list data
+							if(item.isDelete==false){
+								var dataRow = '<tr>'
+									+ '<td class="col-md-3">'
+									+ item.name
+									+ '</td>'
+									+ '<td class="col-md-4">'
+									+ item.majors
+									+ '</td>'
+									+ '<td class="col-md-4">'
+									+ item.gpa
+									+ '</td>'
+									+ '<td class="col-md-1">'
+									+ '<div class="dropdown">'
+									+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
+									+ '<ul class="dropdown-menu">'
+									+	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
+									+	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
+									+ '</ul>'
+									+ '</div>'
+									+ '</td>' + '</tr>';
+									$("#list-data").append(dataRow); //munculkan tabel di list data	
+							}
 					});	
 				
 				// looping data dengan jQuery
@@ -131,32 +132,53 @@
 				$("#list-data").empty();
 				
 					$.each(result, function(index, item) {
-						
-						var dataRow = '<tr>'
-							+ '<td class="col-md-3">'
-							+ item.name
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.majors
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.gpa
-							+ '</td>'
-							+ '<td class="col-md-1">'
-							+ '<div class="dropdown">'
-							+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
-							+ '<ul class="dropdown-menu">'
-							+	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
-							+	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
-							+ '</ul>'
-							+ '</div>'
-							+ '</td>' + '</tr>';
-							$("#list-data").append(dataRow); //munculkan tabel di list data
-						
+						if(item.isDelete==false){
+							var dataRow = '<tr>'
+								+ '<td class="col-md-3">'
+								+ item.name
+								+ '</td>'
+								+ '<td class="col-md-4">'
+								+ item.majors
+								+ '</td>'
+								+ '<td class="col-md-4">'
+								+ item.gpa
+								+ '</td>'
+								+ '<td class="col-md-1">'
+								+ '<div class="dropdown">'
+								+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
+								+ '<ul class="dropdown-menu">'
+								+	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
+								+	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
+								+ '</ul>'
+								+ '</div>'
+								+ '</td>' + '</tr>';
+								$("#list-data").append(dataRow); //munculkan tabel di list data	
+						}
 					});	
 							
 				// menampilkan data ke console => F12
 				console.log(result);
+			}
+		});
+	}
+	
+	function loadBootcampTestType($form,$selected){
+		$.ajax({
+			//url ke api/bootcamptesttype
+			url:'${contextName}/api/bootcamptesttype/',
+			type:'get',
+			dataType:'json',
+			success: function(result){
+				$form.find('#bootcampTestType').empty();
+				$form.find('#bootcampTestType').append('<option value="">-Choose Bootcamp Test Type-</option>');
+				//looping data
+				$.each(result, function(index, item){
+					if ($selected==item.id){
+						$form.find('#bootcampTestType').append('<option value="'+item.id+'" selected="selected">'+item.name+'</option>');
+					} else {
+						$form.find('#bootcampTestType').append('<option value="'+item.id+'">'+item.name+'</option>');
+					}
+				});
 			}
 		});
 	}
@@ -195,6 +217,7 @@
 				$('#modal-data').find('#deletedBy').val(dataApi.deletedBy);
 				$('#modal-data').find('#deletedOn').val(dataApi.deletedOn);
 				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
+				loadBootcampTestType($("#modal-data"),dataApi.bootcampTestType);
 				console.log(dataApi);
 			}
 		});
@@ -215,6 +238,7 @@
 				//menampilkan modal pop up
 				$("#modal-form").modal('show');
 				$('#createdOn').val(d.getDate()+"-"+d.getMonth()+"-"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds());
+				loadBootcampTestType($("#modal-data"));
 			}
 		});
 	});
@@ -307,32 +331,103 @@
 				$("#modal-form").modal('show');
 				//panggil method
 				getData(vid);
-				$('#deletedOn').val(d.getDate() + "-" + d.getMonth() + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
+				$('#deletedOn').val(d.getDate() + "-" + (d.getMonth()+1) + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
 			}
 		});
 	});
 	
-	// method untuk delete data
-	function deleteData($form){
+	//delete
+	function deleteData($form) {
 		// memangil method getFormData dari file
 		var vid = $form.find("#id").val();
+		var nm=$form.find('#name').val();
+		var gdr=$form.find('#gender').val();
+		var ld=$form.find('#lastEducation').val();
+		var gy=$form.find('#graduationYear').val();
+		var el=$form.find('#educationalLevel').val();
+		var mj=$form.find('#majors').val();
+		var gp=$form.find('#gpa').val();
+		var btt = $form.find("#bootcampTestType").val();
+		var iqq=$form.find('#iq').val();
+		var duu=$form.find('#du').val();
+		var art=$form.find('#arithmetic').val();
+		var nl=$form.find('#nestedLogic').val();
+		var jt=$form.find('#joinTable').val();
+		var tr=$form.find('#tro').val();
+		var no=$form.find('#notes').val();
+		var iv=$form.find('#interviewer').val();
+		var creBy=$form.find('#createdBy').val();
+		var creOn=$form.find('#createdOn').val();
+		var modBy=$form.find('#modifiedBy').val();
+		var modOn=$form.find('#modifiedOn').val();
+		var delBy=$form.find('#deletedBy').val();
+		var delOn=$form.find('#deletedOn').val();
+		//var isDelete=$form.find('#isDelete').val();
 		$.ajax({
-			// url ke api/role/
-			url:'${contextName}/api/biodata/'+vid,
+			// url ke api/user/
+			url : '${contextName}/api/biodata/delete/',
 			// method http di controller
-			type:'delete',
+			type : 'put',
 			// data type berupa JSON
-			dataType:'json',
+			dataType : 'json',
+			//
+			data:'{"id":'
+				+ vid 
+				+ ',"name":"' 
+				+ nm 
+				+ '","gender":"' 
+				+ gdr 
+				+ '","lastEducation":"' 
+				+ ld 
+				+ '","graduationYear":"' 
+				+ gy 
+				+ '","educationalLevel":"' 
+				+ el 
+				+ '","majors":"' 
+				+ mj 
+				+ '","gpa":"' 
+				+ gp 
+				+ '","bootcampTestType":"' 
+				+ btt 
+				+ '","iq":"' 
+				+ iqq 
+				+ '","du":"' 
+				+ duu 
+				+ '","arithmetic":"' 
+				+ art 
+				+ '","nestedLogic":"' 
+				+ nl 
+				+ '","joinTable":"' 
+				+ jt 
+				+ '","tro":"' 
+				+ tr 
+				+ '","notes":"' 
+				+ no 
+				+ '","interviewer":"' 
+				+ iv 
+				+ '","createdBy":"' 
+				+ creBy 
+				+ '","createdOn":"' 
+				+ creOn 
+				+ '","modifiedBy":"' 
+				+ modBy 
+				+ '","modifiedOn":"' 
+				+ modOn 
+				+ '","deletedBy":"' 
+				+ delBy
+				+ '","deletedOn":"' 
+				+ delOn
+				+ '","isDelete": true}',
+			contentType: 'application/json',
 			// jika sukses
-			success : function(result){
+			success : function(result) {
 				//menutup modal
 				$("#modal-form").modal('hide');
 				// panggil method load data, untuk melihat data terbaru
 				loadData();
-				console.log(result);
+				console.log(dataForm);
 			}
-		});
+		});	
 	}
-	
 
 </script>
