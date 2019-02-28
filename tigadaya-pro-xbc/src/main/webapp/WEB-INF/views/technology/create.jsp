@@ -35,7 +35,7 @@
 		<div class="col-md-1">
 			<thead>
 				<tr>
-					<th>NAME</th>
+					<th style="position: relative; left: 17px;"> NAME</th>
 					<th class="col-md-1">#</th>
 				</tr>
 			</thead>
