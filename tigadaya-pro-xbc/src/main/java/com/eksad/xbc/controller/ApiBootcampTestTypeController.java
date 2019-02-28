@@ -1,5 +1,6 @@
 package com.eksad.xbc.controller;
 
+
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -14,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eksad.xbc.model.BootcampTestTypeModel;
+import com.eksad.xbc.model.TestModel;
 import com.eksad.xbc.service.BootcampTestTypeService;
-
-
 
 @Controller
 public class ApiBootcampTestTypeController {
@@ -76,16 +76,35 @@ public class ApiBootcampTestTypeController {
 			return result;
 		}
 		
-	@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.PUT)
-	public ResponseEntity<BootcampTestTypeModel> putUpdate(@RequestBody BootcampTestTypeModel item) {
-		ResponseEntity<BootcampTestTypeModel> result = null;
-		try {
-			this.service.update(item);
-			result = new ResponseEntity<BootcampTestTypeModel>(item, HttpStatus.ACCEPTED);
-		} catch (Exception e) {
-			log.debug(e.getMessage(), e);
-			result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+		@RequestMapping(value = "/api/bootcamptesttype/", method = RequestMethod.PUT)
+		public ResponseEntity<BootcampTestTypeModel> putUpdate(@RequestBody BootcampTestTypeModel item){
+			ResponseEntity<BootcampTestTypeModel> result = null;
+			try {
+				this.service.update(item);
+				result = new ResponseEntity<BootcampTestTypeModel>(item,HttpStatus.ACCEPTED);
+			} catch (Exception e) {
+				log.debug(e.getMessage(), e);
+				result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+				return result;
+			}
+		
+		@RequestMapping(value = "/api/bootcamptesttype/{itemId}", method = RequestMethod.DELETE)
+		public ResponseEntity<BootcampTestTypeModel> delApi(@PathVariable("itemId") Integer vid){
+			ResponseEntity<BootcampTestTypeModel> result = null;
+			try {
+				BootcampTestTypeModel item = this.service.getById(vid);
+				if (item != null) {
+					this.service.delete(item);
+					result = new ResponseEntity<BootcampTestTypeModel>(item, HttpStatus.ACCEPTED);
+				} else {
+					result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.NO_CONTENT);
+				}
+			} catch (Exception e) {
+				log.debug(e.getMessage(), e);
+				result = new ResponseEntity<BootcampTestTypeModel>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}		
+				return result;
+			}
+		
 		}
-		return result;
-	}
-}
