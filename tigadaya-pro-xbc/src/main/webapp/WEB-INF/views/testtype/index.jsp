@@ -70,14 +70,21 @@
 						$("#list-data").empty();
 						// looping data dengan jQuery
 						$.each(result,function(index, item) {
+							if(item.isDelete==false){
 							var dataRow = '<tr>'+ 
 							'<td>'+ item.name+ '</td>'+ 
 							'<td>'+ item.createdBy+ '</td>'+ 
-							'<td class="col-md-1">'+ 
-							'<button type="button" class="btn btn-edit btn-warning btn-sm" value="'+ item.id +'"><i class="fa fa-align-justify"></i></button> '+
-							'</td>' +
-							'</tr>';
+							'<div class="dropdown">'+
+							'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+						    '<ul class="dropdown-menu">'+
+						    	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
+						    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
+						    '</ul>'+
+						    '</div>'+
+						'</td>'+
+						'</tr>';
 								$("#list-data").append(dataRow);
+							}
 						});
 						// menampilkan data ke console => F12
 						console.log(result);
@@ -100,7 +107,6 @@
 			success : function(result) {
 				$("#modal-form").modal('hide');
 				loadData();
-
 			}
 
 		});
@@ -116,8 +122,45 @@
 				$('#modal-data').find('#id').val(dataApi.id);
 				$('#modal-data').find('#name').val(dataApi.name);
 				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
-
+				$('#modal-data').find('#notes').val(dataApi.notes);
+				$('#modal-data').find('#typeOfAnswer').val(dataApi.typeOfAnswer);
+				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
+				$('#modal-data').find('#modifiedBy').val(dataApi.mmodifiedBy);
+				$('#modal-data').find('#modifiedOn').val(dataApi.modifiedOn);
+				$('#modal-data').find('#deletedBy').val(dataApi.deletedBy);
+				$('#modal-data').find('#deletedOn').val(dataApi.deletedOn);
+				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
 				console.log(dataApi);
+			}
+		});
+	}
+	
+	function search(){
+		var item = $('#search').val();
+		$.ajax({
+			url: '${contextName}/api/testtype/search/' + item,
+			type: 'get',
+			dataType: 'json',
+			success : function(result){
+				$('#list-data').empty();
+				// looping data dengan jQuery
+				$.each(result, function(index, item){
+				var dataRow = '<tr>' +
+					'<td>' + item.name + '</td>' +
+					'<td>' + item.createdBy + '</td>' +
+					'<td class = "col-md-1">' +
+						'<div class="col-md-1">' +
+					'<button class = "btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+					'<ul class= "dropdown-menu">' +
+					'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
+			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+
+				    '</ul>'+
+				    '</div>'+
+					'</td>'+
+					'</tr>';
+					$("#list-data").append(dataRow);
+					});
+				console.log(result);
 			}
 		});
 	}
