@@ -3,24 +3,28 @@
 	<div class="box-header">
 		<h3 class="box-title">TECHNOLOGY ${username } ${userid }</h3>
 	</div>
-	
-	<div class="box-header col-md-12">
-			<input type="text" name="search" id="search"
-				placeholder="Search by name" />
-			<button class="btn btn-warning btn-xm"
-				onClick="search()">
-				<i class="fa fa-circle-o"></i>
-			</button>
-			<div class="box-tools col-md-1">
-				<button type="button" id="btn-add"
-					class="margin col-md-0.5 btn btn-warning btn-m">
-					<i class="fa fa-plus"></i>
-				</button>
-			</div>
-	</div>
-	
 		
 	<div class="box-body">
+	<div class="row">
+		<div class="col-md-11">
+			<div class="input-group col-md-5">
+				<input type="text" name="search" id="search" class="form-control"
+					placeholder="Search by name" /> <span class="input-group-btn">
+					<button class="btn btn-warning btn-xm "
+						onClick="search()">
+						<i class="fa fa-circle-o"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+		<div class="box-tools">
+			<button type="button" id="btn-add"
+				class="btn btn-warning btn-xm">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+	</div>
+	<br>
 		<table class="table">
 			<thead>
 				<tr>
@@ -104,6 +108,7 @@
 	// function get data technology
 	function getData(dataId){
 		// panggil API
+
 		$.ajax({
 			// url ke api/category/
 			url:'${contextName}/api/technology/'+dataId,
@@ -111,13 +116,11 @@
 			// data type berupa JSON
 			dataType:'json',
 			success : function(dataApi){
+			
 				$('#modal-datech').find('#id').val(dataApi.id);
 				$('#modal-datech').find('#name').val(dataApi.name);
-				$('#modal-datech').find('#name').val(dataApi.name);
-				$('#modal-datech').find('#createdBy').val(dataApi.createdBy);
 				$('#modal-datech').find('#notes').val(dataApi.notes);
-				$('#modal-datech').find('#createdOn').val(dataApi.createdOn);
-				$('#modal-datech').find('#isDelete').val(dataApi.isDelete);
+				
 				
 				console.log(dataApi);
 			}
@@ -126,22 +129,28 @@
 	
 	//function get data trainer
 	function getDataTr(dataId) {
+		
+		alert("test");
+
 		$.ajax({
 			url:'${contextName}/api/techtrainer/'+dataId,
 			type:'get',
 			dataType:'json',
 			success:function(dataApi){
-				$('#modal-datrain').find('#id').val(dataApi.id);
-				$('#modal-datrain').find('#technologyId').val(dataApi.technologyId);
-				$('#modal-datrain').find('#trainerId').val(dataApi.trainerId);
-				$('#modal-datrain').find('#createdBy').val(dataApi.createdBy);
-				$('#modal-datrain').find('#createdOn').val(dataApi.createdOn);
+			$("#list-train").empty();
+			
 				
+				var dataRow ='<tr>'+
+					'<td> '
+				+ '<input type="text" name="tt[][trainerName]" value="'+ name +'" class="form-control name"/>'
+					
+					'</tr;>'
+				$('#list-train').append(dataRow);
+				$('#modal-datrain').find('#trainerName').val(dataApi.name);
 				console.log(dataApi);
 			}
 		});
 	}
-	
 	//ketika button add di click maka muncul pop up form add
 	//ajax di dalem jquery
 	$("#btn-add").click(function(){
@@ -236,6 +245,7 @@
 				$("#modal-technology").modal('show');
 				//panggil method
 				getData(vid);
+				getDataTr(vid);
 			}
 		});
 	});

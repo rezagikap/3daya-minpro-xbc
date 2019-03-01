@@ -20,43 +20,32 @@ public class RoleServiceImpl implements RoleService {
 	
 	@Override
 	public List<RoleModel> getList() {
-		// TODO Auto-generated method stub
 		return this.dao.getList();
 	}
 
-	//@Override
-	//public List<RoleModel> search(String key) {
-		// TODO Auto-generated method stub
-	//	return null;
-//	}
-
+	
 	@Override
 	public RoleModel getById(Integer id) {
-		// TODO Auto-generated method stub
 		return this.dao.getById(id);
 	}
 
 	@Override
 	public void insert(RoleModel model) {
-		// TODO Auto-generated method stub
 		this.dao.insert(model);
 	}
 
 	@Override
 	public void update(RoleModel model) {
-		// TODO Auto-generated method stub
 		this.dao.update(model);
 	}
 
 	@Override
 	public void delete(RoleModel model) {
-		// TODO Auto-generated method stub
 		this.dao.delete(model);
 	}
 
 	@Override
 	public List<RoleModel> search(String key) {
-		// TODO Auto-generated method stub
 		return this.dao.search(key);
 	}
 

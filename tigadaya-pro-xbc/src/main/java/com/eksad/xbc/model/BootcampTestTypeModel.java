@@ -1,7 +1,7 @@
 package com.eksad.xbc.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +19,8 @@ public class BootcampTestTypeModel {
 	@Id
 	@Column(name="id", columnDefinition="serial")
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_bootcamp_test_type_seq")
-	@TableGenerator(name = "t_bootcamp_test_type_seq", table = "tbl_squence",
-	pkColumnName = "seq_id", valueColumnName = "seq_value",
+	@TableGenerator(name = "t_bootcamp_test_type_seq", table = "tbl_squence", 
+	pkColumnName = "seq_id", valueColumnName = "seq_value", 
 	initialValue = 0, allocationSize=1)
 	private Integer id;
 	
@@ -39,7 +39,7 @@ public class BootcampTestTypeModel {
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
-	
+
 	@Column(name="modified_on")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date modifiedOn;
@@ -153,6 +153,7 @@ public class BootcampTestTypeModel {
 
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
-	}	
-
+	}
+	
+	
 }
