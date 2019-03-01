@@ -94,7 +94,7 @@
 							+ item.title
 							+ '</td>'
 							+ '<td class="col-md-4">'
-							+ item.menuParent
+							+ item.menuParent+' - '+item.title
 							+ '</td>'
 							+ '<td class="col-md-1">'
 							+ '<div class="dropdown">'

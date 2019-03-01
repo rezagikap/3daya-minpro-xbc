@@ -8,7 +8,7 @@
 			<div class="form-group">
 				<div class="col-md-12">
 					<label class="control-label">Title</label>
-					<input type="text" class="form-control" name="title" placeholder="Title"/>
+					<input type="text" class="form-control" name="title" id="title" placeholder="Title"/>
 				</div>
 			</div>
 			
