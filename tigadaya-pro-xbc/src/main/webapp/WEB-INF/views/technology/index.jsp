@@ -1,7 +1,7 @@
 <% request.setAttribute("contextName", request.getServletContext().getContextPath()); %>
 <div class="box box-info">
 	<div class="box-header">
-		<h3 class="box-title">TECHNOLOGY</h3>
+		<h3 class="box-title">TECHNOLOGY ${username } ${userid }</h3>
 	</div>
 	
 	<div class="box-header col-md-12">

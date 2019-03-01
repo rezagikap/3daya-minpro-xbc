@@ -4,12 +4,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.eksad.xbc.service.TechnologyService;
 
 @Controller
-public class TechnologyController {
+public class TechnologyController extends BaseController{
 	
 	private Log log = LogFactory.getLog(getClass());
 	
@@ -17,10 +18,13 @@ public class TechnologyController {
 	private TechnologyService service;
 	
 	@RequestMapping(value="/technology")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("username", this.getUserName());
+		model.addAttribute("userid", this.getUserId());
 		return "/technology/index";
 	}
 	
+
 	//url yang ada di create.jsp
 	@RequestMapping(value="/technology/create")
 	public String create(){

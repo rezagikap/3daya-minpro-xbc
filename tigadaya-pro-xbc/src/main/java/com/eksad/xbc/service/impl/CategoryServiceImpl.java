@@ -51,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public String getNewCode() {
-		return this.dao.getNewCode();	
-				}
+		return this.dao.getNewCode();
+	}
 
 }

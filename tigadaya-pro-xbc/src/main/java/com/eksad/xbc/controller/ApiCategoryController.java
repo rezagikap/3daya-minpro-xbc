@@ -63,7 +63,7 @@ public class ApiCategoryController {
 	}
 	
 	@RequestMapping(value = "api/category/", method = RequestMethod.POST)
-	public ResponseEntity<CategoryModel> postInsert(@RequestBody CategoryModel item){
+	public ResponseEntity<CategoryModel> postInsert(@RequestBody CategoryModel item){ //yg nangkep RequestBody
 		ResponseEntity<CategoryModel> result = null;
 		try {
 			this.service.insert(item);
