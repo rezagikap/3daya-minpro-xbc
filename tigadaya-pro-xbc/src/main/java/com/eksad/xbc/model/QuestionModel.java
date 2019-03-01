@@ -1,5 +1,6 @@
 package com.eksad.xbc.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ public class QuestionModel {
 	
 	@Column(name="question")
 	private String question;
+	
 	@Column(name="question_type")
 	private String questionType;
 	
@@ -59,7 +61,7 @@ public class QuestionModel {
 	@Column(name="image_d")
 	private String imageD;
 	
-	@Column(name="image_d")
+	@Column(name="image_e")
 	private String imageE;
 	
 	@Column(name="created_by")
@@ -210,8 +212,15 @@ public class QuestionModel {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedOn(String createdOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date createdOnNew = null;
+		try {
+			createdOnNew = format.parse(createdOn);
+		} catch (Exception e) {
+			this.createdOn = null;
+		}
+		this.createdOn = createdOnNew;
 	}
 
 	public Integer getModifiedBy() {
@@ -226,8 +235,15 @@ public class QuestionModel {
 		return modifiedOn;
 	}
 
-	public void setModifiedOn(Date modifiedOn) {
-		this.modifiedOn = modifiedOn;
+	public void setModifiedOn(String modifiedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date modifiedOnNew = null;
+		try {
+			modifiedOnNew = format.parse(modifiedOn);
+		} catch (Exception e) {
+			this.modifiedOn = null;
+		}
+		this.modifiedOn = modifiedOnNew;
 	}
 
 	public Integer getDeletedBy() {
@@ -242,8 +258,15 @@ public class QuestionModel {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(Date deletedOn) {
-		this.deletedOn = deletedOn;
+	public void setDeletedOn(String deletedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date deletedOnNew = null;
+		try {
+			deletedOnNew = format.parse(deletedOn); 
+		} catch (Exception e) {
+			this.deletedOn = null;
+		}
+		this.deletedOn = deletedOnNew;
 	}
 
 	public Boolean getIsDelete() {

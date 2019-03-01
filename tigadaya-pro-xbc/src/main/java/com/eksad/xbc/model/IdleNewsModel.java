@@ -71,9 +71,9 @@ public class IdleNewsModel {
 	private Boolean isDelete;
 
 	
-	@ManyToOne
-	@JoinColumn(name="category", updatable=false, insertable=false)
-	private List<CategoryModel> listCategory;
+	//@ManyToOne
+	//@JoinColumn(name="category", updatable=false, insertable=false)
+	//private List<CategoryModel> listCategory;
 		
 	public Integer getId() {
 		return id;
@@ -192,13 +192,13 @@ public class IdleNewsModel {
 		this.isDelete = isDelete;
 	}
 
-	public List<CategoryModel> getListCategory() {
-		return listCategory;
-	}
+	//public List<CategoryModel> getListCategory() {
+	//	return listCategory;
+	//}
 
-	public void setListCategory(List<CategoryModel> listCategory) {
-		this.listCategory = listCategory;
-	}
+	//public void setListCategory(List<CategoryModel> listCategory) {
+	//	this.listCategory = listCategory;
+	//}
 
 	
 	

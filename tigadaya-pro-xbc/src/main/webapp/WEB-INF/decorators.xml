@@ -18,6 +18,8 @@
 		<pattern>/class/*</pattern>
 		<pattern>/office/*</pattern>
 		<pattern>/batch/*</pattern>
+		<pattern>/question/*</pattern>
+		<pattern>/logout/*</pattern>
 		</excludes>
 
 	<decorator name="main" page="main.jsp">

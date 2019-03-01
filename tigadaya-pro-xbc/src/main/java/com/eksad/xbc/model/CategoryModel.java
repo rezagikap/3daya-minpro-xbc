@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "t_category")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CategoryModel {
 	@Id
 	@Column(name = "id", columnDefinition = "serial")
@@ -62,9 +62,9 @@ public class CategoryModel {
 	@Column(name = "is_delete")
 	private Boolean isDelete;
 	
-	@JsonIgnore
-	@OneToMany( mappedBy="category", fetch=FetchType.EAGER, orphanRemoval=true)
-	private IdleNewsModel idle_news;
+	//@JsonIgnore
+	//@OneToMany( mappedBy="category", fetch=FetchType.EAGER, orphanRemoval=true)
+	//private IdleNewsModel idle_news;
 	
 	public Integer getId() {
 		return id;
@@ -153,11 +153,11 @@ public class CategoryModel {
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
-	public IdleNewsModel getIdle_news() {
-		return idle_news;
-	}
-	public void setIdle_news(IdleNewsModel idle_news) {
-		this.idle_news = idle_news;
-	}				
+	//public IdleNewsModel getIdle_news() {
+	//	return idle_news;
+	//}
+	//public void setIdle_news(IdleNewsModel idle_news) {
+	//	this.idle_news = idle_news;
+	//}				
 	
 }
