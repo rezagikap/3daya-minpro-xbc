@@ -16,14 +16,14 @@
 	<input type="hidden" class="form-control" name="menuOrder"id="menuOrder" />
 	<input type="hidden" class="form-control" name="menuParent"id="menuParent" />
 	<input type="hidden" class="form-control" name="menuUrl"id="menuUrl" />
-	<input type="hidden" class="form-control" name="code"id="code" value="1" />
+	<input type="hidden" class="form-control" name="code"id="code"/>
 	<input type="hidden" class="form-control" name="createdBy" id="createdBy" value="1" />
 	<input type="hidden" class="form-control" name="createdOn"id="createdOn" />
 	<input type="hidden" class="form-control" name="modifiedBy" id="modifiedBy" value="1" />
 	<input type="hidden" class="form-control" name="modifiedOn"id="modifiedOn" />
 	<input type="hidden" class="form-control" name="deletedBy" id="deletedBy" value="1" />
 	<input type="hidden" class="form-control" name="deletedOn"id="deletedOn" />
-	<input type="hidden" class="form-control" name="isDelete" value=true/>
+	<input type="hidden" class="form-control" name="isDelete" id="isDelete"/>
 	
 	<div class="modal-footer">
 		<button type="button" class="btn btn-danger pull-left"

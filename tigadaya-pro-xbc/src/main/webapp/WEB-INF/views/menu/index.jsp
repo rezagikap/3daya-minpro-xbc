@@ -1,4 +1,5 @@
 <% request.setAttribute("contextName", request.getServletContext().getContextPath()); %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="box box-info">
 
@@ -43,10 +44,11 @@
 					<th>#</th>
 				</tr>
 			</thead>
-			
+
 			<tbody id="list-data">
+				
 			</tbody>
-			
+
 		</table>
 		
 	</div>
@@ -72,95 +74,37 @@
 		loadData();
 	});
 	
+	
 	//method loadData
+	
 	function loadData() { 
 		$.ajax({
 			// url ke api/menu/
-			url : '${contextName}/api/menu/',
+			url : '${contextName}/menu/list',
 			type : 'get',
 			// data type berupa JSON
-			dataType : 'json',
+			dataType : 'html',
 			success : function(result) {
 				//kosong data di table
-				$("#list-data").empty();
-				
-					$.each(result, function(index, item) {
-						if(item.isDelete==false){
-							var dataRow = '<tr>'
-							+ '<td class="col-md-3">'
-							+ item.code
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.title
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.menuParent+' - '+item.title
-							+ '</td>'
-							+ '<td class="col-md-1">'
-							+ '<div class="dropdown">'
-							+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
-							+ '<ul class="dropdown-menu">'
-							+	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
-							+	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
-							+ '</ul>'
-							+ '</div>'
-							+ '</td>' + '</tr>';
-							$("#list-data").append(dataRow); //munculkan tabel di list data
-						}
-					});	
-				
-				// looping data dengan jQuery
-							
-				// menampilkan data ke console => F12
-				alert(mp);
-				console.log(result);
+				$("#list-data").html(result);
 				
 			}
 		});
 	}
+	
 	
 	//method SEARCH
 	function search() {
 		var cari=$('#search').val();
 		$.ajax({
 			// url ke api/menu/
-			url : '${contextName}/api/menu/search/'+cari,
+			url : '${contextName}/menu/search/'+cari,
 			type : 'get',
 			// data type berupa JSON
-			dataType : 'json',
+			dataType : 'html',
 			success : function(result) {
 				//kosong data di table
-				$("#list-data").empty();
-				
-					$.each(result, function(index, item) {
-						if(item.isDelete==false){
-							var dataRow = '<tr>'
-							+ '<td class="col-md-3">'
-							+ item.code
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.title
-							+ '</td>'
-							+ '<td class="col-md-4">'
-							+ item.menuParent
-							+ '</td>'
-							+ '<td class="col-md-1">'
-							+ '<div class="dropdown">'
-							+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
-							+ '<ul class="dropdown-menu">'
-							+	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'
-							+	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'
-							+ '</ul>'
-							+ '</div>'
-							+ '</td>' + '</tr>';
-							$("#list-data").append(dataRow); //munculkan tabel di list data
-						}
-					});	
-				
-				// looping data dengan jQuery
-							
-				// menampilkan data ke console => F12
-				console.log(result);
+				$("#list-data").html(result);
 			}
 		});
 	}
@@ -346,58 +290,18 @@
 	//delete
 	function deleteData($form) {
 		// memangil method getFormData dari file
-		var vid = $form.find("#id").val();
-		var cd=$form.find('#code').val();
-		var ttl=$form.find('#title').val();
-		var desc=$form.find('#description').val();
-		var irl=$form.find('#imageUrl').val();
-		var mord=$form.find('#menuOrder').val();
-		var mp=$form.find('#menuParent').val();
-		var mu=$form.find('#menuUrl').val();
-		var creBy=$form.find('#createdBy').val();
-		var creOn=$form.find('#createdOn').val();
-		var modBy=$form.find('#modifiedBy').val();
-		var modOn=$form.find('#modifiedOn').val();
-		var delBy=$form.find('#deletedBy').val();
-		var delOn=$form.find('#deletedOn').val();
-		//var isDelete=$form.find('#isDelete').val();
+		$('#isDelete').val("true");
+		var dataForm = getFormData($form);
+		
 		$.ajax({
 			// url ke api/user/
-			url : '${contextName}/api/menu/delete/',
+			url : '${contextName}/api/menu/',
 			// method http di controller
 			type : 'put',
 			// data type berupa JSON
 			dataType : 'json',
 			//
-			data:'{"id":'
-				+ vid 
-				+ ',"code":"' 
-				+ cd 
-				+ '","title":"' 
-				+ ttl 
-				+ '","description":"' 
-				+ desc 
-				+ '","imageUrl":"' 
-				+ irl 
-				+ '","menuOrder":"' 
-				+ mord 
-				+ '","menuParent":"' 
-				+ mp 
-				+ '","menuUrl":"' 
-				+ mu 
-				+ '","createdBy":"' 
-				+ creBy 
-				+ '","createdOn":"' 
-				+ creOn 
-				+ '","modifiedBy":"' 
-				+ modBy 
-				+ '","modifiedOn":"' 
-				+ modOn 
-				+ '","deletedBy":"' 
-				+ delBy
-				+ '","deletedOn":"' 
-				+ delOn
-				+ '","isDelete": true}',
+			data:JSON.stringify(dataForm),
 			contentType: 'application/json',
 			// jika sukses
 			success : function(result) {
@@ -405,9 +309,11 @@
 				$("#modal-form").modal('hide');
 				// panggil method load data, untuk melihat data terbaru
 				loadData();
-				console.log(dataForm);
+				
 			}
+			
 		});	
+		console.log(dataForm);
 	}
 </script>
 

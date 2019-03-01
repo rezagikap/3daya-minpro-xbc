@@ -20,7 +20,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<MenuModel> getList() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select jt from MenuModel jt order by jt.title";
+		String hql = "select jt from MenuModel jt where jt.isDelete='false' order by jt.title";
 		Query query = session.createQuery(hql);
 		List<MenuModel> result = query.getResultList();
 		return result;
@@ -29,7 +29,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<MenuModel> search(String key) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select x from MenuModel x where x.title like :keySearch order by x.title";
+		String hql = "select x from MenuModel x where x.title like :keySearch and x.isDelete='false' order by x.title";
 		Query query = session.createQuery(hql);
 		query.setParameter("keySearch", "%"+key+"%");		
 		return query.getResultList();

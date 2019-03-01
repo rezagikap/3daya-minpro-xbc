@@ -2,16 +2,24 @@ package com.eksad.xbc.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -78,6 +86,16 @@ public class MenuModel {
 	@JsonIgnore
 	@OneToMany(mappedBy="menus")
 	private List<MenuAccessModel> listMenuAccess;
+	
+	@NotFound(action=NotFoundAction.IGNORE)
+	@JsonIgnore
+	@ManyToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "menu_parent", referencedColumnName="id", updatable = false, insertable = false)
+	private MenuModel parents;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "parents")
+	private Set<MenuModel> child = new HashSet<MenuModel>();
 	
 	public Integer getId() {
 		return id;
@@ -227,5 +245,23 @@ public class MenuModel {
 	public void setListMenuAccess(List<MenuAccessModel> listMenuAccess) {
 		this.listMenuAccess = listMenuAccess;
 	}
+
+	public MenuModel getParents() {
+		return parents;
+	}
+
+	public void setParents(MenuModel parents) {
+		this.parents = parents;
+	}
+
+	public Set<MenuModel> getChild() {
+		return child;
+	}
+
+	public void setChild(Set<MenuModel> child) {
+		this.child = child;
+	}
+	
+	
 
 }

@@ -4,8 +4,8 @@
 <div class="box box-info">
 	<div class="box-header">
 		<h3 class="box-title">CATEGORY</h3>
+	</div>
 </div>
-<<<<<<< HEAD
 		<div class="row">
 			
 			<div class="col-md-11">
@@ -28,7 +28,6 @@
 		</div>
 
 		<div class="box-body">
-=======
 
 <div class="box-body">
 	<div class="row">
@@ -50,9 +49,6 @@
 			</button>
 		</div>
 	</div>
-
-		
->>>>>>> 5e70104095746f37266624ff45d346286554aa22
 			<table class="table">
 				<thead>
 					<tr>

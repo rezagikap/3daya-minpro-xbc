@@ -152,12 +152,6 @@ public class CategoryModel {
 	}
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
-	}
-	//public IdleNewsModel getIdle_news() {
-	//	return idle_news;
-	//}
-	//public void setIdle_news(IdleNewsModel idle_news) {
-	//	this.idle_news = idle_news;
-	//}				
+	}				
 	
 }
