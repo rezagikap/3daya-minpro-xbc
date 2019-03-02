@@ -1,63 +1,65 @@
-
-<%
-	request.setAttribute("contextName", request.getServletContext().getContextPath());
-%>
-
-<form action="#" method="get">
-	<div class="input-group">
-		<input type="text" name="searchData" class="form-control"
-			placeholder="Search Menu..."> <span class="input-group-btn">
-			<button type="submit" name="search" id="search-btn"
-				class="btn btn-flat">
-				<i class="fa fa-search"></i>
-			</button>
-		</span>
-	</div>
-</form>
-<br>
+<% request.setAttribute("contextName", request.getServletContext().getContextPath()); %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="box box-info">
-	<div class="box-header">
-		<h3 class="box-title">List Menu</h3>
 
-		<div class="box-tools">
-			<button type="button" id="btn-add" class="btn btn-success btn-sm">
-				<i class="fa fa-plus"></i>
-			</button>
-		</div>
+	<div class="box-header">
+		<h3 class="box-title">
+			<b>MENU</b>
+		</h3>
 	</div>
+	
 	<div class="box-body">
-		<form action="#" method="get">
-			<div class="input-group">
-				<input type="text" name="searchData" class="form-control"
-					placeholder="Search Menu..."> <span class="input-group-btn">
-					<button type="submit" name="search" id="search-btn"
-						class="btn btn-flat">
-						<i class="fa fa-search"></i>
-					</button>
-				</span>
+		
+		<div class="row">
+			
+			<div class="col-md-11">
+				<div class="input-group col-md-4">
+					<input type="text" name="search" id="search" class="form-control" placeholder="Search by title">
+					<span class="input-group-btn">
+						<button type="submit" name="search" id="search-btn" class="btn btn-warning" onClick="search()">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div>
 			</div>
-		</form>
+			
+			<div class="box-tools">
+				<button type="button" id="btn-add" class="btn btn-warning btn-xm">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+		
+		</div>
+			
 		<br>
+		
 		<table class="table">
+			
 			<thead>
 				<tr>
-					<th>Code</th>
-					<th>Title</th>
-					<th>Menu Parent</th>
+					<th>CODE</th>
+					<th>TITLE</th>
+					<th>MENU PARENT</th>
 					<th>#</th>
 				</tr>
 			</thead>
+
 			<tbody id="list-data">
+				
 			</tbody>
+
 		</table>
+		
 	</div>
+	
 </div>
 
+<!-- untuk modal dengan ukuran besar-->
 <div class="modal" id="modal-form">
-	<div class="modal-dialog">
-		<div class="box box-success">
-			<div class="box-header with-border">
+	<div class="modal-dialog modal-lg" >
+		<div class="box box-warning">
+			<div class="box-header with-border bg-warning">
 				<h3 class="box-title" id="modal-title">Form Input</h3>
 			</div>
 			<div class="box-body" id="modal-data"></div>
@@ -71,60 +73,353 @@
 		// memanggil method loadData;
 		loadData();
 	});
-
+	
+	//method loadData
+	function loadData() { 
+		$.ajax({
+			// url ke api/menu/
+			url : '${contextName}/menu/list',
+			type : 'get',
+			// data type berupa JSON
+			dataType : 'html',
+			success : function(result) {
+				//kosong data di table
+				$("#list-data").html(result);
+				
+			}
+		});
+	}
+	
+	//method SEARCH
+	function search() {
+		var cari=$('#search').val();
+		$.ajax({
+			// url ke api/menu/
+			url : '${contextName}/menu/search/'+cari,
+			type : 'get',
+			// data type berupa JSON
+			dataType : 'html',
+			success : function(result) {
+				//kosong data di table
+				$("#list-data").html(result);
+			}
+		});
+	}
+	
 	//ketika button add di click
 	$('#btn-add').click(function() {
+		var d = new Date($.now());
 		$.ajax({
-			url : '$(contextName)/menu/create',
+			url : '${contextName}/menu/create',
 			type : 'get',
 			dataType : 'html',
 			success : function(result) {
 				//mengganti judul modal
-				$("#modal-title").html("Add Menu");
+				$("#modal-title").html("ADD MENU");
 				//mengisi content dengan variable result
 				$("#modal-data").html(result);
 				//menampilkan modal pop up
 				$("#modal-form").modal('show');
+				$('#createdOn').val(d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds());
+				loadMenu($("#modal-data"));
 			}
 		});
 	});
-
-	//method loadData
-	function loadData() {
-		$
-				.ajax({
-					// url ke api/package/
-					url : '${contextName}/api/menu/',
-					type : 'get',
-					// data type berupa JSON
-					dataType : 'json',
-					success : function(result) {
-						//kosong data di table
-						$("#list-data").empty();
-						// looping data dengan jQuery
-						$
-								.each(
-										result,
-										function(index, item) {
-											var dataRow = '<tr>'
-													+ '<td>'
-													+ item.code
-													+ '</td>'
-													+ '<td>'
-													+ item.title
-													+ '</td>'
-													+ '<td>'
-													+ item.menuParent
-													+ '</td>'
-													+ '<td class="col-md-1">'
-													+ '<button type="button" class="btn btn-edit btn-warning btn-xs" value="'+ item.id +'"><i class="fa fa-edit"></i></button> '
-													+ '<button type="button" class="btn btn-delete btn-danger btn-xs" value="'+ item.id +'"><i class="fa fa-trash"></i></button> '
-													+ '</td>' + '</tr>';
-											$("#list-data").append(dataRow); //munculkan tabel di list data
-										});
-						// menampilkan data ke console => F12
-						console.log(result);
+	
+	/*
+	function loadMenu($form, $selected){
+		$.ajax({
+			// url ke api/menu/
+			url:'${contextName}/api/menu/',
+			type:'get',
+			// data type berupa JSON
+			dataType:'json',
+			success : function(result){
+				// empty data first
+				$form.find("#menuParent").empty();
+				$form.find("#menuParent").append('<option value="">-Choose Menu Parent-</option>');
+				// looping data
+				$.each(result, function(index, item){
+					if ($selected==item.id) {
+						$form.find("#menuParent").append('<option value="'+ item.id +'" selected="selected">'+ item.title +'</option>');
+					} else {
+						$form.find("#menuParent").append('<option value="'+ item.id +'">'+ item.title +'</option>');
 					}
+					
 				});
+			}
+		});
+	}
+	*/
+	
+	// method untuk add data
+	function addData($form){
+		//memangil method getFormData dari file
+		//resources/dist/js/map-form-objet.js
+		var dataForm = getFormData($form);
+		$.ajax({
+			// url ke api/menu/
+			url:'${contextName}/api/menu/',
+			type:'post',
+			// data type berupa JSON
+			dataType:'json',
+			// mengirim parameter data
+			data:JSON.stringify(dataForm),
+			// mime type 
+			contentType: 'application/json',
+			success : function(result){
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+			}
+		});
+		console.log(dataForm);
+	}
+	
+	/*
+	// function get data 
+	function getData(dataId){
+		// panggil API
+		$.ajax({
+			// url ke api/menu/
+			url:'${contextName}/api/menu/'+dataId,
+			type:'get',
+			// data type berupa JSON
+			dataType:'json',
+			success : function(dataApi){
+				$('#modal-data').find('#id').val(dataApi.id);
+				$('#modal-data').find('#code').val(dataApi.code);
+				$('#modal-data').find('#title').val(dataApi.title);
+				$('#modal-data').find('#description').val(dataApi.description);
+				$('#modal-data').find('#imageUrl').val(dataApi.imageUrl);
+				$('#modal-data').find('#menuOrder').val(dataApi.menuOrder);
+				$('#modal-data').find('#menuParent').val(dataApi.menuParent);
+				$('#modal-data').find('#menuUrl').val(dataApi.menuUrl);
+				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
+				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
+				$('#modal-data').find('#modifiedBy').val(dataApi.modifiedBy);
+				$('#modal-data').find('#modifiedOn').val(dataApi.modifiedOn);
+				$('#modal-data').find('#deletedBy').val(dataApi.deletedBy);
+				$('#modal-data').find('#deletedOn').val(dataApi.deletedOn);
+				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
+				loadMenu($("#modal-data"),dataApi.id);
+				console.log(dataApi);	
+			}
+		});
+	}
+	
+	
+	//btn-edit di click
+	$('#btn-edit').click(function(){
+		var vid = $(this).val();
+		var d = new Date($.now());
+		$.ajax({
+			url:'${contextName}/menu/edit',
+			type:'get',
+			data:{'id':vid},
+			dataType:'html',
+			success : function(result){
+				//mengganti judul modal
+				$("#modal-title").html("EDIT");
+				//mengisi content dengan variable result
+				$("#modal-data").html(result);
+				//menampilkan modal pop up
+				$("#modal-form").modal('show');
+				//panggil method
+				getData(vid);
+				//$('#modifiedOn').val(d.getDate() + "-" + d.getMonth() + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
+			}
+		});
+	});
+	
+	
+	
+	// method untuk edit data
+	function editData($form){
+		// memangil method getFormData dari file
+		// resources/dist/js/map-form-objet.js
+		var dataForm = getFormData($form);
+		$.ajax({
+			// url ke api/test/
+			url:'${contextName}/api/menu/',
+			type:'put',
+			// data type berupa JSON
+			dataType:'json',
+			// mengirim parameter data
+			data:JSON.stringify(dataForm),
+			// mime type 
+			contentType: 'application/json',
+			success : function(result){
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+			}
+		});
+		console.log(dataForm);
+	}
+	*/
+	
+	//btn-delete di click
+	$('#list-data').on('click','#btn-delete', function(){
+		var vid = $(this).val();
+		var d = new Date($.now());
+		$.ajax({
+			url:'${contextName}/menu/delete',
+			type:'get',
+			dataType:'html',
+			success : function(result){
+				//mengganti judul modal
+				$("#modal-title").html("DELETE");
+				//mengisi content dengan variable result
+				$("#modal-data").html(result);
+				//menampilkan modal pop up
+				$("#modal-form").modal('show');
+				//panggil method
+				getData(vid);
+				$('#deletedOn').val(d.getDate() + "-" + (d.getMonth()+1) + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
+			}
+		});
+	});
+	
+	//delete
+	function deleteData($form) {
+		// memangil method getFormData dari file
+		$('#isDelete').val("true");
+		var dataForm = getFormData($form);
+		
+		$.ajax({
+			// url ke api/user/
+			url : '${contextName}/api/menu/',
+			// method http di controller
+			type : 'put',
+			// data type berupa JSON
+			dataType : 'json',
+			//
+			data:JSON.stringify(dataForm),
+			contentType: 'application/json',
+			// jika sukses
+			success : function(result) {
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+				
+			}
+			
+		});	
+		console.log(dataForm);
+	}
+	
+	//function get data 
+	function getData(dataId) {
+		// panggil API
+		$.ajax({
+			// url ke api/menu/
+			url : '${contextName}/api/menu/' + dataId,
+			type : 'get',
+			// data type berupa JSON
+			dataType : 'json',
+			success : function(dataApi) {
+				$('#modal-data').find('#id').val(dataApi.id);
+				$('#modal-data').find('#code').val(dataApi.code);
+				$('#modal-data').find('#title').val(dataApi.title);
+				$('#modal-data').find('#description').val(dataApi.description);
+				$('#modal-data').find('#imageUrl').val(dataApi.imageUrl);
+				$('#modal-data').find('#menuOrder').val(dataApi.menuOrder);
+				$('#modal-data').find('#menuParent').val(dataApi.menuParent);
+				$('#modal-data').find('#menuUrl').val(dataApi.menuUrl);
+				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
+				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
+				$('#modal-data').find('#modifiedBy').val(dataApi.modifiedBy);
+				$('#modal-data').find('#modifiedOn').val(dataApi.modifiedOn);
+				$('#modal-data').find('#deletedBy').val(dataApi.deletedBy);
+				$('#modal-data').find('#deletedOn').val(dataApi.deletedOn);
+				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
+				loadMenu($("#modal-data"), dataApi.id);
+				console.log(dataApi);
+			}
+		});
+
+		
+	function loadMenu($form, $selected) {
+			$.ajax({
+				// url ke api/menu/
+				url : '${contextName}/api/menu/',
+				type : 'get',
+				// data type berupa JSON
+				dataType : 'json',
+				success : function(result) {
+					// empty data first
+					$form.find("#menuParent").empty();
+					$form.find("#menuParent").append(
+							'<option value="">-Choose Menu Parent-</option>');
+					// looping data
+					$.each(result, function(index, item) {
+						if ($selected == item.id) {
+							$form.find("#menuParent").append(
+									'<option value="'+ item.id +'" selected="selected">'
+											+ item.title + '</option>');
+						} else {
+							$form.find("#menuParent").append(
+									'<option value="'+ item.id +'">'
+											+ item.title + '</option>');
+						}
+
+					});
+				}
+			});
+		}
+	}
+
+	//btn-edit di click
+	$('#list-data').on('click','#btn-edit', function(){
+		var vid = $(this).val();
+		var d = new Date($.now());
+		$.ajax({
+			url : '${contextName}/menu/edit',
+			type : 'get',
+			data : {
+				'id' : vid
+			},
+			dataType : 'html',
+			success : function(result) {
+				//mengganti judul modal
+				$("#modal-title").html("EDIT");
+				//mengisi content dengan variable result
+				$("#modal-data").html(result);
+				//menampilkan modal pop up
+				$("#modal-form").modal('show');
+				//panggil method
+				getData(vid);
+				//$('#modifiedOn').val(d.getDate() + "-" + d.getMonth() + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
+			}
+		});
+	});
+	
+	function editData($form){
+		// memangil method getFormData dari file
+		// resources/dist/js/map-form-objet.js
+		var dataForm = getFormData($form);
+		$.ajax({
+			// url ke api/test/
+			url:'${contextName}/api/menu/',
+			type:'put',
+			// data type berupa JSON
+			dataType:'json',
+			// mengirim parameter data
+			data:JSON.stringify(dataForm),
+			// mime type 
+			contentType: 'application/json',
+			success : function(result){
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+			}
+		});
+		console.log(dataForm);
 	}
 </script>
+

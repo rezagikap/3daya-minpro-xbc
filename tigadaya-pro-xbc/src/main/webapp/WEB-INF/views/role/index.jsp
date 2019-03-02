@@ -7,6 +7,13 @@
 			<b>ROLE</b>
 		</h3>
 	</div>
+<<<<<<< HEAD
+	<div class="box-tools col-md-12">
+			<input type="text" name="search" id="search"/>
+			<button type="button" class="btn btn-primary btn-sm" id="btn-search">
+				<i class="fa fa-search"></i>
+			</button>
+=======
 	
 	<div class="box-body">
 		
@@ -29,6 +36,7 @@
 				</button>
 			</div>
 		
+>>>>>>> a929f0c6df1cff5f685ff04a2c6ef5ada45d3561
 		</div>
 			
 		<br>

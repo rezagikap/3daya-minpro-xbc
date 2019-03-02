@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="t_role")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=RoleModel.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 
 public class RoleModel {
 	
@@ -68,6 +68,9 @@ public class RoleModel {
 	private Boolean isDelete;
 	
 	@JsonIgnore
+	@OneToMany(mappedBy="roles")
+	private List<MenuAccessModel> listMenuAccess;
+	
 	@OneToMany(mappedBy="role", fetch=FetchType.EAGER, orphanRemoval=true)
 	private List<UserModel> listUser;
 
@@ -181,6 +184,14 @@ public class RoleModel {
 		this.isDelete = isDelete;
 	}
 
+	public List<MenuAccessModel> getListMenuAccess() {
+		return listMenuAccess;
+	}
+
+	public void setListMenuAccess(List<MenuAccessModel> listMenuAccess) {
+		this.listMenuAccess = listMenuAccess;
+	}
+	
 	public List<UserModel> getListUser() {
 		return listUser;
 	}

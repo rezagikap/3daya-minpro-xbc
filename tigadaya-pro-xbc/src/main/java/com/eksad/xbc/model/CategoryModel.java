@@ -152,7 +152,11 @@ public class CategoryModel {
 	}
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
+<<<<<<< HEAD
 	}
 				
+=======
+	}				
+>>>>>>> cd25ce4935e3e2d284653b83174a7826a26c7029
 	
 }

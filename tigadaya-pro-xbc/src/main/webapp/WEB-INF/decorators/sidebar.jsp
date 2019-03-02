@@ -39,6 +39,7 @@
 					<li><a href="${contextName}/user"><i class="fa fa-circle-o"></i>User</a></li>
 					<li><a href="${contextName}/role"><i class="fa fa-circle-o"></i>Role</a></li>
 					<li><a href="${contextName}/menu"><i class="fa fa-circle-o"></i>Menu</a></li>
+					<li><a href="${contextName}/menu-access"><i class="fa fa-circle-o"></i>Menu Access</a></li>
 					<li><a href="${contextName}/test"><i class="fa fa-circle-o"></i>Test</a></li>
 					<li><a href="${contextName}/list"><i class="fa fa-circle-o"></i>List</a></li>
 					<li><a href="${contextName}/question"><i class="fa fa-circle-o"></i>Question</a></li>
