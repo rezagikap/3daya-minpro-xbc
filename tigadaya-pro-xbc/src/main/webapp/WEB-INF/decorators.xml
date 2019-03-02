@@ -14,6 +14,7 @@
 		<pattern>/category/*</pattern>
 		<pattern>/idle-news/*</pattern>
 		<pattern>/testimony/*</pattern>
+		<pattern>/idlemonitoring/*</pattern>
 		<pattern>/bootcamptesttype/*</pattern>
 		<pattern>/class/*</pattern>
 		<pattern>/office/*</pattern>

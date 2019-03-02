@@ -3,7 +3,7 @@
 %>
 <div class="box box-info">
 	<div class="box-header">
-		<h3 class="box-title">USER</h3>
+		<h3 class="box-title">Idle Monitoring</h3>
 	</div>
 		
 	<div class="box-body">
@@ -11,7 +11,7 @@
 		<div class="col-md-11">
 			<div class="input-group col-md-5">
 				<input type="text" name="search" id="search" class="form-control"
-					placeholder="Search by username/email" /> <span class="input-group-btn">
+					placeholder="Search by name " /> <span class="input-group-btn">
 					<button class="btn btn-warning btn-xm "
 						onClick="search()">
 						<i class="fa fa-circle-o"></i>
@@ -31,8 +31,8 @@
 			<thead>
 				<tr>
 					<th>NAME</th>
-					<th>ROLE</th>
-					<th>EMAIL</th>
+					<th>IDLE DATE</th>
+					<th>PLACEMENT DATE</th>
 					<th class="col-md-1">#</th>
 				</tr>
 			</thead>
@@ -64,7 +64,7 @@
 			function() {
 				var d = new Date($.now());
 				$.ajax({
-					url : '${contextName}/user/create',
+					url : '${contextName}/idlemonitoring/create',
 					type : 'get',
 					dataType : 'html',
 					success : function(result) {
@@ -79,7 +79,6 @@
 										+ d.getFullYear() + " " + d.getHours()
 										+ ":" + d.getMinutes() + ":"
 										+ d.getSeconds());
-						loadRole($("#modal-data"));
 					}
 				});
 			});
@@ -88,7 +87,7 @@
 		$
 				.ajax({
 					// url ke api/role/
-					url : '${contextName}/api/user/',
+					url : '${contextName}/api/idlemonitoring/',
 					type : 'get',
 					// data type berupa JSON
 					dataType : 'json',
@@ -100,20 +99,20 @@
 											if(item.isDelete==false){
 												var dataRow = '<tr>'
 													+ '<td>'
-													+ item.username
+													+ item.name
 													+ '</td>'
 													+ '<td>'
-													+ item.role.name
+													+ item.idleDate
 													+ '</td>'
 													+ '<td>'
-													+ item.email
+													+ item.placementDate
 													+ '</td>'
 													+ '<td class="col-md-1">'
 													+ '<div class="dropdown">'
 													+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
 													+ '<ul class="dropdown-menu">'
 													+ '<li id="btn-edit" value="'+ item.id +'"><a>Edit</a></li> '
-													+ '<li id="btn-reset" value="'+ item.id +'"><a>Reset Password</a></li> '
+													+ '<li id="btn-placement" value="'+ item.id +'"><a>Placement</a></li> '
 													+ '<li id="btn-delete" value="'+ item.id +'"><a>Delete</a></li> '
 													+ '</ul>' + '</div>'
 													+ '</td>' + '</tr>';
@@ -131,8 +130,8 @@
 		// resources/dist/js/map-form-object.js
 		var dataForm = getFormData($form);
 		$.ajax({
-			// url ke api/user/
-			url : '${contextName}/api/user/',
+			// url ke api/idlemonitoring/
+			url : '${contextName}/api/idlemonitoring/',
 			type : 'post',
 			dataType : 'json',
 			data : JSON.stringify(dataForm),
@@ -147,17 +146,18 @@
 	function getDataEdit(dataId) {
 		var d = new Date($.now());
 		$.ajax({
-			url : '${contextName}/api/user/' + dataId,
+			url : '${contextName}/api/idlemonitoring/' + dataId,
 			type : 'get',
 			dataType : 'json',
 			success : function(dataApi) {
 				$('#modal-data').find('#id').val(dataApi.id);
-				$('#modal-data').find('#username').val(dataApi.username);
-				$('#modal-data').find('#password').val(dataApi.password);
-				$('#modal-data').find('#email').val(dataApi.email);
-				$('#modal-data').find('#roleId').val(dataApi.roleId);
-				$('#modal-data').find('#mobileFlag').val(dataApi.mobileFlag);
-				$('#modal-data').find('#mobileToken').val(dataApi.mobileToken);
+				$('#modal-data').find('#testId').val(dataApi.testId);
+				$('#modal-data').find('#idleDate').val(dataApi.idleDate);
+				$('#modal-data').find('#lastProject').val(dataApi.lastProject);
+				$('#modal-data').find('#idleReason').val(dataApi.idleReason);
+				$('#modal-data').find('#placementDate').val(dataApi.placementDate);
+				$('#modal-data').find('#placementAt').val(dataApi.placementAt);
+				$('#modal-data').find('#notes').val(dataApi.notes);
 				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
 				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
 				$('#modal-data').find('#modifiedBy').val(dataApi.modifiedBy);
@@ -179,17 +179,18 @@
 	function getDataDelete(dataId) {
 		var d = new Date($.now());
 		$.ajax({
-			url : '${contextName}/api/user/' + dataId,
+			url : '${contextName}/api/idlemonitoring/' + dataId,
 			type : 'get',
 			dataType : 'json',
 			success : function(dataApi) {
 				$('#modal-data').find('#id').val(dataApi.id);
-				$('#modal-data').find('#username').val(dataApi.username);
-				$('#modal-data').find('#password').val(dataApi.password);
-				$('#modal-data').find('#email').val(dataApi.email);
-				$('#modal-data').find('#roleId').val(dataApi.roleId);
-				$('#modal-data').find('#mobileFlag').val(dataApi.mobileFlag);
-				$('#modal-data').find('#mobileToken').val(dataApi.mobileToken);
+				$('#modal-data').find('#testId').val(dataApi.testId);
+				$('#modal-data').find('#idleDate').val(dataApi.idleDate);
+				$('#modal-data').find('#lastProject').val(dataApi.lastProject);
+				$('#modal-data').find('#idleReason').val(dataApi.idleReason);
+				$('#modal-data').find('#placementDate').val(dataApi.placementDate);
+				$('#modal-data').find('#placementAt').val(dataApi.placementAt);
+				$('#modal-data').find('#notes').val(dataApi.notes);
 				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
 				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
 				$('#modal-data').find('#modifiedBy').val(dataApi.modifiedBy);
@@ -210,7 +211,7 @@
 	$('#list-data').on('click', '#btn-edit', function() {
 				var vid = $(this).val();
 				$.ajax({
-					url : '${contextName}/user/edit',
+					url : '${contextName}/idlemonitoring/edit',
 					type : 'get',
 					dataType : 'html',
 					success : function(result) {
@@ -221,8 +222,6 @@
 						//menampilkan modal pop up
 						$("#modal-form").modal('show');
 						
-						//panggil Role
-						loadRole($("#modal-data"));
 						// panggil method getData
 						getDataEdit(vid);
 						
@@ -237,9 +236,9 @@
 		// resources/dist/js/map-form-objet.js
 		var dataForm = getFormData($form);
 		$.ajax({
-			// url ke api/user/
+			// url ke api/idlemonitoring/
 			
-			url : '${contextName}/api/user/',
+			url : '${contextName}/api/idlemonitoring/',
 			type : 'put',
 			// data type berupa JSON
 			dataType : 'json',
@@ -260,7 +259,7 @@
 	$('#list-data').on('click', '#btn-delete', function() {
 		var vid = $(this).val();
 		$.ajax({
-			url : '${contextName}/user/delete',
+			url : '${contextName}/idlemonitoring/delete',
 			type : 'get',
 			dataType : 'html',
 			success : function(result) {
@@ -275,34 +274,18 @@
 			}
 		});
 	});
+	
 	// method untuk delete data
-	
-	//ketika Reset Password di klik
-	$('#list-data').on('click', '#btn-reset', function(){
-		var vid=$(this).val();
-		$.ajax({
-			url: '${contextName}/user/reset',
-			type: 'get',
-			dataType: 'html',
-			success: function(result){
-				$('#modal-title').html("RESET PASSWORD");
-				$('#modal-data').html(result);
-				$('#modal-form').modal('show');
-				getDataDelete(vid);
-			}
-			
-		});
-	});
-	
 		function deleteData($form) {
 			// memangil method getFormData dari file
 			var vid = $form.find("#id").val();
-			var username=$form.find('#username').val();
-			var password=$form.find('#password').val();
-			var email=$form.find('#email').val();
-			var role_id=$form.find('#roleId').val();
-			var mobile_flag=$form.find('#mobileFlag').val();
-			var mobile_token=$form.find('#mobileToken').val();
+			var biodata_id=$form.find('#testId').val();
+			var idle_date=$form.find('#idleDate').val();
+			var last_project=$form.find('#lastProject').val();
+			var idle_reason=$form.find('#idleReason').val();
+			var placement_date=$form.find('#placementDate').val();
+			var placement_at=$form.find('#placementAt').val();
+			var notes=$form.find('#notes').val();
 			var create_by=$form.find('#createdBy').val();
 			var create_on=$form.find('#createdOn').val();
 			var modified_by=$form.find('#modifiedBy').val();
@@ -311,13 +294,13 @@
 			var deleted_on=$form.find('#deletedOn').val();
 			//var is_delete=$form.find('#isDelete').val();
 			$.ajax({
-				// url ke api/user/
-				url : '${contextName}/api/user/delete/',
+				// url ke api/idlemonitoring/
+				url : '${contextName}/api/idlemonitoring/delete/',
 				// method http di controller
 				type : 'put',
 				dataType : 'json',
 				// data type berupa JSON
-				data: '{"id":' + vid + ',"username":"' + username + '","password":"' + password + '","email":"' + email + '","roleId":"' + role_id + '","mobileFlag":"' + mobile_flag + '","mobileToken":"' + mobile_token + '","createdBy":"' + create_by + '","createdOn":"' + create_on + '","modifiedBy":"' + modified_by + '","modifiedOn":"' + modified_on + '","deletedBy":"' + deleted_by + '","deletedOn":"' + deleted_on + '","isDelete": true }',
+				data: '{"id":' + vid + ',"idlemonitoringname":"' + idlemonitoringname + '","password":"' + password + '","email":"' + email + '","roleId":"' + role_id + '","mobileFlag":"' + mobile_flag + '","mobileToken":"' + mobile_token + '","createdBy":"' + create_by + '","createdOn":"' + create_on + '","modifiedBy":"' + modified_by + '","modifiedOn":"' + modified_on + '","deletedBy":"' + deleted_by + '","deletedOn":"' + deleted_on + '","isDelete": true }',
 				contentType:'application/json',
 				// jika sukses
 				success : function(result) {
@@ -330,55 +313,10 @@
 			});	
 		}
 	
-	//method untuk Reset Password
-	function resetData($form){
-		var dataForm=getFormData($form);
-		$.ajax({
-			url: '${contextName}/api/user/reset/',
-			type: 'put',
-			dataType: 'json',
-			data: JSON.stringify(dataForm),
-			contentType: 'application/json',
-			success: function(result){
-				$("#modal-form").modal('hide');
-				loadData();
-			}
-		});
-		console.log(dataForm);
-	}
-	
-	function loadRole($form, $selected) {
-		$.ajax({
-			// url ke api/role/
-			url : '${contextName}/api/role/',
-			type : 'get',
-			// data type berupa JSON
-			dataType : 'json',
-			success : function(result) {
-				// empty data first
-				$form.find("#roleId").empty();
-				$form.find("#roleId").append('<option value="">=Select Role=</option>');
-				// looping data
-				$.each(result, function(index, item) {
-					if ($selected == item.id) {
-						$form.find("#roleId").append(
-								'<option value="'+ item.id +'" selected="selected">'
-										+ item.code + ' - ' + item.name
-										+ '</option>');
-					} else {
-						$form.find("#roleId").append(
-								'<option value="'+ item.id +'">' + item.code
-										+ ' - ' + item.name + '</option>');
-					}
-				});
-			}
-		});
-	}
-	
 	function search(){
 		var item = $('#search').val();
 		$.ajax({
-			url: '${contextName}/api/user/search/' + item,
+			url: '${contextName}/api/idlemonitoring/search/' + item,
 			type: 'get',
 			dataType: 'json',
 			success: function(result){
@@ -387,17 +325,14 @@
 				$.each(result, function(index, item){
 					var dataRow = '<tr>'
 						+ '<td>'
-						+ item.username
-						+ '</td>'
-						+ '<td>'
-						+ item.email
+						+ item.name
 						+ '</td>'
 						+ '<td class="col-md-1">'
 						+ '<div class="dropdown">'
 						+ '<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'
 						+ '<ul class="dropdown-menu">'
 						+ '<li id="btn-edit" value="'+ item.id +'"><a>Edit</a></li> '
-						+ '<li id="btn-reset" value="'+ item.id +'"><a>Reset Password</a></li> '
+						+ '<li id="btn-reset" value="'+ item.id +'"><a> Placement </a></li> '
 						+ '<li id="btn-delete" value="'+ item.id +'"><a>Delete</a></li> '
 						+ '</ul>' + '</div>'
 						+ '</td>' + '</tr>';

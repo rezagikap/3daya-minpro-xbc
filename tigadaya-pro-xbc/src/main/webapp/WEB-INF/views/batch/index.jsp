@@ -148,7 +148,8 @@
 				//looping data
 				$.each(result, function(index, item){
 					if ($selected == item.id){
-						$form.find("#trainerId").append('<option value ="'+item.id+'" selected="selected">'+item.name+'</option>');
+						$form.find("#trainerId").append(
+								'<option value="'+item.id+'" selected="selected">'+item.name+'</option>');
 					}else{
 						$form.find("#trainerId").append('<option value = "'+item.id+'">'+item.name+'</option>');
 					}

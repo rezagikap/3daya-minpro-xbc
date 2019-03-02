@@ -34,7 +34,7 @@
 <script src="${contextName}/resources/jquery/jquery.validate.js"></script>
 <script src="${contextName}/resources/jquery/localization/messages_es.js"></script>
 <script src="${contextName}/resources/dist/css/screen.css"></script>
-<script src="${contextName}/resources/dist/css/style.css"></script>
+<script src="${contextName}/resources/dist/css/style.css"></script> 
 
 <decorator:head />
 </head>

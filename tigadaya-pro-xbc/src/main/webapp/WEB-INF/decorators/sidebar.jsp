@@ -52,6 +52,7 @@
 					<li><a href="${contextName}/office"><i class="fa fa-circle-o"></i>Office</a></li>
 					<li><a href="${contextName}/category"><i class="fa fa-circle-o"></i>Category</a></li>
 					<li><a href="${contextName}/idle-news"><i class="fa fa-circle-o"></i>Idle News</a></li>
+					<li><a href="${contextName}/idlemonitoring"><i class="fa fa-circle-o"></i>Idle Monitoring</a></li>
 					<li><a href="${contextName}/testimony"><i class="fa fa-circle-o"></i>Testimony</a></li>
 					<li><a href="${contextName}/batch"><i class="fa fa-circle-o"></i>Batch</a></li>
 					<li><a href="${contextName}/question"><i class="fa fa-circle-o"></i>Question</a></li>
