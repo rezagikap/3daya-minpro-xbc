@@ -7,7 +7,7 @@
 			<div class="form-group">
 				<div class="col-md-12">
 					<label class="control-label">Name</label> <input type="text"
-						class="form-control" name="name" id="name" placeholder="Name" />
+						class="form-control" name="name" id="name" placeholder="Name" value="${get.name }" />
 				</div>
 			</div>
 

@@ -74,9 +74,7 @@
 		loadData();
 	});
 	
-	
 	//method loadData
-	
 	function loadData() { 
 		$.ajax({
 			// url ke api/menu/
@@ -91,7 +89,6 @@
 			}
 		});
 	}
-	
 	
 	//method SEARCH
 	function search() {
@@ -129,6 +126,7 @@
 		});
 	});
 	
+	/*
 	function loadMenu($form, $selected){
 		$.ajax({
 			// url ke api/menu/
@@ -152,6 +150,7 @@
 			}
 		});
 	}
+	*/
 	
 	// method untuk add data
 	function addData($form){
@@ -178,28 +177,7 @@
 		console.log(dataForm);
 	}
 	
-	//btn-edit di click
-	$('#list-data').on('click','#btn-edit', function(){
-		var vid = $(this).val();
-		var d = new Date($.now());
-		$.ajax({
-			url:'${contextName}/menu/edit',
-			type:'get',
-			dataType:'html',
-			success : function(result){
-				//mengganti judul modal
-				$("#modal-title").html("EDIT");
-				//mengisi content dengan variable result
-				$("#modal-data").html(result);
-				//menampilkan modal pop up
-				$("#modal-form").modal('show');
-				//panggil method
-				getData(vid);
-				$('#modifiedOn').val(d.getDate() + "-" + d.getMonth() + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
-			}
-		});
-	});
-	
+	/*
 	// function get data 
 	function getData(dataId){
 		// panggil API
@@ -226,19 +204,36 @@
 				$('#modal-data').find('#deletedOn').val(dataApi.deletedOn);
 				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
 				loadMenu($("#modal-data"),dataApi.id);
-				console.log(dataApi);
-				
+				console.log(dataApi);	
 			}
 		});
 	}
 	
-	//function getMenuParent(dataId){
-	//	$.ajax({
-	//		url: '${contextName}/api/menu/'+dataId,
-	//		type:'get',
-	//		dataType:'json',
-	//	})
-	//}
+	
+	//btn-edit di click
+	$('#btn-edit').click(function(){
+		var vid = $(this).val();
+		var d = new Date($.now());
+		$.ajax({
+			url:'${contextName}/menu/edit',
+			type:'get',
+			data:{'id':vid},
+			dataType:'html',
+			success : function(result){
+				//mengganti judul modal
+				$("#modal-title").html("EDIT");
+				//mengisi content dengan variable result
+				$("#modal-data").html(result);
+				//menampilkan modal pop up
+				$("#modal-form").modal('show');
+				//panggil method
+				getData(vid);
+				//$('#modifiedOn').val(d.getDate() + "-" + d.getMonth() + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
+			}
+		});
+	});
+	
+	
 	
 	// method untuk edit data
 	function editData($form){
@@ -264,6 +259,7 @@
 		});
 		console.log(dataForm);
 	}
+	*/
 	
 	//btn-delete di click
 	$('#list-data').on('click','#btn-delete', function(){
@@ -313,6 +309,116 @@
 			}
 			
 		});	
+		console.log(dataForm);
+	}
+	
+	//function get data 
+	function getData(dataId) {
+		// panggil API
+		$.ajax({
+			// url ke api/menu/
+			url : '${contextName}/api/menu/' + dataId,
+			type : 'get',
+			// data type berupa JSON
+			dataType : 'json',
+			success : function(dataApi) {
+				$('#modal-data').find('#id').val(dataApi.id);
+				$('#modal-data').find('#code').val(dataApi.code);
+				$('#modal-data').find('#title').val(dataApi.title);
+				$('#modal-data').find('#description').val(dataApi.description);
+				$('#modal-data').find('#imageUrl').val(dataApi.imageUrl);
+				$('#modal-data').find('#menuOrder').val(dataApi.menuOrder);
+				$('#modal-data').find('#menuParent').val(dataApi.menuParent);
+				$('#modal-data').find('#menuUrl').val(dataApi.menuUrl);
+				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
+				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
+				$('#modal-data').find('#modifiedBy').val(dataApi.modifiedBy);
+				$('#modal-data').find('#modifiedOn').val(dataApi.modifiedOn);
+				$('#modal-data').find('#deletedBy').val(dataApi.deletedBy);
+				$('#modal-data').find('#deletedOn').val(dataApi.deletedOn);
+				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
+				loadMenu($("#modal-data"), dataApi.id);
+				console.log(dataApi);
+			}
+		});
+
+		
+	function loadMenu($form, $selected) {
+			$.ajax({
+				// url ke api/menu/
+				url : '${contextName}/api/menu/',
+				type : 'get',
+				// data type berupa JSON
+				dataType : 'json',
+				success : function(result) {
+					// empty data first
+					$form.find("#menuParent").empty();
+					$form.find("#menuParent").append(
+							'<option value="">-Choose Menu Parent-</option>');
+					// looping data
+					$.each(result, function(index, item) {
+						if ($selected == item.id) {
+							$form.find("#menuParent").append(
+									'<option value="'+ item.id +'" selected="selected">'
+											+ item.title + '</option>');
+						} else {
+							$form.find("#menuParent").append(
+									'<option value="'+ item.id +'">'
+											+ item.title + '</option>');
+						}
+
+					});
+				}
+			});
+		}
+	}
+
+	//btn-edit di click
+	$('#list-data').on('click','#btn-edit', function(){
+		var vid = $(this).val();
+		var d = new Date($.now());
+		$.ajax({
+			url : '${contextName}/menu/edit',
+			type : 'get',
+			data : {
+				'id' : vid
+			},
+			dataType : 'html',
+			success : function(result) {
+				//mengganti judul modal
+				$("#modal-title").html("EDIT");
+				//mengisi content dengan variable result
+				$("#modal-data").html(result);
+				//menampilkan modal pop up
+				$("#modal-form").modal('show');
+				//panggil method
+				getData(vid);
+				//$('#modifiedOn').val(d.getDate() + "-" + d.getMonth() + "-"+ d.getFullYear() + " " + d.getHours()+ ":" + d.getMinutes() + ":"+ d.getSeconds());
+			}
+		});
+	});
+	
+	function editData($form){
+		// memangil method getFormData dari file
+		// resources/dist/js/map-form-objet.js
+		var dataForm = getFormData($form);
+		$.ajax({
+			// url ke api/test/
+			url:'${contextName}/api/menu/',
+			type:'put',
+			// data type berupa JSON
+			dataType:'json',
+			// mengirim parameter data
+			data:JSON.stringify(dataForm),
+			// mime type 
+			contentType: 'application/json',
+			success : function(result){
+				//menutup modal
+				$("#modal-form").modal('hide');
+				// panggil method load data, untuk melihat data terbaru
+				loadData();
+			}
+		});
 		console.log(dataForm);
 	}
 </script>
