@@ -8,13 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "t_menu_access")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class MenuAccessModel {
 
 	@Id
@@ -35,6 +42,18 @@ public class MenuAccessModel {
 	@Column(name = "created_on")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createdOn;
+	
+	@ManyToOne
+	@JoinColumn(name="menu_id", updatable=false, insertable=false)
+	//@JsonManagedReference
+	//@JsonIgnore
+	private MenuModel menus;
+	
+	@ManyToOne
+	@JoinColumn(name="role_id", updatable=false, insertable=false)
+	//@JsonManagedReference
+	//@JsonIgnore
+	private RoleModel roles;
 
 	public Integer getId() {
 		return id;
@@ -83,5 +102,19 @@ public class MenuAccessModel {
 		this.createdOn = createdOnNew;
 	}
 
-	
+	public MenuModel getMenus() {
+		return menus;
+	}
+
+	public void setMenus(MenuModel menus) {
+		this.menus = menus;
+	}
+
+	public RoleModel getRoles() {
+		return roles;
+	}
+
+	public void setRoles(RoleModel roles) {
+		this.roles = roles;
+	}
 }

@@ -39,6 +39,7 @@
 					<li><a href="${contextName}/user"><i class="fa fa-circle-o"></i>User</a></li>
 					<li><a href="${contextName}/role"><i class="fa fa-circle-o"></i>Role</a></li>
 					<li><a href="${contextName}/menu"><i class="fa fa-circle-o"></i>Menu</a></li>
+					<li><a href="${contextName}/menu-access"><i class="fa fa-circle-o"></i>Menu Access</a></li>
 					<li><a href="${contextName}/test"><i class="fa fa-circle-o"></i>Test</a></li>
 					<li><a href="${contextName}/list"><i class="fa fa-circle-o"></i>List</a></li>
 					<li><a href="${contextName}/question"><i class="fa fa-circle-o"></i>Question</a></li>
@@ -51,7 +52,11 @@
 					<li><a href="${contextName}/class"><i class="fa fa-circle-o"></i>Class</a></li>
 					<li><a href="${contextName}/office"><i class="fa fa-circle-o"></i>Office</a></li>
 					<li><a href="${contextName}/category"><i class="fa fa-circle-o"></i>Category</a></li>
+					<li><a href="${contextName}/idle-news"><i class="fa fa-circle-o"></i>Idle News</a></li>
+					<li><a href="${contextName}/idlemonitoring"><i class="fa fa-circle-o"></i>Idle Monitoring</a></li>
+					<li><a href="${contextName}/testimony"><i class="fa fa-circle-o"></i>Testimony</a></li>
 					<li><a href="${contextName}/batch"><i class="fa fa-circle-o"></i>Batch</a></li>
+					<li><a href="${contextName}/question"><i class="fa fa-circle-o"></i>Question</a></li>
 					<li><a href="${contextName}/logout"><i class="fa fa-circle-o"></i>Logout</a></li>
 				</ul>
 			</li>		

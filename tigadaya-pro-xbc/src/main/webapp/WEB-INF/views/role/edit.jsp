@@ -3,7 +3,7 @@
 <!-- form mulai -->
 <form id="form-edit" class="form-horizontal">
 	<!-- id -->
-	<input type="hidden" name="id" id="id" />
+	<input type="hidden"  class="form-control" name="id" id="id" />
 
 	<!-- code -->
 	<div class="form-group">
@@ -33,8 +33,7 @@
 	<input type="hidden" class="form-control" name="modifiedOn" id="modifiedOn" />
 	<input type="hidden" class="form-control" name="deletedBy" id="deletedBy" value="1"/>
 	<input type="hidden" class="form-control" name="deletedOn" id="deletedOn" />
-	<input type="hidden" class="form-control" name="isDelete" id="isDelete" />
-	
+	<input type="hidden" class="form-control" name="isDelete" id="isDelete" /> 
 	
 	<div class="modal-footer">
 		<button type="button" class="btn btn-primary" onClick="editData($('#form-edit'))">Simpan</button>

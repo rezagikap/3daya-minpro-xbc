@@ -50,10 +50,12 @@
 	
 	<input type="hidden" class="form-control" name="deletedBy" id="deletedBy"/>
 	
+	<input type="hidden" class="form-control" name="deletedOn" id="deletedOn"/>
+	
 	
 	<div class="modal-footer">
 		<button type="button" onClick="addData($('#form-create'))"
-			class="btn btn-success pull-left">SIMPAN</button>
+			class="btn btn-warning pull-left">SIMPAN</button>
 		<button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
 	</div>
 </form>

@@ -17,6 +17,7 @@ public class BaseController {
 	}
 
 	public Integer getUserId() {
+		
 		return 1;
 	}
 

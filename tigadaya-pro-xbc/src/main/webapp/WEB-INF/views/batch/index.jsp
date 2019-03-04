@@ -3,27 +3,16 @@
 	<div class = "box-header">
 		<h3 class = "box-title">BATCH</h3>
 	</div>
-	<div class = "box-body">
-	<div class="row">
-		<div class="col-md-11">
-			<div class="input-group col-md-5">
-				<input type="text" name="search" id="search" class="form-control"
-					placeholder="Search by username/email" /> <span class="input-group-btn">
-					<button class="btn btn-warning btn-xm "
-						onClick="search()">
-						<i class="fa fa-circle-o"></i>
-					</button>
-				</span>
-			</div>
-		</div>
-		<div class="box-tools">
-			<button type="button" id="btn-add"
-				class="btn btn-warning btn-xm">
-				<i class="fa fa-plus"></i>
-			</button>
-		</div>
+	<div class = "box-body col-md-12">
+		<input type="text" name = "search" id = "search" placeholder="Search by Technology/Name" required>
+		<button type ="button" class="btn btn-warning btn-sm" onclick="search()">
+			<i class = "fa fa-circle-o"></i>
+		</button>
+		<button type = "button" id = "btn-add" class = "btn btn-succcess btn-warning btn-sm pull-right">
+			<i class = "fa fa-plus"></i>
+		</button>
 	</div>
-	
+	<div class = "box-body">
 		<table class="table">
 			<thead>
 				<tr>
@@ -74,15 +63,15 @@
 				// looping data dengan JQuery
 				$.each(result, function(index, item){
 					var dataRow ='<tr>'+
-					'<td>'+ item.technologyId +'</td>'+
+					'<td>'+ item.technology.name +'</td>'+
 					'<td>'+ item.name+'</td>'+
-					'<td>'+ item.trainerId+'</td>'+
+					'<td>'+ item.trainer.name+'</td>'+
 					'<td class = "col-md-1">'+
 					'<div class = "dropdown">'+
 						'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
 						'<ul class = "dropdown-menu">'+
 							'<li id = "btn-edit" value = "'+item.id+'"><a>Edit</a></li>'+
-							'<li id = "btn-partcipant" value = ""><a>Add Participant</a></li>'+
+							'<li id = "btn-participant" value = ""><a>Add Participant</a></li>'+
 							'<li id = "btn-test" value = ""><a>Setup Test</a></li>'+
 						'</ul>' +
 					'</div>' +
@@ -106,7 +95,7 @@
 				$('#list-data').empty();
 				$.each(result, function(index, item){
 					var dataRow ='<tr>'+
-					'<td>'+ item.technologyId +'</td>'+
+					'<td>'+ item.technology.name +'</td>'+
 					'<td>'+ item.name+'</td>'+
 					'<td>'+ item.trainer.name+'</td>'+
 					'<td class = "col-md-1">'+
@@ -114,13 +103,34 @@
 						'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
 						'<ul class = "dropdown-menu">'+
 							'<li id = "btn-edit" value = "'+item.id+'"><a>Edit</a></li>'+
-							'<li id = "btn-partcipant" value = "'+item.id+'"><a>Add Participant</a></li>'+
-							'<li id = "btn-test" value = "'+item.id+'"><a>Setup Test</a></li>'+
+							'<li id = "btn-partcipant" value = ""><a>Add Participant</a></li>'+
+							'<li id = "btn-test" value = ""><a>Setup Test</a></li>'+
 						'</ul>' +
 					'</div>' +
 					'</td>' +
 					'</tr>';
 				$("#list-data").append(dataRow);
+				});
+			}
+		});
+	}
+	
+	//loadTechnology
+	function loadTechnology($form, $selected){
+		$.ajax({
+			url : '${contextName}/api/technology/',
+			type : 'get',
+			dataType : 'json',
+			success : function(result){
+				$form.find("#technologyId").empty();
+				$form.find("#technologyId").append('<option value = "">-Choose Technology-</option>');
+				//looping data
+				$.each(result, function(index, item){
+					if ($selected == item.id){
+						$form.find("#technologyId").append('<option value ="'+item.id+'" selected="selected">'+item.name+'</option>');
+					}else{
+						$form.find("#technologyId").append('<option value = "'+item.id+'">'+item.name+'</option>');
+					}
 				});
 			}
 		});
@@ -138,7 +148,8 @@
 				//looping data
 				$.each(result, function(index, item){
 					if ($selected == item.id){
-						$form.find("#trainerId").append('<option value ="'+item.id+'" selected="selected">'+item.name+'</option>');
+						$form.find("#trainerId").append(
+								'<option value="'+item.id+'" selected="selected">'+item.name+'</option>');
 					}else{
 						$form.find("#trainerId").append('<option value = "'+item.id+'">'+item.name+'</option>');
 					}
@@ -184,12 +195,13 @@
 						+ d.getFullYear() + " " + d.getHours()
 						+ ":" + d.getMinutes() + ":"
 						+ d.getSeconds());
+				loadTechnology($("#modal-data-large"));
 				loadTrainer($("#modal-data-large"));
 				loadBootcampType($("#modal-data-large"));
 			}
 		});
 	});
-	
+	//method untuk add data
 	function addData($form){
 		// memangil method getFormData dari file
 		// resources/dist/js/map-form-objet.js
@@ -205,6 +217,7 @@
 				loadData();	
 			}
 		});
+		console.log(dataForm);
 	}
 	
 	function getData(dataId){
@@ -213,18 +226,18 @@
 			type : 'get',
 			dataType : 'json',
 			success : function(dataApi){
-				$('#modal-data').find('#id').val(dataApi.id);
-				$('#modal-data').find('#technologyId').val(dataApi.techologyId);
-				$('#modal-data').find('#trainerId').val(dataApi.trainerId);
-				$('#modal-data').find('#name').val(dataApi.name);
-				$('#modal-data').find('#periodFrom').val(dataApi.periodFrom);
-				$('#modal-data').find('#periodTo').val(dataApi.periodTo);
-				$('#modal-data').find('#roomId').val(dataApi.roomId);
-				$('#modal-data').find('#bootcampTypeId').val(dataApi.bootcampTypeId);
-				$('#modal-data').find('#notes').val(dataApi.notes);
-				$('#modal-data').find('#createdBy').val(dataApi.createdBy);
-				$('#modal-data').find('#createdOn').val(dataApi.createdOn);
-				$('#modal-data').find('#isDelete').val(dataApi.isDelete);
+				$('#modal-data-large').find('#id').val(dataApi.id);
+				$('#modal-data-large').find('#technologyId').val(dataApi.technologyId);
+				$('#modal-data-large').find('#trainerId').val(dataApi.trainerId);
+				$('#modal-data-large').find('#name').val(dataApi.name);
+				$('#modal-data-large').find('#periodFrom').val(dataApi.periodFrom);
+				$('#modal-data-large').find('#periodTo').val(dataApi.periodTo);
+				$('#modal-data-large').find('#roomId').val(dataApi.roomId);
+				$('#modal-data-large').find('#bootcampTypeId').val(dataApi.bootcampTypeId);
+				$('#modal-data-large').find('#notes').val(dataApi.notes);
+				$('#modal-data-large').find('#createdBy').val(dataApi.createdBy);
+				$('#modal-data-large').find('#createdOn').val(dataApi.createdOn);
+				$('#modal-data-large').find('#isDelete').val(dataApi.isDelete);
 			}
 		});
 	}
@@ -237,77 +250,14 @@
 			type : 'get',
 			dataType : 'html',
 			success : function(result) {
-				//mengganti judul modal
-				$("#modal-title-large").html("EDIT DATA");
-				//menggisi content dengan variable result
+				$("#modal-title-large").html("EDIT");
 				$("#modal-data-large").html(result);
-				//menampilkan modal pop up
 				$("#modal-form-large").modal('show');
-				//panggil Trainer
-				loadTrainer($("#modal-data"));
-				loadBootcampType($("#modal-data"));
+				loadTechnology($("#modal-data-large"));
+				loadTrainer($("#modal-data-large"));
+				loadBootcampType($("#modal-data-large"));
 				getData(vid);
 			}
 		});
 	});
-	
-	//method untuk edit data 
-	function editData($form){
-		//memanggil method getFormData dari file 
-		//resources/dist/js/map-form-object.js
-		var dataForm = getFormData($form);
-		$.ajax({
-			//url ke api/batch/
-			url : '${contextName}/api/batch/',
-			type: 'put',
-			//data type berupa JSON
-			dataType:'json',
-			//mengirim parameter data 
-			data : JSON.stringify(dataForm),
-			// mime type 
-			contentType : 'application/json',
-			success : function(result) {
-				//menutup modal
-				$("#modal-form").modal('hide');
-				// panggil method load data, untuk melihat data terbaru
-				loadData();
-			}
-		});
-		console.log(dataForm);
-	}
-	
-	function search(){
-		var item = $('#search').val();
-		$.ajax({
-			url: '${contextName}/api/batch/search/' + item,
-			type: 'get',
-			dataType: 'json',
-			success: function(result){
-				$("#list-data").empty();
-				// looping data dengan jQuery
-				$.each(result, function(index, item){
-					var dataRow = '<tr>'
-						+ '<td>'
-						+ item.technologyId
-						+ '</td>'
-						+ '<td>'
-						+ item.name
-						+ '</td>'
-						+ '<td class="col-md-1">'
-						'<div class = "dropdown">'+
-						'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
-						'<ul class = "dropdown-menu">'+
-							'<li id = "btn-edit" value = "'+item.id+'"><a>Edit</a></li>'+
-							'<li id = "btn-partcipant" value = "'+item.id+'"><a>Add Participant</a></li>'+
-							'<li id = "btn-test" value = "'+item.id+'"><a>Setup Test</a></li>'+
-						'</ul>' +'</div>' 
-						+ '</td>' + '</tr>';
-					$("#list-data").append(dataRow);
-				});
-				console.log(result);
-			}
-		});
-	}
-			
-		
 </script>

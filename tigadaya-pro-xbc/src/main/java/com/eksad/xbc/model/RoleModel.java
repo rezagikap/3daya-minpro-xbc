@@ -1,6 +1,7 @@
 package com.eksad.xbc.model;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,15 +20,18 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+
+
 @Entity
 @Table(name="t_role")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=RoleModel.class)
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 
 public class RoleModel {
+	
 	@Id
 	@Column(name="id", columnDefinition = "serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_role_seq")
-	@TableGenerator(name = "t_role_seq", table = "tbl_squence", pkColumnName = "seq_id", valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "role_seq")
+	@TableGenerator(name = "role_seq", table = "tbl_squence", pkColumnName = "seq_id", valueColumnName = "seq_value", initialValue = 0, allocationSize = 1)
 	private Integer id;
 	
 	@Column(name="code")
@@ -43,27 +47,30 @@ public class RoleModel {
 	private Integer createdBy;
 	
 	@Column(name="created_on")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
 	@Column(name="modified_on")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
 	@Column(name="deleted_on")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date deletedOn;
 	
-	@Column(name="is_deleted")
+	@Column(name="is_delete")
 	private Boolean isDelete;
 	
 	@JsonIgnore
+	@OneToMany(mappedBy="roles")
+	private List<MenuAccessModel> listMenuAccess;
+	
 	@OneToMany(mappedBy="role", fetch=FetchType.EAGER, orphanRemoval=true)
 	private List<UserModel> listUser;
 
@@ -111,8 +118,15 @@ public class RoleModel {
 		return createdOn;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setCreatedOn(String createdOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date createdOnNew = null;
+		try {
+			createdOnNew = format.parse(createdOn);
+		} catch (Exception e) {
+			this.createdOn = null;
+		}
+		this.createdOn = createdOnNew;
 	}
 
 	public Integer getModifiedBy() {
@@ -127,8 +141,16 @@ public class RoleModel {
 		return modifiedOn;
 	}
 
-	public void setModifiedOn(Date modifiedOn) {
-		this.modifiedOn = modifiedOn;
+
+	public void setModifiedOn(String modifiedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date modifiedOnNew = null;
+		try {
+			modifiedOnNew = format.parse(modifiedOn);
+		} catch (Exception e) {
+			this.modifiedOn = null;
+		}
+		this.modifiedOn = modifiedOnNew;
 	}
 
 	public Integer getDeletedBy() {
@@ -143,8 +165,15 @@ public class RoleModel {
 		return deletedOn;
 	}
 
-	public void setDeletedOn(Date deletedOn) {
-		this.deletedOn = deletedOn;
+	public void setDeletedOn(String deletedOn) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date deletedOnNew = null;
+		try {
+			deletedOnNew = format.parse(deletedOn);
+		} catch (Exception e) {
+			this.deletedOn = null;
+		}
+		this.deletedOn = deletedOnNew;
 	}
 
 	public Boolean getIsDelete() {
@@ -155,6 +184,14 @@ public class RoleModel {
 		this.isDelete = isDelete;
 	}
 
+	public List<MenuAccessModel> getListMenuAccess() {
+		return listMenuAccess;
+	}
+
+	public void setListMenuAccess(List<MenuAccessModel> listMenuAccess) {
+		this.listMenuAccess = listMenuAccess;
+	}
+	
 	public List<UserModel> getListUser() {
 		return listUser;
 	}

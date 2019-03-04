@@ -44,8 +44,13 @@
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="SELECT username, password, is_delete FROM t_user WHERE username=?"
-				authorities-by-username-query="SELECT u1.username, u2.name FROM t_user u1, t_role u2 WHERE u1.role_id=u2.id and u1.username=?" />
+<<<<<<< HEAD
+				users-by-username-query="SELECT username, password, 1 as enabled FROM t_user WHERE is_delete='false' AND username=?"
+				authorities-by-username-query="SELECT u1.username, u2.name FROM t_user u1, t_role u2 WHERE u1.is_delete='false' AND u1.role_id=u2.id and u1.username=?" />
+=======
+				users-by-username-query="SELECT username, password, 1 as enabled FROM t_user WHERE is_delete='false' and username=?"
+				authorities-by-username-query="SELECT u1.username, u2.name FROM t_user u1, t_role u2 WHERE u1.is_delete='false' and u1.role_id=u2.id and u1.username=?" />
+>>>>>>> cd25ce4935e3e2d284653b83174a7826a26c7029
 		</authentication-provider>
 	</authentication-manager>
 

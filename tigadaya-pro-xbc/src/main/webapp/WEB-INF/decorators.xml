@@ -10,15 +10,21 @@
 		<pattern>/user/*</pattern>
 		<pattern>/role/*</pattern>
 		<pattern>/menu/*</pattern>
+		<pattern>/menu-access/*</pattern>
 		<pattern>/test/*</pattern>
 		<pattern>/list/*</pattern>
+		<pattern>/biodata/*</pattern>
 		<pattern>/category/*</pattern>
+		<pattern>/idle-news/*</pattern>
+		<pattern>/testimony/*</pattern>
+		<pattern>/idlemonitoring/*</pattern>
 		<pattern>/bootcamptesttype/*</pattern>
 		<pattern>/class/*</pattern>
 		<pattern>/office/*</pattern>
 		<pattern>/batch/*</pattern>
-
-	</excludes>
+		<pattern>/question/*</pattern>
+		<pattern>/logout/*</pattern>
+		</excludes>
 
 	<decorator name="main" page="main.jsp">
 		<pattern>/*</pattern>

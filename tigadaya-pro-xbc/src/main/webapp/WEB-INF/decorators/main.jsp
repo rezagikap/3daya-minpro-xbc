@@ -34,7 +34,11 @@
 <script src="${contextName}/resources/jquery/jquery.validate.js"></script>
 <script src="${contextName}/resources/jquery/localization/messages_es.js"></script>
 <script src="${contextName}/resources/dist/css/screen.css"></script>
+<<<<<<< HEAD
 <script src="${contextName}/resources/dist/css/style.css"></script> -->
+=======
+<script src="${contextName}/resources/dist/css/style.css"></script> 
+>>>>>>> 1d5f2298255ce79c69ddc7048840a352f0467546
 
 <decorator:head />
 </head>
@@ -60,7 +64,7 @@
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 						<!-- main body begin-->
 						<decorator:body />
 						<!-- main body end -->

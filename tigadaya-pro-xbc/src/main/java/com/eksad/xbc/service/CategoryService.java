@@ -12,4 +12,5 @@ public interface CategoryService {
 	public void insert(CategoryModel model);
 	public void update(CategoryModel model);
 	public void delete(CategoryModel model);
+	
 }

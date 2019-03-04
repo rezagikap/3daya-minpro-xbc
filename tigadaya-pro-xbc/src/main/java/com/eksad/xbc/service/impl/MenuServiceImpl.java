@@ -47,4 +47,9 @@ public class MenuServiceImpl implements MenuService {
 		this.dao.delete(model);
 	}
 
+	@Override
+	public String getNewCode() {
+		return this.dao.getNewCode();
+	}
+
 }
