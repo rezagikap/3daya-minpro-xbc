@@ -14,12 +14,11 @@ import javax.persistence.TableGenerator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.sun.istack.NotNull;
 
 @Entity
 @Table(name="t_technology")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class TechnologyModel{
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class TechnologyModel {
 	
 
 	@Id
@@ -38,28 +37,27 @@ public class TechnologyModel{
 	
 	@Column(name="created_by")
 	private Integer createdBy;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	
 	@Column(name="created_on")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date createdOn;
 	
 	@Column(name="modified_by")
 	private Integer modifiedBy;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	@Column(name="modified_on")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date modifiedOn;
 	
 	@Column(name="deleted_by")
 	private Integer deletedBy;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	@Column(name="deleted_on")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date deletedOn;
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
-	
 
 	public Integer getId() {
 		return id;
@@ -84,7 +82,7 @@ public class TechnologyModel{
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
+
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
@@ -92,7 +90,7 @@ public class TechnologyModel{
 	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
-	
+
 	public Date getCreatedOn() {
 		return createdOn;
 	}
@@ -107,7 +105,7 @@ public class TechnologyModel{
 		}
 		this.createdOn = createdOnNew;
 	}
-	
+
 	public Integer getModifiedBy() {
 		return modifiedBy;
 	}
@@ -116,7 +114,6 @@ public class TechnologyModel{
 		this.modifiedBy = modifiedBy;
 	}
 
-	
 	public Date getModifiedOn() {
 		return modifiedOn;
 	}
@@ -140,7 +137,6 @@ public class TechnologyModel{
 		this.deletedBy = deletedBy;
 	}
 
-	
 	public Date getDeletedOn() {
 		return deletedOn;
 	}
@@ -163,4 +159,7 @@ public class TechnologyModel{
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
 	}
+	
+	
+
 }

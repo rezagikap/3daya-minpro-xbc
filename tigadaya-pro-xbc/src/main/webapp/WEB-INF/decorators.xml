@@ -6,6 +6,7 @@
 		<pattern>/resources/*</pattern>
 		<pattern>/trainer/*</pattern>
 		<pattern>/technology/*</pattern>
+		<pattern>/bootcamptype/*</pattern>
 		<pattern>/user/*</pattern>
 		<pattern>/role/*</pattern>
 		<pattern>/menu/*</pattern>

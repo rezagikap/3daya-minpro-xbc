@@ -87,7 +87,6 @@ public class ApiTechnologyController {
 	public ResponseEntity<TechForm> postInsert(@RequestBody TechForm item){
 		ResponseEntity<TechForm> result = null;
 		try {
-			
 			this.service.insert(item,1);
 			result = new ResponseEntity<TechForm>(item, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -110,6 +109,7 @@ public class ApiTechnologyController {
 		return result;
 	}
 	
+	
 	@RequestMapping(value="/api/technology/{itemId}", method=RequestMethod.DELETE)
 	public ResponseEntity<TechnologyModel> delApi(@PathVariable("itemId") Integer vid){
 		ResponseEntity<TechnologyModel> result = null;
@@ -127,4 +127,6 @@ public class ApiTechnologyController {
 		}
 		return result;
 	}
+	
+	
 }

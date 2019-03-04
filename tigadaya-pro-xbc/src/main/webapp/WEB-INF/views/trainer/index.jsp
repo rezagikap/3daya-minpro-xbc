@@ -176,7 +176,7 @@
 					'<td>'+ item.name+'</td>'+
 					'<td class="col-md-1">'+
 						'<div class="dropdown">'+
-					'<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
+					'<button class="btn btn-warning dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-align-justify"></i><span class="caret"></span></button>'+
 				   	 '<ul class="dropdown-menu">'+
 				   	'<li id="btn-edit" value="'+item.id+'"><a>Edit</a></li>'+
 			    	'<li id="btn-delete" value="'+item.id+'"><a>Delete</a></li>'+

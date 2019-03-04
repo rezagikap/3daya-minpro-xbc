@@ -21,10 +21,8 @@ public class TechnologyController {
 		return "/technology/index";
 	}
 	
-	//url yang ada di create.jsp
 	@RequestMapping(value="/technology/create")
 	public String create(){
-		// menampilkan create.jsp
 		return "/technology/create";
 	}
 	
@@ -45,6 +43,6 @@ public class TechnologyController {
 	
 	@RequestMapping(value="/technology/trainer")
 	public String addTt() {
-		return "/technology/trainer";
+		return"/technology/trainer";
 	}
 }

@@ -12,15 +12,13 @@
 	<input type="hidden" name="createdOn" id="createdOn" />
 	<input type="hidden" name="modifiedBy" id="modifiedBy" />
 	<input type="hidden" name="modifiedOn" id="modifiedOn" />
-	<input type="hidden" name="deletedBy" id="deletedBy" />
-	<input type="hidden" name="deletedOn" id="deletedOn" />
 	<input type="hidden" name="isDelete" id="isDelete" />
 	
 	
 	
 	<div class="modal-footer">
-		<button type="button" class="btn btn-danger" style = "position:relative;right:275px;top:2px; padding: 10px 23px;" data-dismiss="modal">No</button>
-		<button type="button" class="btn btn-success" style = "position:relative;right:120px;top:2px; padding: 10px 23px;" onClick="deleteData($('#form-delete'))">Yes</button>
+		<button type="button" class="btn btn-danger" style="position: relative; right: 275px; padding: 10px 24px"; data-dismiss="modal">No</button>
+		<button type="button" class="btn btn-success" style="position: relative; right: 120px; padding: 10px 23px"; onClick="deleteData($('#form-delete'))">Yes</button>
 	</div>
 </form>
 <!-- Form Selesai -->

@@ -19,15 +19,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="t_trainer")
+@Table(name="t_bootcamp_type")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class TrainerModel {
+public class BootcampTypeModel {
 	
 
 	@Id
 	@Column(name="id", columnDefinition="serial")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_trainer_seq")
-	@TableGenerator(name = "t_trainer_seq", table = "tbl_squence", 
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "t_bootcamp_type_seq")
+	@TableGenerator(name = "t_bootcamp_type_seq", table = "tbl_squence", 
 	pkColumnName = "seq_id", valueColumnName = "seq_value", 
 	initialValue = 0, allocationSize=1)
 	private Integer id;
@@ -61,10 +61,6 @@ public class TrainerModel {
 	
 	@Column(name="is_delete")
 	private Boolean isDelete;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="techno")
-	private List<TechTrainerModel> listech;
 	
 
 
@@ -167,15 +163,6 @@ public class TrainerModel {
 
 	public void setIsDelete(Boolean isDelete) {
 		this.isDelete = isDelete;
-	}
-
-	
-	public List<TechTrainerModel> getListech() {
-		return listech;
-	}
-
-	public void setListech(List<TechTrainerModel> listech) {
-		this.listech = listech;
 	}
 	
 
